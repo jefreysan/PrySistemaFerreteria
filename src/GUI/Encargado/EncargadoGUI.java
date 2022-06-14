@@ -2,11 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package GUI;
+package GUI.Encargado;
 
 import DAO.EncargadoDAO;
 import DTO.EncargadoTO;
 import Library.ValidarClass;
+import java.awt.Color;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
@@ -35,6 +36,7 @@ public class EncargadoGUI extends javax.swing.JInternalFrame {
         initComponents();
         setVisible(true);
         setSize(1146, 424);
+        this.getContentPane().setBackground(Color.white);
         objDtm = (DefaultTableModel) jtblRegistroEncargado.getModel();
     }
 
@@ -75,8 +77,8 @@ public class EncargadoGUI extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jtxtBuscarEncargado = new javax.swing.JTextField();
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 204));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel1.setFont(new java.awt.Font("Bahnschrift", 1, 15)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -222,13 +224,13 @@ public class EncargadoGUI extends javax.swing.JInternalFrame {
                 .addGap(10, 10, 10))
         );
 
-        jPanel3.setBackground(new java.awt.Color(0, 0, 204));
+        jPanel3.setBackground(new java.awt.Color(153, 153, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel4.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("REGISTRO DE ENCARGADO");
+        jLabel4.setText("DATOS DEL ENCARGADO");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -444,7 +446,7 @@ public class EncargadoGUI extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -560,23 +562,27 @@ public class EncargadoGUI extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-            EncargadoTO objEncargadoTO = new EncargadoTO();
-            objEncargadoTO.setRucencarg(jtxtRucEncargado.getText().toUpperCase().trim());
-            objEncargadoTO.setNombencarg(jtxtnombEncargado.getText().toUpperCase().trim());
-            objEncargadoTO.setDireencarg(jtxtdireccionEncargado.getText().toUpperCase().trim());
-            objEncargadoTO.setCeluencarg(jtxtCelularEncargado.getText().trim());
-            if (sw) {
-                objEncargadoDAO.insert(objEncargadoTO);
-                mensaje = "ENCARGADO GUARDADO";
+            if (jtxtRucEncargado.getText().trim().length() == 0 || jtxtnombEncargado.getText().trim().length() == 0
+                    || jtxtdireccionEncargado.getText().trim().length() == 0 || jtxtCelularEncargado.getText().trim().length() == 0) {
+                JOptionPane.showMessageDialog(null, "COMPLETAR CAJA DE TEXTO", "FERRETERIA MICKY", JOptionPane.WARNING_MESSAGE);
             } else {
-                objEncargadoTO.setIdencargado(Integer.parseInt(jtxtCodEncargado.getText().trim()));
-                objEncargadoDAO.update(objEncargadoTO);
-                mensaje = "ENCARGADO ACTUALIZADO";
+                EncargadoTO objEncargadoTO = new EncargadoTO();
+                objEncargadoTO.setRucencarg(jtxtRucEncargado.getText().toUpperCase().trim());
+                objEncargadoTO.setNombencarg(jtxtnombEncargado.getText().toUpperCase().trim());
+                objEncargadoTO.setDireencarg(jtxtdireccionEncargado.getText().toUpperCase().trim());
+                objEncargadoTO.setCeluencarg(jtxtCelularEncargado.getText().trim());
+                if (sw) {
+                    objEncargadoDAO.insert(objEncargadoTO);
+                    mensaje = "ENCARGADO REGISTRADO";
+                } else {
+                    objEncargadoTO.setIdencargado(Integer.parseInt(jtxtCodEncargado.getText().trim()));
+                    objEncargadoDAO.update(objEncargadoTO);
+                    mensaje = "ENCARGADO ACTUALIZADO";
+                }
+                habilitarControles(false);
+                JOptionPane.showMessageDialog(null, mensaje, "FERRETERIA MICKY", JOptionPane.INFORMATION_MESSAGE);
+                limpiarControles();
             }
-            habilitarControles(false);
-            JOptionPane.showMessageDialog(null, mensaje);
-            limpiarControles();
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e);
         }

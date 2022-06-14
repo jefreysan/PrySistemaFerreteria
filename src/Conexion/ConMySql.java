@@ -10,7 +10,7 @@ static ConMySql instance = null;
     Connection connection = null;
 
     public ConMySql() throws Exception {
-        String url = "jdbc:mysql://localhost:3306/bdprueba";
+        String url = "jdbc:mysql://localhost:3306/bdferreteria";
         Class.forName("com.mysql.jdbc.Driver");
         connection = DriverManager.getConnection(url, "root", "");
     }

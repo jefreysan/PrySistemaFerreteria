@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import GUI.Cliente.ClienteGUI;
+
 /**
  *
  * @author HP
@@ -16,6 +18,8 @@ public class MenuGUI extends javax.swing.JFrame {
      */
     public MenuGUI() {
         initComponents();
+        setVisible(true);
+        setExtendedState(MAXIMIZED_BOTH);
     }
 
     /**
@@ -32,7 +36,7 @@ public class MenuGUI extends javax.swing.JFrame {
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
         saveMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
+        saveAsMenuItemEncargado = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
@@ -50,15 +54,25 @@ public class MenuGUI extends javax.swing.JFrame {
 
         openMenuItem.setMnemonic('o');
         openMenuItem.setText("Cliente");
+        openMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(openMenuItem);
 
         saveMenuItem.setMnemonic('s');
         saveMenuItem.setText("Proveedor");
         fileMenu.add(saveMenuItem);
 
-        saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Encargado");
-        fileMenu.add(saveAsMenuItem);
+        saveAsMenuItemEncargado.setMnemonic('a');
+        saveAsMenuItemEncargado.setText("Encargado");
+        saveAsMenuItemEncargado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveAsMenuItemEncargadoActionPerformed(evt);
+            }
+        });
+        fileMenu.add(saveAsMenuItemEncargado);
 
         exitMenuItem.setMnemonic('x');
         exitMenuItem.setText("Exit");
@@ -125,6 +139,14 @@ public class MenuGUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
+    private void saveAsMenuItemEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuItemEncargadoActionPerformed
+      
+    }//GEN-LAST:event_saveAsMenuItemEncargadoActionPerformed
+
+    private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
+          MenuGUI.desktopPane.add(new ClienteGUI());
+    }//GEN-LAST:event_openMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -174,7 +196,7 @@ public class MenuGUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;
-    private javax.swing.JMenuItem saveAsMenuItem;
+    private javax.swing.JMenuItem saveAsMenuItemEncargado;
     private javax.swing.JMenuItem saveMenuItem;
     // End of variables declaration//GEN-END:variables
 
