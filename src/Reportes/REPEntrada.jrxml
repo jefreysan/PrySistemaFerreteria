@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0bfb3cf5-4414-4cfc-978e-aacc14240198">
+	<property name="ireport.zoom" value="1.7715610000000013"/>
+	<property name="ireport.x" value="49"/>
+	<property name="ireport.y" value="136"/>
+	<parameter name="parameter_entrada" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select e.identrada,e.fechaent,e.nroent,t.descrpago,en.nombencarg,prov.nombprove,p.descrprod,de.pcompraent,de.cantidadent,de.importeent,e.totalent
+from entrada e inner join encargado en
+on e.idencargado = en.idencargado
+inner join proveedor prov
+on e.idproveedor = prov.idproveedor
+inner join detalleentrada de
+on e.identrada = de.identrada
+inner join producto p
+on de.idproducto=p.idproducto
+inner join tipopago t
+on e.idtipopago= t.idtipopago
+where e.identrada =$P{parameter_entrada}]]>
+	</queryString>
+	<field name="identrada" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaent" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nroent" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descrpago" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombencarg" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombprove" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descrprod" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pcompraent" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidadent" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="importeent" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="totalent" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="115" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="555" height="114" uuid="2d9d10df-4d7f-42ae-893a-63a8fb032bf7"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="85" y="90" width="130" height="20" uuid="38ae574a-cc64-4c5f-9960-3688c20db535"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Bahnschrift"/>
+				</textElement>
+				<text><![CDATA[ferreteriamicky@gmail.com]]></text>
+			</staticText>
+			<line>
+				<reportElement x="300" y="70" width="1" height="45" uuid="b22221d5-1355-4a1a-9453-6525e5ee519d"/>
+			</line>
+			<staticText>
+				<reportElement x="85" y="50" width="152" height="20" uuid="69d8a0ce-1518-4755-957a-9675cd97e8d0"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Bahnschrift"/>
+				</textElement>
+				<text><![CDATA[Av.Panamerica MZ B LT.2A Las Americas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="70" width="74" height="20" uuid="caf636e2-6efe-41ab-b2bd-e5a018878932"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Bahnschrift" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[CELULAR:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="318" y="90" width="64" height="20" uuid="083822f3-eb8b-4637-9dcf-ad7faa813922"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift"/>
+				</textElement>
+				<text><![CDATA[Electricidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="394" y="90" width="64" height="20" uuid="0b6b7c09-1f8c-4d64-bce8-238b43e3980a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift"/>
+				</textElement>
+				<text><![CDATA[Pintura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="475" y="70" width="64" height="20" uuid="685d8b3e-acd7-492e-b0fb-e45a33f3a91b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift"/>
+				</textElement>
+				<text><![CDATA[Tuberias]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="30" width="100" height="20" uuid="5e286cdd-5fbc-409b-9fe0-3a5c3698c073"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Bahnschrift"/>
+				</textElement>
+				<text><![CDATA[10404865647]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="475" y="90" width="64" height="20" uuid="ed4eff24-3346-4460-97f4-0f5bcd268daa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift"/>
+				</textElement>
+				<text><![CDATA[Pernos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="394" y="70" width="64" height="20" uuid="ab93ea03-7c10-4ca0-ac20-d8c3ec15f233"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift"/>
+				</textElement>
+				<text><![CDATA[Sanitarios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="70" width="111" height="20" uuid="0266282c-a5d4-42d4-b4cb-64aabde01e95"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Bahnschrift"/>
+				</textElement>
+				<text><![CDATA[991007603- 960206253]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="249" height="20" forecolor="#FFFFFF" backcolor="#0033CC" uuid="8ffb5f23-6149-4e85-93c6-c307b17340ea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="14"/>
+				</textElement>
+				<text><![CDATA[FERRETERIA MICKY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="50" width="74" height="20" uuid="012726fd-067a-4e73-a89d-4351b1d0ca19"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Bahnschrift" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[DIRECCION:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="30" width="74" height="20" uuid="92451ff4-c1a0-420e-b5b2-fb083c043d0b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Bahnschrift" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[RUC:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="70" width="64" height="20" uuid="4932d426-90ed-420a-8313-19a924427a61"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift"/>
+				</textElement>
+				<text><![CDATA[Herramientas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="90" width="74" height="20" uuid="8053ca7a-548c-4257-8508-cd71ead54e7c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Bahnschrift" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[CORREO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="349" y="21" width="203" height="44" uuid="5afae366-1414-4ec1-b482-6b3dae6a788b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="12"/>
+				</textElement>
+				<text><![CDATA[Encuentra lo que necesitas para renovar tu espacio]]></text>
+			</staticText>
+			<line>
+				<reportElement x="349" y="69" width="206" height="1" uuid="ce022663-1c66-4690-8bb4-0dc0f2bfae61"/>
+			</line>
+			<rectangle>
+				<reportElement x="249" y="0" width="100" height="70" uuid="4f84eb38-c06c-4b47-9d8a-322dcb9f23d8"/>
+			</rectangle>
+			<image>
+				<reportElement x="268" y="5" width="67" height="60" uuid="4b09cf01-4efb-4cc9-bdf3-6dcfe090b9ab"/>
+				<imageExpression><![CDATA["C:\\Users\\HP\\Documents\\NetBeansProjects\\PrySistemaFerreteria2022\\src\\Icons\\ferreteria.jpg"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="19" width="249" height="1" uuid="d4a850be-284e-4b13-ab46-b5a26c4c5693"/>
+			</line>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="458" y="4" width="94" height="15" uuid="5a57eb51-3842-428c-94f0-5111b18f96e1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="361" y="4" width="97" height="14" uuid="67beaf5a-b1d5-4d2f-8456-bfdf3343cca0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[FECHA IMPRESIÓN:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="349" y="21" width="206" height="1" uuid="c2443d47-333c-4eb2-89d3-db745abad12f"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="67" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="27" forecolor="#0033CC" backcolor="#CCCCFF" uuid="6d56bb9c-ecb5-4ce3-bd57-62017bd7c6d0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="13" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[ENTRADA]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="27" width="555" height="21" uuid="191b6249-b89d-441a-80a3-68489c9b9a26"/>
+			</rectangle>
+			<line>
+				<reportElement x="331" y="27" width="1" height="20" uuid="4504599a-6af5-4ae9-854d-cb7b4190d989"/>
+			</line>
+			<staticText>
+				<reportElement x="344" y="27" width="113" height="20" uuid="275c13bb-ca16-4041-a48f-1f229c2ef25d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Bahnschrift" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[FECHA DE ENTREGA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="457" y="27" width="95" height="20" uuid="a03d87b2-11cc-4c57-a44f-64e9ebfc7482"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaent}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="48" width="555" height="19" uuid="e5ec22bd-6ce5-4ef4-8325-4c7b1ad94c71"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="27" width="75" height="19" uuid="4a4c1a1a-4d29-478b-a1d1-9666317d2a81"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Bahnschrift" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ENCARGADO:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="331" y="46" width="1" height="20" uuid="371b7a65-96bc-4fea-8bb1-d015cf01c0a3"/>
+			</line>
+			<staticText>
+				<reportElement x="344" y="47" width="38" height="20" uuid="935b7da8-d136-459d-bd6b-dd6c358ecc3d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Bahnschrift" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[SERIE:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="85" y="47" width="246" height="20" uuid="3f0c98d2-2d11-49ac-b10d-d9a2e5be188b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombprove}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="47" width="75" height="20" uuid="e3e1fe5e-4fba-4a3c-a7dd-cf75b3446731"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Bahnschrift" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[PROVEEDOR:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="85" y="27" width="246" height="20" uuid="d66c4cda-f76e-49f5-aebb-549067fc355d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombencarg}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="47" width="92" height="20" uuid="803f9d3d-4065-4865-8b27-01c0a557a933"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nroent}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="474" y="47" width="1" height="20" uuid="0048945b-33fe-4a49-93c1-0337a77efd51"/>
+			</line>
+			<textField>
+				<reportElement mode="Transparent" x="475" y="47" width="80" height="20" uuid="96a48869-05f0-4b18-8760-12ed35d51fda"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descrpago}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="0" width="64" height="20" backcolor="#CCCCFF" uuid="87f887e4-8766-4e02-8bef-58eeabb2f213"/>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Transparent" x="1" y="0" width="63" height="20" backcolor="#CCCCCC" uuid="221e1d84-3db9-4ca2-ba49-5a4635dcfb42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CANTIDAD]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Opaque" x="64" y="0" width="282" height="20" backcolor="#CCCCFF" uuid="e50a3550-eb1c-4e0a-b65a-5242a0991c48"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="346" y="0" width="113" height="20" backcolor="#CCCCFF" uuid="acfd4e03-a2c1-4641-b0fe-7f15eea1a1ce"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="459" y="0" width="96" height="20" backcolor="#CCCCFF" uuid="1592530a-bacc-40f0-98e5-c260e11a373f"/>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Transparent" x="349" y="0" width="108" height="20" backcolor="#CCCCFF" uuid="f0c21403-0e86-4e0a-ab25-72bbe3fed834"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" isBold="true"/>
+				</textElement>
+				<text><![CDATA[P.COMPRA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="459" y="0" width="95" height="20" backcolor="#CCCCCC" uuid="104a2cb5-9c5c-4bf2-ac6b-0abcdd3c177d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IMPORTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="67" y="0" width="277" height="20" backcolor="#CCCCCC" uuid="6853ed28-bf98-4768-a508-2cd812ef4e90"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="56b46331-4084-4ff7-a740-d609c74aa992"/>
+			</line>
+			<line>
+				<reportElement mode="Opaque" x="346" y="0" width="1" height="20" uuid="816af32a-4f48-44f5-883b-926012125a28"/>
+			</line>
+			<line>
+				<reportElement x="458" y="0" width="1" height="20" uuid="13dc36f4-13a0-4653-b582-cccb7b8d92f5"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="20" uuid="00f13c1f-fd75-4c38-965c-ecef2a9079a4"/>
+			</line>
+			<textField>
+				<reportElement x="459" y="0" width="95" height="20" uuid="2273e65d-b1d8-4510-b2d5-cbd14d180254"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{importeent}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="349" y="0" width="108" height="20" uuid="5bd58ac8-52b8-4b5a-9b26-1bed969c3190"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pcompraent}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="64" y="0" width="1" height="20" uuid="d93fd915-df0c-4ebb-9abd-1811f5f41788"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="67" y="0" width="277" height="20" uuid="87f7a0ce-e0ea-4e8b-9d84-0bad11c6279f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descrprod}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="1" height="20" uuid="5f31f269-d9a2-465a-8145-f1d0e18ed454"/>
+			</line>
+			<textField>
+				<reportElement x="1" y="0" width="62" height="20" uuid="8f8576e6-e8b8-4797-9fd2-844b0cabe277"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidadent}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="423" y="1" width="52" height="20" uuid="180f24bc-b04c-4a4c-b9fd-f516da6e0200"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Bahnschrift" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[TOTAL: S/.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="475" y="1" width="77" height="20" uuid="f0535df9-f916-437a-81b2-adfdd9678fed"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bahnschrift" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalent}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="16" width="515" height="13" backcolor="#CCCCFF" uuid="50ad5401-4a29-4394-a1c5-a34da4d0139e"/>
+				<textElement textAlignment="Right">
+					<font fontName="Bahnschrift"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PAGINA "+$V{PAGE_NUMBER}+" DE"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="16" width="40" height="13" backcolor="#CCCCFF" uuid="b9179c8c-53da-43a5-beb9-05e2a0c91e6e"/>
+				<textElement>
+					<font fontName="Bahnschrift"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
