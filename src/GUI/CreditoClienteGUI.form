@@ -275,18 +275,13 @@
                           <Component id="jtxtcodigoCliente" min="-2" pref="90" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           <Component id="btnbuscarCliente" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jlabelnombreProveedor5" min="-2" max="-2" attributes="0"/>
-                              <Component id="jcomboxPago" min="-2" pref="160" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
                       <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                           <Component id="btnBuscarCredito" min="-2" max="-2" attributes="0"/>
                           <Component id="jtxtnombreCliente" min="-2" pref="346" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="24" max="32767" attributes="0"/>
+                  <EmptySpace pref="30" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -294,14 +289,10 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jlabelnombreProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jlabelnombreProveedor5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jlabelnombreProveedor" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jtxtcodigoCliente" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jcomboxPago" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="btnbuscarCliente" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -354,25 +345,6 @@
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jlabelnombreProveedor5">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Bahnschrift" size="12" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="TIPO DE PAGO:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="jcomboxPago">
-          <Properties>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcomboxPagoActionPerformed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="btnbuscarCliente">

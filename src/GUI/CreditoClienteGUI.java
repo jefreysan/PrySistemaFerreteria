@@ -8,7 +8,6 @@ import DAO.CreditoDAO;
 import DAO.DetalleCreditoDAO;
 import DAO.DetalleEntradaDAO;
 import DAO.EntradaDAO;
-import DAO.TipoPagoDAO;
 import DTO.DetalleCreditoTO;
 import Library.ValidarClass;
 import java.sql.ResultSet;
@@ -31,7 +30,6 @@ public class CreditoClienteGUI extends javax.swing.JInternalFrame {
     CreditoDAO objCreditoDAO = new CreditoDAO();
     DetalleCreditoDAO objDetalleCreditoDAO = new DetalleCreditoDAO();
 
-    TipoPagoDAO objTipoPagoDAO = new TipoPagoDAO();
     JRootPane rootPane;
     ResultSet rsTipoPago, rsCredito;
 
@@ -73,8 +71,6 @@ public class CreditoClienteGUI extends javax.swing.JInternalFrame {
         jlabelnombreProveedor = new javax.swing.JLabel();
         btnBuscarCredito = new javax.swing.JButton();
         jtxtcodigoCliente = new javax.swing.JTextField();
-        jlabelnombreProveedor5 = new javax.swing.JLabel();
-        jcomboxPago = new javax.swing.JComboBox<>();
         btnbuscarCliente = new javax.swing.JButton();
         jtxtnombreCliente = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
@@ -234,16 +230,6 @@ public class CreditoClienteGUI extends javax.swing.JInternalFrame {
             }
         });
 
-        jlabelnombreProveedor5.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jlabelnombreProveedor5.setText("TIPO DE PAGO:");
-
-        jcomboxPago.setEnabled(false);
-        jcomboxPago.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcomboxPagoActionPerformed(evt);
-            }
-        });
-
         btnbuscarCliente.setText("BUSCAR");
         btnbuscarCliente.setEnabled(false);
         btnbuscarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -280,27 +266,20 @@ public class CreditoClienteGUI extends javax.swing.JInternalFrame {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jtxtcodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
-                        .addComponent(btnbuscarCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlabelnombreProveedor5)
-                            .addComponent(jcomboxPago, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnbuscarCliente))
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(btnBuscarCredito)
                         .addComponent(jtxtnombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlabelnombreProveedor)
-                    .addComponent(jlabelnombreProveedor5))
+                .addComponent(jlabelnombreProveedor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtxtcodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcomboxPago, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnbuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlabelnombreProveedor1)
@@ -503,7 +482,6 @@ public class CreditoClienteGUI extends javax.swing.JInternalFrame {
             habilitarControles(false);
             JOptionPane.showMessageDialog(rootPane, "CREDITO GRABADO");
             limpiarControles();
-            jcomboxPago.removeAllItems();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e);
         }
@@ -545,13 +523,11 @@ public class CreditoClienteGUI extends javax.swing.JInternalFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         habilitarControles(false);
         limpiarControles();
-        jcomboxPago.removeAllItems();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         habilitarControles(true);
         limpiarControles();
-        llenarComboTipoPago();
         sw = true;
     }//GEN-LAST:event_btnNuevoActionPerformed
 
@@ -574,10 +550,6 @@ public class CreditoClienteGUI extends javax.swing.JInternalFrame {
     private void jtxtTotalDeudaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtTotalDeudaKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtTotalDeudaKeyTyped
-
-    private void jcomboxPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcomboxPagoActionPerformed
-
-    }//GEN-LAST:event_jcomboxPagoActionPerformed
 
     private void btnbuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarClienteActionPerformed
         BuscarClienteCreditoGUI objBuscarClienteCreditoGUI = new BuscarClienteCreditoGUI();
@@ -607,7 +579,6 @@ public class CreditoClienteGUI extends javax.swing.JInternalFrame {
         try {
             limpiarJTable();
             xidcliente = Integer.parseInt(jtxtcodigoCliente.getText().trim());
-            obtenerIdTipoPago();
             rsCredito = objCreditoDAO.buscarCreditoCliente(xidcliente, xidtipopago);
             while (rsCredito.next()) {
                 Object[] registro = {rsCredito.getInt(1), rsCredito.getString(2), rsCredito.getDouble(4)};
@@ -685,13 +656,11 @@ public class CreditoClienteGUI extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> jcomboxPago;
     private javax.swing.JLabel jlabelnombreProveedor;
     private javax.swing.JLabel jlabelnombreProveedor1;
     private javax.swing.JLabel jlabelnombreProveedor2;
     private javax.swing.JLabel jlabelnombreProveedor3;
     private javax.swing.JLabel jlabelnombreProveedor4;
-    private javax.swing.JLabel jlabelnombreProveedor5;
     private javax.swing.JLabel jlabelnombreProveedor6;
     private javax.swing.JTable jtblCreditoCliente;
     public static javax.swing.JTextField jtxtDeudaActual;
@@ -711,7 +680,6 @@ public class CreditoClienteGUI extends javax.swing.JInternalFrame {
         btnCancelar.setEnabled(b);
         btnNuevo.setEnabled(!b);
         btnbuscarCliente.setEnabled(b);
-        jcomboxPago.setEnabled(b);
         btnBuscarCredito.setEnabled(b);
 //        btnEliminarProducto.setEnabled(b);
     }
@@ -723,32 +691,6 @@ public class CreditoClienteGUI extends javax.swing.JInternalFrame {
             objTextField.setText(null);
         }
 
-    }
-
-    private void llenarComboTipoPago() {
-        try {
-            rsTipoPago = objTipoPagoDAO.buscar("%");
-            while (rsTipoPago.next()) {
-                jcomboxPago.addItem(rsTipoPago.getString(2));
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
-        }
-    }
-
-    private void obtenerIdTipoPago() {
-        try {
-            String nombre = jcomboxPago.getSelectedItem().toString();
-            rsTipoPago.first();
-            do {
-                if (nombre.equals(rsTipoPago.getString(2))) {
-                    xidtipopago = rsTipoPago.getInt(1);
-                    rsTipoPago.last();
-                }
-            } while (rsTipoPago.next());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
-        }
     }
 
     private void limpiarJTable() {

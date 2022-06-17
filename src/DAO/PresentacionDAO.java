@@ -6,7 +6,7 @@
 package DAO;
 
 import Conexion.ConMySql;
-import DTO.UnidadMedidaTO;
+import DTO.PresentacionTO;
 import Interfaz.VentasInterface;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -19,20 +19,20 @@ import javax.swing.JRootPane;
  *
  * @author HP
  */
-public class UnidadMedidaDAO implements VentasInterface<UnidadMedidaTO> {
+public class PresentacionDAO implements VentasInterface<PresentacionTO> {
+
     ResultSet rs;
     JRootPane rootPane;
-    
+
     @Override
     public ResultSet buscar(Object objObject) {
         try {
             Connection cn = ConMySql.getInstance().getConection();
             String nombre = "%" + objObject + "%";
-            String sql = "SELECT *FROM vudm where descrudm like ?";
+            String sql = "SELECT *FROM vpresentacion where descrpresent like ?";
             PreparedStatement ps = cn.prepareStatement(sql);
             ps.setString(1, nombre);
             rs = ps.executeQuery();
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e);
         }
@@ -40,12 +40,14 @@ public class UnidadMedidaDAO implements VentasInterface<UnidadMedidaTO> {
     }
 
     @Override
-    public void insert(UnidadMedidaTO objObjeto) {
+    public void insert(PresentacionTO objObjeto) {
         try {
             Connection cn = ConMySql.getInstance().getConection();
-            String sql = "CALL sp_insert_udm(?);";
+            String sql = "CALL sp_insert_presentacion(?,?,?);";
             CallableStatement cs = cn.prepareCall(sql);
-            cs.setString(1, objObjeto.getDescrunid());
+            cs.setInt(1, objObjeto.getIdudm());
+            cs.setString(2, objObjeto.getDescrpresent());
+            cs.setDouble(3, objObjeto.getCantpresent());
             cs.execute();
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(rootPane, e);
@@ -53,13 +55,15 @@ public class UnidadMedidaDAO implements VentasInterface<UnidadMedidaTO> {
     }
 
     @Override
-    public void update(UnidadMedidaTO objObjeto) {
+    public void update(PresentacionTO objObjeto) {
         try {
             Connection cn = ConMySql.getInstance().getConection();
-            String sql = "CALL sp_update_udm(?,?);";
+            String sql = "CALL sp_update_presentacion(?,?,?,?);";
             CallableStatement cs = cn.prepareCall(sql);
-            cs.setInt(1, objObjeto.getIdunidadmedida());
-            cs.setString(2, objObjeto.getDescrunid());
+            cs.setInt(1, objObjeto.getIdpresentacion());
+            cs.setInt(2, objObjeto.getIdudm());
+            cs.setString(3, objObjeto.getDescrpresent());
+            cs.setDouble(4, objObjeto.getCantpresent());
             cs.execute();
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(rootPane, e);
@@ -67,12 +71,12 @@ public class UnidadMedidaDAO implements VentasInterface<UnidadMedidaTO> {
     }
 
     @Override
-    public void delete(UnidadMedidaTO objObjeto) {
+    public void delete(PresentacionTO objObjeto) {
         try {
             Connection cn = ConMySql.getInstance().getConection();
-            String sql = "CALL sp_delete_udm(?);";
+            String sql = "CALL sp_delete_presentacion(?);";
             CallableStatement cs = cn.prepareCall(sql);
-            cs.setInt(1, objObjeto.getIdunidadmedida());
+            cs.setInt(1, objObjeto.getIdpresentacion());
             cs.execute();
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(rootPane, e);

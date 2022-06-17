@@ -2,13 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package GUI;
+package GUI.Entrada;
 
 import DAO.DetalleEntradaDAO;
 import DAO.EntradaDAO;
-import DAO.TipoPagoDAO;
 import DTO.DetalleEntradaTO;
 import DTO.EntradaTO;
+import GUI.BuscarProductoEntrada;
+import GUI.MenuGUI;
 import Library.ValidarClass;
 import com.sun.glass.events.KeyEvent;
 import java.sql.ResultSet;
@@ -31,7 +32,6 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
      */
     EntradaDAO objEntradaDAO = new EntradaDAO();
     DetalleEntradaDAO objDetalleEntradaDAO = new DetalleEntradaDAO();
-    TipoPagoDAO objTipoPagoDAO = new TipoPagoDAO();
     JRootPane rootPane;
     ResultSet rsTipoPago;
     boolean sw;
@@ -107,9 +107,6 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
         btnBuscarProducto = new javax.swing.JButton();
         jcomboxPago = new javax.swing.JComboBox<>();
         jlabelcodigoProducto2 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jlabelnumDocumento3 = new javax.swing.JLabel();
-        jcomboxPago1 = new javax.swing.JComboBox<>();
 
         jPanel1.setBackground(new java.awt.Color(0, 204, 153));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -651,34 +648,6 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
                 .addGap(10, 10, 10))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jlabelnumDocumento3.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jlabelnumDocumento3.setText("ESTADO:");
-
-        jcomboxPago1.setEnabled(false);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlabelnumDocumento3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jcomboxPago1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlabelnumDocumento3)
-                    .addComponent(jcomboxPago1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -691,7 +660,6 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -713,21 +681,18 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(23, Short.MAX_VALUE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
+                        .addGap(54, 54, 54)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5))))
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -799,7 +764,6 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
             String fecha = objSimpleDateFormat.format(jDateFechaActual.getDate());
             objEntradaTO.setFechaent(fecha);
             objEntradaTO.setNroent(jtxtnroEntrada.getText().toUpperCase().trim());
-            obtenerIdTipoPago();
             objEntradaTO.setIdtipago(xidtipopago);
             objEntradaTO.setIdencargado(Integer.parseInt(jtxtcodigoEncargadoEntrada.getText()));
             objEntradaTO.setIdproveedor(Integer.parseInt(jtxtcodigoProveedor.getText()));
@@ -927,8 +891,6 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         habilitarControles(true);
         limpiarControles();
-        llenarComboTipoPago();
-
         sw = true;
     }//GEN-LAST:event_btnNuevoActionPerformed
 
@@ -977,14 +939,12 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> jcomboxPago;
-    private javax.swing.JComboBox<String> jcomboxPago1;
     private javax.swing.JLabel jlabelCantidad;
     private javax.swing.JLabel jlabelDescProducto;
     private javax.swing.JLabel jlabelDescProducto1;
@@ -996,7 +956,6 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlabelnombreProveedor1;
     private javax.swing.JLabel jlabelnumDocumento1;
     private javax.swing.JLabel jlabelnumDocumento2;
-    private javax.swing.JLabel jlabelnumDocumento3;
     private javax.swing.JLabel jlabelprecioCompra;
     private javax.swing.JTable jtblEntrada;
     private javax.swing.JTextField jtxtTotal;
@@ -1043,32 +1002,6 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
     private void limpiarJTable() {
         while (objDtm.getRowCount() > 0) {
             objDtm.removeRow(0);
-        }
-    }
-
-    private void llenarComboTipoPago() {
-        try {
-            rsTipoPago = objTipoPagoDAO.buscar("%");
-            while (rsTipoPago.next()) {
-                jcomboxPago.addItem(rsTipoPago.getString(2));
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
-        }
-    }
-
-    private void obtenerIdTipoPago() {
-        try {
-            String nombre = jcomboxPago.getSelectedItem().toString();
-            rsTipoPago.first();
-            do {
-                if (nombre.equals(rsTipoPago.getString(2))) {
-                    xidtipopago = rsTipoPago.getInt(1);
-                    rsTipoPago.last();
-                }
-            } while (rsTipoPago.next());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
         }
     }
 

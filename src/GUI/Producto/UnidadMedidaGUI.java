@@ -2,44 +2,42 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package GUI;
+package GUI.Producto;
 
-import DAO.CategoriaDAO;
-import DTO.CategoriaTO;
+import DAO.UnidadMedidaDAO;
+import DTO.UnidadMedidaTO;
+import java.awt.Color;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author JEFREY
  */
-public class CategoriaGUI extends javax.swing.JInternalFrame {
+public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form CategoriaGUI
+     * Creates new form UnidadMedidaGUI
      */
-    CategoriaDAO objCategoriaDAO = new CategoriaDAO();
-    CategoriaTO objCategoriaTO = new CategoriaTO();
+    UnidadMedidaDAO objUnidadMedidaDAO = new UnidadMedidaDAO();
+    UnidadMedidaTO objUnidadMedidaTO = new UnidadMedidaTO();
 
     JRootPane rootPane;
     boolean sw;
     DefaultTableModel objDtm;
-    ResultSet rsCategoria;
-    int xidcategoria;
-    DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+    ResultSet rsUnidadMedida;
+    int xidunidadmedida;
+    String mensaje;
 
-    public CategoriaGUI() {
+    public UnidadMedidaGUI() {
         initComponents();
         setVisible(true);
-        setSize(860, 386);
-
-        objDtm = (DefaultTableModel) jtblCategoria.getModel();
-        jtblCategoria.getColumn("COD").setPreferredWidth(30);
-
+        setSize(828, 351);
+        this.getContentPane().setBackground(Color.white);
+        objDtm = (DefaultTableModel) jtblRegistroUDM.getModel();
     }
 
     /**
@@ -51,13 +49,13 @@ public class CategoriaGUI extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jPanelRegistro = new javax.swing.JPanel();
+        jLabelRegistroUDM = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jtxtdescripCategoria = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jtxtcodigoCategoria = new javax.swing.JTextField();
+        jLabelCodigo = new javax.swing.JLabel();
+        jtxtDescripcionUDM = new javax.swing.JTextField();
+        jLabelDescripcionUDM = new javax.swing.JLabel();
+        jtxtCodigoUDM = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnCancelar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
@@ -65,75 +63,77 @@ public class CategoriaGUI extends javax.swing.JInternalFrame {
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
+        jPanelDatos = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtblCategoria = new javax.swing.JTable();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jtxtBuscarCategoria = new javax.swing.JTextField();
+        jtblRegistroUDM = new javax.swing.JTable();
+        jPanelBuscar = new javax.swing.JPanel();
+        jLabelBuscarUDM = new javax.swing.JLabel();
+        jtxtBuscarUDM = new javax.swing.JTextField();
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 204));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanelRegistro.setBackground(new java.awt.Color(153, 153, 255));
+        jPanelRegistro.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jLabel1.setFont(new java.awt.Font("Bahnschrift", 1, 15)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("AREA DE CATEGORIA");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelRegistroUDM.setFont(new java.awt.Font("Bahnschrift", 1, 15)); // NOI18N
+        jLabelRegistroUDM.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelRegistroUDM.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelRegistroUDM.setText("REGISTRO DE UNIDAD DE MEDIDA");
+        jLabelRegistroUDM.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanelRegistroLayout = new javax.swing.GroupLayout(jPanelRegistro);
+        jPanelRegistro.setLayout(jPanelRegistroLayout);
+        jPanelRegistroLayout.setHorizontalGroup(
+            jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRegistroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelRegistroUDM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanelRegistroLayout.setVerticalGroup(
+            jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistroLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabelRegistroUDM)
+                .addGap(5, 5, 5))
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel6.setOpaque(false);
 
-        jLabel7.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jLabel7.setText("CODIGO:");
+        jLabelCodigo.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jLabelCodigo.setText("CODIGO:");
 
-        jtxtdescripCategoria.setEditable(false);
-        jtxtdescripCategoria.addActionListener(new java.awt.event.ActionListener() {
+        jtxtDescripcionUDM.setEditable(false);
+        jtxtDescripcionUDM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtdescripCategoriaActionPerformed(evt);
+                jtxtDescripcionUDMActionPerformed(evt);
             }
         });
-        jtxtdescripCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
+        jtxtDescripcionUDM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtxtdescripCategoriaKeyReleased(evt);
+                jtxtDescripcionUDMKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtdescripCategoriaKeyTyped(evt);
+                jtxtDescripcionUDMKeyTyped(evt);
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jLabel9.setText("DESCRIPCION CATEGORIA:");
+        jLabelDescripcionUDM.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jLabelDescripcionUDM.setText("DESCRIPCION UNIDAD MEDIDA:");
 
-        jtxtcodigoCategoria.setEditable(false);
-        jtxtcodigoCategoria.setBackground(new java.awt.Color(204, 204, 204));
-        jtxtcodigoCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
+        jtxtCodigoUDM.setEditable(false);
+        jtxtCodigoUDM.setBackground(new java.awt.Color(204, 204, 204));
+        jtxtCodigoUDM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtxtcodigoCategoriaKeyReleased(evt);
+                jtxtCodigoUDMKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtcodigoCategoriaKeyTyped(evt);
+                jtxtCodigoUDMKeyTyped(evt);
             }
         });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setOpaque(false);
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/cancelar.png"))); // NOI18N
         btnCancelar.setText("CANCELAR");
@@ -220,27 +220,27 @@ public class CategoriaGUI extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(0, 0, 204));
-        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanelDatos.setBackground(new java.awt.Color(153, 153, 255));
+        jPanelDatos.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel4.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("REGISTRO DE CATEGORIA");
+        jLabel4.setText("DATOS DE UNIDAD DE MEDIDA");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelDatosLayout = new javax.swing.GroupLayout(jPanelDatos);
+        jPanelDatos.setLayout(jPanelDatosLayout);
+        jPanelDatosLayout.setHorizontalGroup(
+            jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDatosLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        jPanelDatosLayout.setVerticalGroup(
+            jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDatosLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addComponent(jLabel4)
                 .addGap(5, 5, 5))
@@ -256,39 +256,39 @@ public class CategoriaGUI extends javax.swing.JInternalFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
+                            .addComponent(jLabelDescripcionUDM)
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(15, 15, 15)
-                                .addComponent(jtxtcodigoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabelCodigo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtxtCodigoUDM, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jtxtdescripCategoria))
+                    .addComponent(jtxtDescripcionUDM))
                 .addGap(10, 10, 10))
-            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addComponent(jPanelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jtxtcodigoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelCodigo)
+                    .addComponent(jtxtCodigoUDM, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addComponent(jLabel9)
+                .addComponent(jLabelDescripcionUDM)
                 .addGap(10, 10, 10)
-                .addComponent(jtxtdescripCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addComponent(jtxtDescripcionUDM, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(10, 10, 10))
         );
 
-        jtblCategoria.setModel(new javax.swing.table.DefaultTableModel(
+        jtblRegistroUDM.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "COD", "CATEGORIA"
+                "COD", "UDM"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -299,56 +299,54 @@ public class CategoriaGUI extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jtblCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtblRegistroUDM.setSelectionBackground(new java.awt.Color(51, 51, 255));
+        jtblRegistroUDM.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtblCategoriaMouseClicked(evt);
+                jtblRegistroUDMMouseClicked(evt);
             }
         });
-        jtblCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtblCategoriaKeyReleased(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jtblCategoria);
-        if (jtblCategoria.getColumnModel().getColumnCount() > 0) {
-            jtblCategoria.getColumnModel().getColumn(0).setResizable(false);
-            jtblCategoria.getColumnModel().getColumn(1).setResizable(false);
+        jScrollPane1.setViewportView(jtblRegistroUDM);
+        if (jtblRegistroUDM.getColumnModel().getColumnCount() > 0) {
+            jtblRegistroUDM.getColumnModel().getColumn(0).setMinWidth(70);
+            jtblRegistroUDM.getColumnModel().getColumn(0).setMaxWidth(70);
+            jtblRegistroUDM.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanelBuscar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanelBuscar.setOpaque(false);
 
-        jLabel2.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jLabel2.setText("BUSCAR:");
+        jLabelBuscarUDM.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jLabelBuscarUDM.setText("BUSCAR:");
 
-        jtxtBuscarCategoria.addActionListener(new java.awt.event.ActionListener() {
+        jtxtBuscarUDM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtBuscarCategoriaActionPerformed(evt);
+                jtxtBuscarUDMActionPerformed(evt);
             }
         });
-        jtxtBuscarCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
+        jtxtBuscarUDM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtxtBuscarCategoriaKeyReleased(evt);
+                jtxtBuscarUDMKeyReleased(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelBuscarLayout = new javax.swing.GroupLayout(jPanelBuscar);
+        jPanelBuscar.setLayout(jPanelBuscarLayout);
+        jPanelBuscarLayout.setHorizontalGroup(
+            jPanelBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelBuscarLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jLabel2)
-                .addGap(15, 15, 15)
-                .addComponent(jtxtBuscarCategoria)
+                .addComponent(jLabelBuscarUDM)
+                .addGap(10, 10, 10)
+                .addComponent(jtxtBuscarUDM)
                 .addGap(10, 10, 10))
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        jPanelBuscarLayout.setVerticalGroup(
+            jPanelBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelBuscarLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jtxtBuscarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtxtBuscarUDM, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelBuscarUDM))
                 .addGap(10, 10, 10))
         );
 
@@ -356,47 +354,47 @@ public class CategoriaGUI extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(10, 10, 10))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
+                    .addComponent(jPanelBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addComponent(jPanelRegistro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanelRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtxtcodigoCategoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtcodigoCategoriaKeyTyped
+    private void jtxtCodigoUDMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtCodigoUDMKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtcodigoCategoriaKeyTyped
+    }//GEN-LAST:event_jtxtCodigoUDMKeyTyped
 
-    private void jtxtcodigoCategoriaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtcodigoCategoriaKeyReleased
+    private void jtxtCodigoUDMKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtCodigoUDMKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtcodigoCategoriaKeyReleased
+    }//GEN-LAST:event_jtxtCodigoUDMKeyReleased
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         try {
-            int op = JOptionPane.showConfirmDialog(null, "¿ESTA SEGURO QUE DESEA ELIMINAR?", "REGISTRO CATEGORIA", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int op = JOptionPane.showConfirmDialog(null, "¿ESTA SEGURO QUE DESEA ELIMINAR?", "REGISTRO UNIDAD DE MEDIDA", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (op == JOptionPane.YES_OPTION) {
-                objCategoriaTO.setIdcategoria(xidcategoria);
-                objCategoriaDAO.delete(objCategoriaTO);
+                objUnidadMedidaTO.setIdunidadmedida(xidunidadmedida);
+                objUnidadMedidaDAO.delete(objUnidadMedidaTO);
                 limpiarControles();
                 JOptionPane.showMessageDialog(null, "REGISTRO ELIMINADO");
             }
@@ -405,36 +403,36 @@ public class CategoriaGUI extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void jtxtdescripCategoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdescripCategoriaKeyTyped
+    private void jtxtDescripcionUDMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtDescripcionUDMKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtdescripCategoriaKeyTyped
+    }//GEN-LAST:event_jtxtDescripcionUDMKeyTyped
 
-    private void jtxtdescripCategoriaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdescripCategoriaKeyReleased
+    private void jtxtDescripcionUDMKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtDescripcionUDMKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtdescripCategoriaKeyReleased
+    }//GEN-LAST:event_jtxtDescripcionUDMKeyReleased
 
-    private void jtxtdescripCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtdescripCategoriaActionPerformed
+    private void jtxtDescripcionUDMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtDescripcionUDMActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtdescripCategoriaActionPerformed
+    }//GEN-LAST:event_jtxtDescripcionUDMActionPerformed
 
-    private void jtxtBuscarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtBuscarCategoriaActionPerformed
+    private void jtxtBuscarUDMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtBuscarUDMActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtBuscarCategoriaActionPerformed
+    }//GEN-LAST:event_jtxtBuscarUDMActionPerformed
 
-    private void jtxtBuscarCategoriaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtBuscarCategoriaKeyReleased
+    private void jtxtBuscarUDMKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtBuscarUDMKeyReleased
         try {
             limpiarJTable();
-            if (!jtxtBuscarCategoria.getText().isEmpty()) {
-                rsCategoria = objCategoriaDAO.buscar(jtxtBuscarCategoria.getText().trim());
-                while (rsCategoria.next()) {
-                    Object registro[] = {rsCategoria.getInt(1), rsCategoria.getString(2)};
+            if (!jtxtBuscarUDM.getText().isEmpty()) {
+                rsUnidadMedida = objUnidadMedidaDAO.buscar(jtxtBuscarUDM.getText().trim());
+                while (rsUnidadMedida.next()) {
+                    Object registro[] = {rsUnidadMedida.getInt(1), rsUnidadMedida.getString(2)};
                     objDtm.addRow(registro);
                 }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e);
         }
-    }//GEN-LAST:event_jtxtBuscarCategoriaKeyReleased
+    }//GEN-LAST:event_jtxtBuscarUDMKeyReleased
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
@@ -448,21 +446,24 @@ public class CategoriaGUI extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-            String mensaje = "";
-            objCategoriaTO.setDescrcateg(jtxtdescripCategoria.getText().toUpperCase());
-            if (sw) {
-                objCategoriaDAO.insert(objCategoriaTO);
-                mensaje = "CATEGORIA GUARDADO";
+            if (jtxtDescripcionUDM.getText().trim().length() == 0) {
+                JOptionPane.showMessageDialog(null, "COMPLETAR CAJA DE TEXTO", "FERRETERIA MICKY", JOptionPane.WARNING_MESSAGE);
             } else {
-                objCategoriaTO.setIdcategoria(Integer.parseInt(jtxtcodigoCategoria.getText()));
-                objCategoriaDAO.update(objCategoriaTO);
-                mensaje = "CATEGORIA ACTUALIZADO";
+                objUnidadMedidaTO.setDescrunid(jtxtDescripcionUDM.getText().toUpperCase().trim());
+                if (sw) {
+                    objUnidadMedidaDAO.insert(objUnidadMedidaTO);
+                    mensaje = "UNIDAD REGISTRADO";
+                } else {
+                    objUnidadMedidaTO.setIdunidadmedida(Integer.parseInt(jtxtCodigoUDM.getText()));
+                    objUnidadMedidaDAO.update(objUnidadMedidaTO);
+                    mensaje = "UNIDAD ACTUALIZADO";
+                }
+                habilitarControles(false);
+                JOptionPane.showMessageDialog(null, mensaje, "FERRETERIA MICKY", JOptionPane.INFORMATION_MESSAGE);
+                limpiarControles();
             }
-            habilitarControles(false);
-            JOptionPane.showMessageDialog(null, mensaje);
-            limpiarControles();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
+            JOptionPane.showMessageDialog(null, e, "FERRETERIA MICKY", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -471,31 +472,26 @@ public class CategoriaGUI extends javax.swing.JInternalFrame {
         sw = false;
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void jtblCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblCategoriaMouseClicked
+    private void jtblRegistroUDMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblRegistroUDMMouseClicked
         try {
-            xidcategoria = Integer.parseInt(jtblCategoria.getValueAt(jtblCategoria.getSelectedRow(), 0).toString());
-            rsCategoria.first();
-           
+            xidunidadmedida = Integer.parseInt(jtblRegistroUDM.getValueAt(jtblRegistroUDM.getSelectedRow(), 0).toString());
+            rsUnidadMedida.first();
             do {
-                if (xidcategoria == rsCategoria.getInt(1)) {
-                    jtxtcodigoCategoria.setText(String.valueOf(rsCategoria.getInt(1)));
-                    jtxtdescripCategoria.setText(rsCategoria.getString(2));
-                    rsCategoria.last();
+                if (xidunidadmedida == rsUnidadMedida.getInt(1)) {
+                    jtxtCodigoUDM.setText(String.valueOf(rsUnidadMedida.getInt(1)));
+                    jtxtDescripcionUDM.setText(rsUnidadMedida.getString(2));
+                    rsUnidadMedida.last();
                 }
-            } while (rsCategoria.next());
+            } while (rsUnidadMedida.next());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e);
         }
-    }//GEN-LAST:event_jtblCategoriaMouseClicked
+    }//GEN-LAST:event_jtblRegistroUDMMouseClicked
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         habilitarControles(false);
         limpiarControles();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void jtblCategoriaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtblCategoriaKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtblCategoriaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -505,42 +501,41 @@ public class CategoriaGUI extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabelBuscarUDM;
+    private javax.swing.JLabel jLabelCodigo;
+    private javax.swing.JLabel jLabelDescripcionUDM;
+    private javax.swing.JLabel jLabelRegistroUDM;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanelBuscar;
+    private javax.swing.JPanel jPanelDatos;
+    private javax.swing.JPanel jPanelRegistro;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtblCategoria;
-    private javax.swing.JTextField jtxtBuscarCategoria;
-    private javax.swing.JTextField jtxtcodigoCategoria;
-    private javax.swing.JTextField jtxtdescripCategoria;
+    private javax.swing.JTable jtblRegistroUDM;
+    private javax.swing.JTextField jtxtBuscarUDM;
+    private javax.swing.JTextField jtxtCodigoUDM;
+    private javax.swing.JTextField jtxtDescripcionUDM;
     // End of variables declaration//GEN-END:variables
 
     private void habilitarControles(boolean b) {
-        JTextField[] arrJTexFields = {jtxtdescripCategoria};
+        JTextField[] arrJTexFields = {jtxtDescripcionUDM};
         for (JTextField obJTextField : arrJTexFields) {
             obJTextField.setEditable(b);
         }
-        jtxtBuscarCategoria.setEditable(!b);
-        jtxtdescripCategoria.grabFocus();
+        jtxtBuscarUDM.setEditable(!b);
+        jtxtDescripcionUDM.grabFocus();
         btnGuardar.setEnabled(b);
         btnCancelar.setEnabled(b);
         btnNuevo.setEnabled(!b);
         btnEditar.setEnabled(!b);
         btnEliminar.setEnabled(!b);
         btnSalir.setEnabled(!b);
-
     }
 
     private void limpiarControles() {
         limpiarJTable();
-        JTextField[] objTextFields = {jtxtcodigoCategoria, jtxtBuscarCategoria, jtxtdescripCategoria};
+        JTextField[] objTextFields = {jtxtCodigoUDM, jtxtBuscarUDM, jtxtDescripcionUDM};
         for (JTextField objTextField : objTextFields) {
             objTextField.setText(null);
         }

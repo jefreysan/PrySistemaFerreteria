@@ -8,7 +8,6 @@ import DAO.ComprobanteVentaDAO;
 import DAO.CreditoDAO;
 import DAO.DetalleComprobanteVentaDAO;
 import DAO.ProductoDAO;
-import DAO.TipoPagoDAO;
 import DTO.ComprobanteVentaTO;
 import DTO.CreditoTO;
 import DTO.DetalleComprobanteVentaTO;
@@ -32,7 +31,6 @@ public class ComprobanteGUI extends javax.swing.JInternalFrame {
      */
     ComprobanteVentaDAO objComprobanteVentaDAO = new ComprobanteVentaDAO();
     DetalleComprobanteVentaDAO objDetalleComprobanteVentaDAO = new DetalleComprobanteVentaDAO();
-    TipoPagoDAO objTipoPagoDAO = new TipoPagoDAO();
     ProductoDAO objProductoDAO = new ProductoDAO();
     CreditoDAO objCreditoDAO = new CreditoDAO();
     ValidarClass objValidarClass = new ValidarClass();
@@ -120,8 +118,6 @@ public class ComprobanteGUI extends javax.swing.JInternalFrame {
         jPanel4 = new javax.swing.JPanel();
         jtxtSerieNumero = new javax.swing.JTextField();
         jlabelnombreProveedor4 = new javax.swing.JLabel();
-        jcomboxPago = new javax.swing.JComboBox<>();
-        jlabelnombreProveedor5 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jlabelTotal3 = new javax.swing.JLabel();
         jtxtVuelto = new javax.swing.JTextField();
@@ -662,16 +658,6 @@ public class ComprobanteGUI extends javax.swing.JInternalFrame {
         jlabelnombreProveedor4.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
         jlabelnombreProveedor4.setText("SERIE NRO.");
 
-        jcomboxPago.setEnabled(false);
-        jcomboxPago.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcomboxPagoActionPerformed(evt);
-            }
-        });
-
-        jlabelnombreProveedor5.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jlabelnombreProveedor5.setText("TIPO DE PAGO:");
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -681,23 +667,15 @@ public class ComprobanteGUI extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlabelnombreProveedor4)
                     .addComponent(jtxtSerieNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jcomboxPago, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlabelnombreProveedor5))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(235, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlabelnombreProveedor4)
-                    .addComponent(jlabelnombreProveedor5))
+                .addComponent(jlabelnombreProveedor4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtxtSerieNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcomboxPago, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jtxtSerieNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
         );
 
@@ -896,7 +874,6 @@ public class ComprobanteGUI extends javax.swing.JInternalFrame {
             ComprobanteVentaTO objComprobanteVentaTO = new ComprobanteVentaTO();
             objComprobanteVentaTO.setIdencargado(Integer.parseInt(jtxtcodigoEncargado.getText()));
             objComprobanteVentaTO.setIdcliente(Integer.parseInt(jtxtcodigoCliente.getText()));
-            obtenerIdTipoPago();
             objComprobanteVentaTO.setIdtipopago(xidtipopago);
             objComprobanteVentaTO.setNrocomp(jtxtSerieNumero.getText().trim());
             objComprobanteVentaTO.setSubTotalcomp(subTotal);
@@ -923,7 +900,6 @@ public class ComprobanteGUI extends javax.swing.JInternalFrame {
             habilitarControles(false);
             JOptionPane.showMessageDialog(rootPane, "COMPROBANTE GRABADO");
             limpiarControles();
-            jcomboxPago.removeAllItems();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e);
         }
@@ -1052,14 +1028,12 @@ public class ComprobanteGUI extends javax.swing.JInternalFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         habilitarControles(false);
         limpiarControles();
-        jcomboxPago.removeAllItems();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         generarSerie();
         habilitarControles(true);
         limpiarControles();
-        llenarComboTipoPago();
         sw = true;
     }//GEN-LAST:event_btnNuevoActionPerformed
 
@@ -1110,10 +1084,6 @@ public class ComprobanteGUI extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtTotalPagoKeyTyped
 
-    private void jcomboxPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcomboxPagoActionPerformed
-
-    }//GEN-LAST:event_jcomboxPagoActionPerformed
-
     private void jtxtStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtStockActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtStockActionPerformed
@@ -1146,7 +1116,6 @@ public class ComprobanteGUI extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> jcomboxPago;
     private javax.swing.JLabel jlabelCantidad;
     private javax.swing.JLabel jlabelDescProducto;
     private javax.swing.JLabel jlabelTotal;
@@ -1161,7 +1130,6 @@ public class ComprobanteGUI extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlabelnombreProveedor2;
     private javax.swing.JLabel jlabelnombreProveedor3;
     private javax.swing.JLabel jlabelnombreProveedor4;
-    private javax.swing.JLabel jlabelnombreProveedor5;
     private javax.swing.JLabel jlabelprecioCompra;
     private javax.swing.JTable jtblComprobante;
     private javax.swing.JTextField jtxtIGV;
@@ -1192,34 +1160,7 @@ public class ComprobanteGUI extends javax.swing.JInternalFrame {
         btnbuscarCliente.setEnabled(b);
         btnbuscarProveedor.setEnabled(b);
         btnBuscarProducto.setEnabled(b);
-        jcomboxPago.setEnabled(b);
         btnEliminarProducto.setEnabled(b);
-    }
-
-    private void llenarComboTipoPago() {
-        try {
-            rsTipoPago = objTipoPagoDAO.buscar("%");
-            while (rsTipoPago.next()) {
-                jcomboxPago.addItem(rsTipoPago.getString(2));
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
-        }
-    }
-
-    private void obtenerIdTipoPago() {
-        try {
-            String nombre = jcomboxPago.getSelectedItem().toString();
-            rsTipoPago.first();
-            do {
-                if (nombre.equals(rsTipoPago.getString(2))) {
-                    xidtipopago = rsTipoPago.getInt(1);
-                    rsTipoPago.last();
-                }
-            } while (rsTipoPago.next());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
-        }
     }
 
     private void limpiarControles() {

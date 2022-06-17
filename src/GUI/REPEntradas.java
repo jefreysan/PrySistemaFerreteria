@@ -6,7 +6,6 @@ package GUI;
 
 import Conexion.ConMySql;
 import DAO.EntradaDAO;
-import DAO.TipoPagoDAO;
 import DTO.EntradaTO;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.sql.Connection;
@@ -35,7 +34,6 @@ public class REPEntradas extends javax.swing.JInternalFrame {
     JRootPane rootPane;
     boolean sw;
     DefaultTableModel objDtm;
-    TipoPagoDAO objTipoPagoDAO = new TipoPagoDAO();
     ResultSet rsEntrada,rsTipoPago;
     int xidentrada,xidtipopago;
     EntradaDAO objEntradaDAO = new EntradaDAO();
@@ -45,7 +43,6 @@ public class REPEntradas extends javax.swing.JInternalFrame {
         initComponents();
         setVisible(true);
         setSize(998, 400);
-        llenarComboTipoPago();
         objDtm = (DefaultTableModel) jtblReporteEntrada.getModel();
     }
 
@@ -69,8 +66,6 @@ public class REPEntradas extends javax.swing.JInternalFrame {
         jdateFechaFin = new com.toedter.calendar.JDateChooser();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jcomboxPago = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblReporteEntrada = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -140,15 +135,6 @@ public class REPEntradas extends javax.swing.JInternalFrame {
         jLabel11.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
         jLabel11.setText("FECHA FIN:");
 
-        jLabel12.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jLabel12.setText("ESTADO:");
-
-        jcomboxPago.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcomboxPagoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -162,14 +148,10 @@ public class REPEntradas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jdateFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jcomboxPago, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(34, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel12)
-                        .addGap(125, 125, 125))))
+                        .addGap(125, 331, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,13 +159,11 @@ public class REPEntradas extends javax.swing.JInternalFrame {
                 .addGap(4, 4, 4)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12))
+                    .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jdateFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jdateFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcomboxPago, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jdateFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -302,22 +282,21 @@ public class REPEntradas extends javax.swing.JInternalFrame {
             limpiarJTable();
             String fechaIncio = objSimpleDateFormat.format(jdateFechaInicio.getDate());
             String fechaFinal = objSimpleDateFormat.format(jdateFechaFin.getDate());
-            String estado = jcomboxPago.getSelectedItem().toString();
-            if (estado.equals("CONTADO")) {
-                rsEntrada = objEntradaDAO.buscarPorFecha(fechaIncio, fechaFinal,estado);
+//            if (estado.equals("CONTADO")) {
+//                rsEntrada = objEntradaDAO.buscarPorFecha(fechaIncio, fechaFinal,estado);
                 while (rsEntrada.next()) {
                     Object[] registro = {rsEntrada.getInt(1), rsEntrada.getString(2), rsEntrada.getString(6),rsEntrada.getString(5),rsEntrada.getString(4),
                         rsEntrada.getDouble(7)};
                     objDtm.addRow(registro);
                 }
-            }else{
-               rsEntrada = objEntradaDAO.buscarPorFecha(fechaIncio, fechaFinal,estado);
+//            }else{
+//               rsEntrada = objEntradaDAO.buscarPorFecha(fechaIncio, fechaFinal,estado);
                 while (rsEntrada.next()) {
                     Object[] registro = {rsEntrada.getInt(1), rsEntrada.getString(2), rsEntrada.getString(6),rsEntrada.getString(5),rsEntrada.getString(4),
                         rsEntrada.getDouble(7)};
                     objDtm.addRow(registro);
                 }
-            }
+//            }
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e);
@@ -354,10 +333,6 @@ public class REPEntradas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtblReporteEntradaMouseClicked
 
-    private void jcomboxPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcomboxPagoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcomboxPagoActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -385,7 +360,6 @@ public class REPEntradas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JMenuItem jMenuItemAnular;
     private javax.swing.JMenuItem jMenuItemImprimir;
     private javax.swing.JPanel jPanel1;
@@ -393,7 +367,6 @@ public class REPEntradas extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPopupMenu jPopupMenuEntradas;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> jcomboxPago;
     private com.toedter.calendar.JDateChooser jdateFechaFin;
     private com.toedter.calendar.JDateChooser jdateFechaInicio;
     private javax.swing.JTable jtblReporteEntrada;
@@ -411,29 +384,5 @@ public class REPEntradas extends javax.swing.JInternalFrame {
         jdateFechaInicio.setCalendar(null);
         jdateFechaFin.setCalendar(null);
     }
-   private void llenarComboTipoPago() {
-        try {
-            rsTipoPago = objTipoPagoDAO.buscar("%");
-            while (rsTipoPago.next()) {
-                jcomboxPago.addItem(rsTipoPago.getString(2));
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
-        }
-    }
 
-    private void obtenerIdTipoPago() {
-        try {
-            String nombre = jcomboxPago.getSelectedItem().toString();
-            rsTipoPago.first();
-            do {
-                if (nombre.equals(rsTipoPago.getString(2))) {
-                    xidtipopago = rsTipoPago.getInt(1);
-                    rsTipoPago.last();
-                }
-            } while (rsTipoPago.next());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
-        }
-    }
 }

@@ -5,7 +5,14 @@
  */
 package GUI;
 
+import GUI.Proveedor.ProveedorGUI;
 import GUI.Cliente.ClienteGUI;
+import GUI.Encargado.EncargadoGUI;
+import GUI.Producto.CategoriaGUI;
+import GUI.Producto.PrePrecioGUI;
+import GUI.Producto.PresentacionGUI;
+import GUI.Producto.ProductoGUI;
+import GUI.Producto.UnidadMedidaGUI;
 
 /**
  *
@@ -19,6 +26,7 @@ public class MenuGUI extends javax.swing.JFrame {
     public MenuGUI() {
         initComponents();
         setVisible(true);
+        setTitle("SISTEMAS DE VENTAS - FERRETERIA MICKY");
         setExtendedState(MAXIMIZED_BOTH);
     }
 
@@ -43,6 +51,7 @@ public class MenuGUI extends javax.swing.JFrame {
         copyMenuItem = new javax.swing.JMenuItem();
         pasteMenuItem = new javax.swing.JMenuItem();
         deleteMenuItem = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
@@ -63,6 +72,11 @@ public class MenuGUI extends javax.swing.JFrame {
 
         saveMenuItem.setMnemonic('s');
         saveMenuItem.setText("Proveedor");
+        saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(saveMenuItem);
 
         saveAsMenuItemEncargado.setMnemonic('a');
@@ -86,23 +100,51 @@ public class MenuGUI extends javax.swing.JFrame {
         menuBar.add(fileMenu);
 
         editMenu.setMnemonic('e');
-        editMenu.setText("Edit");
+        editMenu.setText("Materiales");
 
         cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Cut");
+        cutMenuItem.setText("Producto");
+        cutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cutMenuItemActionPerformed(evt);
+            }
+        });
         editMenu.add(cutMenuItem);
 
         copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Copy");
+        copyMenuItem.setText("Categoria");
+        copyMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copyMenuItemActionPerformed(evt);
+            }
+        });
         editMenu.add(copyMenuItem);
 
         pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Paste");
+        pasteMenuItem.setText("UnidadMedida");
+        pasteMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pasteMenuItemActionPerformed(evt);
+            }
+        });
         editMenu.add(pasteMenuItem);
 
         deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Delete");
+        deleteMenuItem.setText("Presentacion");
+        deleteMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteMenuItemActionPerformed(evt);
+            }
+        });
         editMenu.add(deleteMenuItem);
+
+        jMenuItem1.setText("Presentacion  Precios");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        editMenu.add(jMenuItem1);
 
         menuBar.add(editMenu);
 
@@ -140,12 +182,37 @@ public class MenuGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void saveAsMenuItemEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuItemEncargadoActionPerformed
-      
+        MenuGUI.desktopPane.add(new EncargadoGUI());
     }//GEN-LAST:event_saveAsMenuItemEncargadoActionPerformed
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
-          MenuGUI.desktopPane.add(new ClienteGUI());
+        MenuGUI.desktopPane.add(new ClienteGUI());
     }//GEN-LAST:event_openMenuItemActionPerformed
+
+    private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
+        MenuGUI.desktopPane.add(new ProveedorGUI());
+    }//GEN-LAST:event_saveMenuItemActionPerformed
+
+    private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItemActionPerformed
+        MenuGUI.desktopPane.add(new ProductoGUI());
+
+    }//GEN-LAST:event_cutMenuItemActionPerformed
+
+    private void deleteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMenuItemActionPerformed
+        MenuGUI.desktopPane.add(new PresentacionGUI());
+    }//GEN-LAST:event_deleteMenuItemActionPerformed
+
+    private void copyMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyMenuItemActionPerformed
+        MenuGUI.desktopPane.add(new CategoriaGUI());
+    }//GEN-LAST:event_copyMenuItemActionPerformed
+
+    private void pasteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasteMenuItemActionPerformed
+        MenuGUI.desktopPane.add(new UnidadMedidaGUI());
+    }//GEN-LAST:event_pasteMenuItemActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+          MenuGUI.desktopPane.add(new PrePrecioGUI());
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -193,6 +260,7 @@ public class MenuGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;

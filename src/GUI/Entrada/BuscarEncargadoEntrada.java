@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package GUI;
+package GUI.Entrada;
 
+import GUI.Entrada.EntradaGUI;
 import DAO.EncargadoDAO;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;

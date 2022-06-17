@@ -9,6 +9,7 @@ import DAO.ProductoDAO;
 import DAO.UnidadMedidaDAO;
 import DTO.ProductoTO;
 import Library.ValidarClass;
+import java.awt.Color;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
@@ -41,6 +42,7 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
         initComponents();
         setVisible(true);
         setSize(1105, 479);
+        this.getContentPane().setBackground(Color.white);
         objDtm = (DefaultTableModel) jtblRegistroProd.getModel();
     }
 
@@ -56,7 +58,7 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
+        jLabelDescripcion = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnCancelar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
@@ -66,18 +68,18 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
         btnSalir = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabelCodigo = new javax.swing.JLabel();
         jtxtCodProducto = new javax.swing.JTextField();
         jtxtnombProd = new javax.swing.JTextField();
-        jlblCantidadProd = new javax.swing.JLabel();
+        jLabelCantidad = new javax.swing.JLabel();
         jtxtCantidadProd = new javax.swing.JTextField();
-        jlblCategoriaProd = new javax.swing.JLabel();
+        jLabelUnidadProducto = new javax.swing.JLabel();
         jcomboxCategoria = new javax.swing.JComboBox<>();
-        jlblPVentaProd = new javax.swing.JLabel();
+        jLabelPrecioVenta = new javax.swing.JLabel();
         jtxtpcompraProd = new javax.swing.JTextField();
-        jlblCategoriaProd1 = new javax.swing.JLabel();
+        jLabelCategoriaProducto = new javax.swing.JLabel();
         jcomboxUnidadMedida = new javax.swing.JComboBox<>();
-        jlblPVentaProd1 = new javax.swing.JLabel();
+        jLabelPrecioCompra = new javax.swing.JLabel();
         jtxtpventaProd = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblRegistroProd = new javax.swing.JTable();
@@ -85,13 +87,13 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jtxtBuscarProducto = new javax.swing.JTextField();
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 204));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel1.setFont(new java.awt.Font("Bahnschrift", 1, 15)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("AREA DE PRODUCTO");
+        jLabel1.setText("REGISTRO DEL PRODUCTO");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -112,9 +114,10 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel6.setOpaque(false);
 
-        jLabel9.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jLabel9.setText("DESCRIPCION DEL PRODUCTO:");
+        jLabelDescripcion.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jLabelDescripcion.setText("DESCRIPCION DEL PRODUCTO:");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -203,13 +206,13 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
                 .addGap(5, 5, 5))
         );
 
-        jPanel3.setBackground(new java.awt.Color(0, 0, 204));
+        jPanel3.setBackground(new java.awt.Color(153, 153, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jLabel4.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("REGISTRO DE PRODUCTO");
+        jLabel4.setText("DATOS DEL PRODUCTO");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -229,8 +232,8 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
                 .addGap(5, 5, 5))
         );
 
-        jLabel5.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jLabel5.setText("CODIGO:");
+        jLabelCodigo.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jLabelCodigo.setText("CODIGO:");
 
         jtxtCodProducto.setEditable(false);
         jtxtCodProducto.setBackground(new java.awt.Color(204, 204, 204));
@@ -245,8 +248,8 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
             }
         });
 
-        jlblCantidadProd.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jlblCantidadProd.setText("CANTIDAD:");
+        jLabelCantidad.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jLabelCantidad.setText("CANTIDAD:");
 
         jtxtCantidadProd.setEditable(false);
         jtxtCantidadProd.addActionListener(new java.awt.event.ActionListener() {
@@ -263,8 +266,8 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
             }
         });
 
-        jlblCategoriaProd.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jlblCategoriaProd.setText("U.MEDIDA:");
+        jLabelUnidadProducto.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jLabelUnidadProducto.setText("U.MEDIDA:");
 
         jcomboxCategoria.setEnabled(false);
         jcomboxCategoria.addActionListener(new java.awt.event.ActionListener() {
@@ -278,11 +281,11 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
             }
         });
 
-        jlblPVentaProd.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jlblPVentaProd.setText("P.VENTA:");
-        jlblPVentaProd.addKeyListener(new java.awt.event.KeyAdapter() {
+        jLabelPrecioVenta.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jLabelPrecioVenta.setText("PRECIO VENTA:");
+        jLabelPrecioVenta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jlblPVentaProdKeyReleased(evt);
+                jLabelPrecioVentaKeyReleased(evt);
             }
         });
 
@@ -301,8 +304,8 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
             }
         });
 
-        jlblCategoriaProd1.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jlblCategoriaProd1.setText("CATEGORIA:");
+        jLabelCategoriaProducto.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jLabelCategoriaProducto.setText("CATEGORIA:");
 
         jcomboxUnidadMedida.setEnabled(false);
         jcomboxUnidadMedida.addActionListener(new java.awt.event.ActionListener() {
@@ -316,11 +319,11 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
             }
         });
 
-        jlblPVentaProd1.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jlblPVentaProd1.setText("P.COMPRA:");
-        jlblPVentaProd1.addKeyListener(new java.awt.event.KeyAdapter() {
+        jLabelPrecioCompra.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jLabelPrecioCompra.setText("PRECIO COMPRA:");
+        jLabelPrecioCompra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jlblPVentaProd1KeyReleased(evt);
+                jLabelPrecioCompraKeyReleased(evt);
             }
         });
 
@@ -348,7 +351,7 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
                 .addGap(10, 10, 10)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jlblCategoriaProd)
+                        .addComponent(jLabelUnidadProducto)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -357,10 +360,10 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabelCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(26, 26, 26))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                                        .addComponent(jlblCategoriaProd1)
+                                        .addComponent(jLabelCategoriaProducto)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel6Layout.createSequentialGroup()
@@ -369,20 +372,20 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
                                     .addComponent(jcomboxUnidadMedida, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jcomboxCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(0, 194, Short.MAX_VALUE))
+                                .addComponent(jLabelDescripcion)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlblPVentaProd1)
-                                    .addComponent(jtxtpcompraProd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(39, 39, 39)
+                                    .addComponent(jLabelPrecioCompra)
+                                    .addComponent(jtxtpcompraProd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(10, 10, 10)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlblPVentaProd)
-                                    .addComponent(jtxtpventaProd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabelPrecioVenta)
+                                    .addComponent(jtxtpventaProd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtxtCantidadProd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jlblCantidadProd))))
+                                    .addComponent(jtxtCantidadProd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelCantidad))))
                         .addGap(10, 10, 10))))
         );
         jPanel6Layout.setVerticalGroup(
@@ -391,25 +394,25 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jtxtCodProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcomboxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlblCategoriaProd1))
+                    .addComponent(jLabelCategoriaProducto))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlblCategoriaProd)
+                    .addComponent(jLabelUnidadProducto)
                     .addComponent(jcomboxUnidadMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addComponent(jLabel9)
+                .addComponent(jLabelDescripcion)
                 .addGap(10, 10, 10)
                 .addComponent(jtxtnombProd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlblPVentaProd)
-                    .addComponent(jlblCantidadProd)
-                    .addComponent(jlblPVentaProd1))
+                    .addComponent(jLabelPrecioVenta)
+                    .addComponent(jLabelCantidad)
+                    .addComponent(jLabelPrecioCompra))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtxtCantidadProd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -424,7 +427,7 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "COD", "CATEGORIA", "U.MEDIDA", "DESCRIPCION", "PC", "PV", "CANTIDAD"
+                "COD", "CATEGORIA", "U.MEDIDA", "DESCRIPCION", "PC", "PV", "STOCK"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -435,6 +438,7 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jtblRegistroProd.setSelectionBackground(new java.awt.Color(51, 51, 255));
         jtblRegistroProd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtblRegistroProdMouseClicked(evt);
@@ -442,12 +446,18 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtblRegistroProd);
         if (jtblRegistroProd.getColumnModel().getColumnCount() > 0) {
-            jtblRegistroProd.getColumnModel().getColumn(0).setResizable(false);
-            jtblRegistroProd.getColumnModel().getColumn(1).setResizable(false);
-            jtblRegistroProd.getColumnModel().getColumn(2).setResizable(false);
-            jtblRegistroProd.getColumnModel().getColumn(3).setResizable(false);
-            jtblRegistroProd.getColumnModel().getColumn(4).setResizable(false);
-            jtblRegistroProd.getColumnModel().getColumn(5).setResizable(false);
+            jtblRegistroProd.getColumnModel().getColumn(0).setMinWidth(70);
+            jtblRegistroProd.getColumnModel().getColumn(0).setMaxWidth(70);
+            jtblRegistroProd.getColumnModel().getColumn(1).setMinWidth(150);
+            jtblRegistroProd.getColumnModel().getColumn(1).setMaxWidth(150);
+            jtblRegistroProd.getColumnModel().getColumn(2).setMinWidth(150);
+            jtblRegistroProd.getColumnModel().getColumn(2).setMaxWidth(150);
+            jtblRegistroProd.getColumnModel().getColumn(3).setMinWidth(250);
+            jtblRegistroProd.getColumnModel().getColumn(3).setMaxWidth(250);
+            jtblRegistroProd.getColumnModel().getColumn(4).setMinWidth(100);
+            jtblRegistroProd.getColumnModel().getColumn(4).setMaxWidth(100);
+            jtblRegistroProd.getColumnModel().getColumn(5).setMinWidth(100);
+            jtblRegistroProd.getColumnModel().getColumn(5).setMaxWidth(100);
             jtblRegistroProd.getColumnModel().getColumn(6).setResizable(false);
         }
 
@@ -472,11 +482,11 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(139, 139, 139)
+                .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtxtBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addContainerGap(439, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -485,7 +495,7 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtxtBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(10, 10, 10))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -499,7 +509,7 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(10, 10, 10))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -513,7 +523,7 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(10, 10, 10))
         );
 
         pack();
@@ -586,12 +596,12 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
                 mensaje = "PRODUCTO ACTUALIZADO";
             }
             habilitarControles(false);
-            JOptionPane.showMessageDialog(rootPane, mensaje);
+                JOptionPane.showMessageDialog(null, mensaje, "FERRETERIA MICKY", JOptionPane.INFORMATION_MESSAGE);
             limpiarControles();
             jcomboxCategoria.removeAllItems();
             jcomboxUnidadMedida.removeAllItems();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
+            JOptionPane.showMessageDialog(null, e, "FERRETERIA MICKY", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -643,9 +653,9 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jtxtnombProdKeyTyped
 
-    private void jlblPVentaProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jlblPVentaProdKeyReleased
+    private void jLabelPrecioVentaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabelPrecioVentaKeyReleased
 
-    }//GEN-LAST:event_jlblPVentaProdKeyReleased
+    }//GEN-LAST:event_jLabelPrecioVentaKeyReleased
 
     private void jcomboxCategoriaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcomboxCategoriaKeyReleased
 
@@ -683,9 +693,9 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcomboxUnidadMedidaActionPerformed
 
-    private void jlblPVentaProd1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jlblPVentaProd1KeyReleased
+    private void jLabelPrecioCompraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabelPrecioCompraKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_jlblPVentaProd1KeyReleased
+    }//GEN-LAST:event_jLabelPrecioCompraKeyReleased
 
     private void jtxtpventaProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtpventaProdActionPerformed
         // TODO add your handling code here:
@@ -714,8 +724,13 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelCantidad;
+    private javax.swing.JLabel jLabelCategoriaProducto;
+    private javax.swing.JLabel jLabelCodigo;
+    private javax.swing.JLabel jLabelDescripcion;
+    private javax.swing.JLabel jLabelPrecioCompra;
+    private javax.swing.JLabel jLabelPrecioVenta;
+    private javax.swing.JLabel jLabelUnidadProducto;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -724,11 +739,6 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> jcomboxCategoria;
     private javax.swing.JComboBox<String> jcomboxUnidadMedida;
-    private javax.swing.JLabel jlblCantidadProd;
-    private javax.swing.JLabel jlblCategoriaProd;
-    private javax.swing.JLabel jlblCategoriaProd1;
-    private javax.swing.JLabel jlblPVentaProd;
-    private javax.swing.JLabel jlblPVentaProd1;
     private javax.swing.JTable jtblRegistroProd;
     private javax.swing.JTextField jtxtBuscarProducto;
     private javax.swing.JTextField jtxtCantidadProd;

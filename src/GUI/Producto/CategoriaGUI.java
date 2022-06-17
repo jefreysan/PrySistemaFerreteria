@@ -2,40 +2,46 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package GUI;
+package GUI.Producto;
 
-import DAO.UnidadMedidaDAO;
-import DTO.UnidadMedidaTO;
+import DAO.CategoriaDAO;
+import DTO.CategoriaTO;
+import java.awt.Color;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author JEFREY
  */
-public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
+public class CategoriaGUI extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form UnidadMedidaGUI
+     * Creates new form CategoriaGUI
      */
-    UnidadMedidaDAO objUnidadMedidaDAO = new UnidadMedidaDAO();
-    UnidadMedidaTO objUnidadMedidaTO = new UnidadMedidaTO();
+    CategoriaDAO objCategoriaDAO = new CategoriaDAO();
+    CategoriaTO objCategoriaTO = new CategoriaTO();
 
     JRootPane rootPane;
     boolean sw;
     DefaultTableModel objDtm;
-    ResultSet rsUnidadMedida;
-    int xidunidadmedida;
+    ResultSet rsCategoria;
+    int xidcategoria;
     String mensaje;
-    public UnidadMedidaGUI() {
+    DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+
+    public CategoriaGUI() {
         initComponents();
         setVisible(true);
-        setSize(860, 386);
+        setSize(828, 357);
+        this.getContentPane().setBackground(Color.white);
+        objDtm = (DefaultTableModel) jtblCategoria.getModel();
+        jtblCategoria.getColumn("COD").setPreferredWidth(30);
 
-        objDtm = (DefaultTableModel) jtblUnidadMedida.getModel();
     }
 
     /**
@@ -50,10 +56,10 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jtxtdescripUnidadMedida = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jtxtcodigoUnidadMedida = new javax.swing.JTextField();
+        jLabelCodigo = new javax.swing.JLabel();
+        jtxtDescripcionCategoria = new javax.swing.JTextField();
+        jLabelDescripcion = new javax.swing.JLabel();
+        jtxtcodigoCategoria = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnCancelar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
@@ -64,18 +70,18 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtblUnidadMedida = new javax.swing.JTable();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jtxtBuscarUnidadMedida = new javax.swing.JTextField();
+        jtblCategoria = new javax.swing.JTable();
+        jPanelBuscar = new javax.swing.JPanel();
+        jLabelBuscar = new javax.swing.JLabel();
+        jtxtBuscarCategoria = new javax.swing.JTextField();
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 204));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel1.setFont(new java.awt.Font("Bahnschrift", 1, 15)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("AREA DE UNIDAD DE MEDIDA");
+        jLabel1.setText("REGISTRO DE CATEGORIA");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -83,53 +89,55 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jLabel1)
-                .addGap(5, 5, 5))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel6.setOpaque(false);
 
-        jLabel7.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jLabel7.setText("CODIGO:");
+        jLabelCodigo.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jLabelCodigo.setText("CODIGO:");
 
-        jtxtdescripUnidadMedida.setEditable(false);
-        jtxtdescripUnidadMedida.addActionListener(new java.awt.event.ActionListener() {
+        jtxtDescripcionCategoria.setEditable(false);
+        jtxtDescripcionCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtdescripUnidadMedidaActionPerformed(evt);
+                jtxtDescripcionCategoriaActionPerformed(evt);
             }
         });
-        jtxtdescripUnidadMedida.addKeyListener(new java.awt.event.KeyAdapter() {
+        jtxtDescripcionCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtxtdescripUnidadMedidaKeyReleased(evt);
+                jtxtDescripcionCategoriaKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtdescripUnidadMedidaKeyTyped(evt);
+                jtxtDescripcionCategoriaKeyTyped(evt);
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jLabel9.setText("DESCRIPCION UNIDAD MEDIDA:");
+        jLabelDescripcion.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jLabelDescripcion.setText("DESCRIPCION CATEGORIA:");
 
-        jtxtcodigoUnidadMedida.setEditable(false);
-        jtxtcodigoUnidadMedida.setBackground(new java.awt.Color(204, 204, 204));
-        jtxtcodigoUnidadMedida.addKeyListener(new java.awt.event.KeyAdapter() {
+        jtxtcodigoCategoria.setEditable(false);
+        jtxtcodigoCategoria.setBackground(new java.awt.Color(204, 204, 204));
+        jtxtcodigoCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtxtcodigoUnidadMedidaKeyReleased(evt);
+                jtxtcodigoCategoriaKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtcodigoUnidadMedidaKeyTyped(evt);
+                jtxtcodigoCategoriaKeyTyped(evt);
             }
         });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setOpaque(false);
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/cancelar.png"))); // NOI18N
         btnCancelar.setText("CANCELAR");
@@ -216,13 +224,13 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(0, 0, 204));
+        jPanel3.setBackground(new java.awt.Color(153, 153, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel4.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("REGISTRO DE UNIDAD DE MEDIDA");
+        jLabel4.setText("DATOS DE CATEGORIA");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -252,13 +260,13 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
+                            .addComponent(jLabelDescripcion)
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtxtcodigoUnidadMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabelCodigo)
+                                .addGap(15, 15, 15)
+                                .addComponent(jtxtcodigoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jtxtdescripUnidadMedida))
+                    .addComponent(jtxtDescripcionCategoria))
                 .addGap(10, 10, 10))
             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -266,20 +274,20 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jtxtcodigoUnidadMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelCodigo)
+                    .addComponent(jtxtcodigoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addComponent(jLabel9)
+                .addComponent(jLabelDescripcion)
                 .addGap(10, 10, 10)
-                .addComponent(jtxtdescripUnidadMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jtxtDescripcionCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jtblUnidadMedida.setModel(new javax.swing.table.DefaultTableModel(
+        jtblCategoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -295,54 +303,59 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jtblUnidadMedida.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtblCategoria.setSelectionBackground(new java.awt.Color(51, 51, 255));
+        jtblCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtblUnidadMedidaMouseClicked(evt);
+                jtblCategoriaMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jtblUnidadMedida);
-        if (jtblUnidadMedida.getColumnModel().getColumnCount() > 0) {
-            jtblUnidadMedida.getColumnModel().getColumn(0).setResizable(false);
-            jtblUnidadMedida.getColumnModel().getColumn(1).setResizable(false);
+        jtblCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtblCategoriaKeyReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtblCategoria);
+        if (jtblCategoria.getColumnModel().getColumnCount() > 0) {
+            jtblCategoria.getColumnModel().getColumn(0).setMinWidth(70);
+            jtblCategoria.getColumnModel().getColumn(0).setMaxWidth(70);
+            jtblCategoria.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanelBuscar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanelBuscar.setOpaque(false);
 
-        jLabel2.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jLabel2.setText("BUSCAR:");
+        jLabelBuscar.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jLabelBuscar.setText("BUSCAR:");
 
-        jtxtBuscarUnidadMedida.addActionListener(new java.awt.event.ActionListener() {
+        jtxtBuscarCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtBuscarUnidadMedidaActionPerformed(evt);
+                jtxtBuscarCategoriaActionPerformed(evt);
             }
         });
-        jtxtBuscarUnidadMedida.addKeyListener(new java.awt.event.KeyAdapter() {
+        jtxtBuscarCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtxtBuscarUnidadMedidaKeyReleased(evt);
+                jtxtBuscarCategoriaKeyReleased(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelBuscarLayout = new javax.swing.GroupLayout(jPanelBuscar);
+        jPanelBuscar.setLayout(jPanelBuscarLayout);
+        jPanelBuscarLayout.setHorizontalGroup(
+            jPanelBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelBuscarLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jLabel2)
-                .addGap(10, 10, 10)
-                .addComponent(jtxtBuscarUnidadMedida)
+                .addComponent(jLabelBuscar)
+                .addGap(15, 15, 15)
+                .addComponent(jtxtBuscarCategoria)
                 .addGap(10, 10, 10))
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jtxtBuscarUnidadMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        jPanelBuscarLayout.setVerticalGroup(
+            jPanelBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelBuscarLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanelBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelBuscar)
+                    .addComponent(jtxtBuscarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10))
         );
 
@@ -350,47 +363,47 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
+                    .addComponent(jPanelBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
+                        .addComponent(jPanelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                .addGap(10, 10, 10))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtxtcodigoUnidadMedidaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtcodigoUnidadMedidaKeyTyped
+    private void jtxtcodigoCategoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtcodigoCategoriaKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtcodigoUnidadMedidaKeyTyped
+    }//GEN-LAST:event_jtxtcodigoCategoriaKeyTyped
 
-    private void jtxtcodigoUnidadMedidaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtcodigoUnidadMedidaKeyReleased
+    private void jtxtcodigoCategoriaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtcodigoCategoriaKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtcodigoUnidadMedidaKeyReleased
+    }//GEN-LAST:event_jtxtcodigoCategoriaKeyReleased
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         try {
-            int op = JOptionPane.showConfirmDialog(null, "¿ESTA SEGURO QUE DESEA ELIMINAR?", "REGISTRO UNIDAD DE MEDIDA", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int op = JOptionPane.showConfirmDialog(null, "¿ESTA SEGURO QUE DESEA ELIMINAR?", "REGISTRO CATEGORIA", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (op == JOptionPane.YES_OPTION) {
-                objUnidadMedidaTO.setIdunidadmedida(xidunidadmedida);
-                objUnidadMedidaDAO.delete(objUnidadMedidaTO);
+                objCategoriaTO.setIdcategoria(xidcategoria);
+                objCategoriaDAO.delete(objCategoriaTO);
                 limpiarControles();
                 JOptionPane.showMessageDialog(null, "REGISTRO ELIMINADO");
             }
@@ -399,36 +412,36 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void jtxtdescripUnidadMedidaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdescripUnidadMedidaKeyTyped
+    private void jtxtDescripcionCategoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtDescripcionCategoriaKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtdescripUnidadMedidaKeyTyped
+    }//GEN-LAST:event_jtxtDescripcionCategoriaKeyTyped
 
-    private void jtxtdescripUnidadMedidaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdescripUnidadMedidaKeyReleased
+    private void jtxtDescripcionCategoriaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtDescripcionCategoriaKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtdescripUnidadMedidaKeyReleased
+    }//GEN-LAST:event_jtxtDescripcionCategoriaKeyReleased
 
-    private void jtxtdescripUnidadMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtdescripUnidadMedidaActionPerformed
+    private void jtxtDescripcionCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtDescripcionCategoriaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtdescripUnidadMedidaActionPerformed
+    }//GEN-LAST:event_jtxtDescripcionCategoriaActionPerformed
 
-    private void jtxtBuscarUnidadMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtBuscarUnidadMedidaActionPerformed
+    private void jtxtBuscarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtBuscarCategoriaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtBuscarUnidadMedidaActionPerformed
+    }//GEN-LAST:event_jtxtBuscarCategoriaActionPerformed
 
-    private void jtxtBuscarUnidadMedidaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtBuscarUnidadMedidaKeyReleased
+    private void jtxtBuscarCategoriaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtBuscarCategoriaKeyReleased
         try {
             limpiarJTable();
-            if (!jtxtBuscarUnidadMedida.getText().isEmpty()) {
-                rsUnidadMedida = objUnidadMedidaDAO.buscar(jtxtBuscarUnidadMedida.getText().trim());
-                while (rsUnidadMedida.next()) {
-                    Object registro[] = {rsUnidadMedida.getInt(1), rsUnidadMedida.getString(2)};
+            if (!jtxtBuscarCategoria.getText().isEmpty()) {
+                rsCategoria = objCategoriaDAO.buscar(jtxtBuscarCategoria.getText().trim());
+                while (rsCategoria.next()) {
+                    Object registro[] = {rsCategoria.getInt(1), rsCategoria.getString(2)};
                     objDtm.addRow(registro);
                 }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e);
         }
-    }//GEN-LAST:event_jtxtBuscarUnidadMedidaKeyReleased
+    }//GEN-LAST:event_jtxtBuscarCategoriaKeyReleased
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
@@ -442,21 +455,24 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-            objUnidadMedidaTO.setDescrunid(jtxtdescripUnidadMedida.getText().toUpperCase().trim());
-            if (sw) {
-                objUnidadMedidaDAO.insert(objUnidadMedidaTO);
-                mensaje = "UNIDAD DE MEDIDA GUARDADO";
+            if (jtxtDescripcionCategoria.getText().trim().length() == 0) {
+                JOptionPane.showMessageDialog(null, "COMPLETAR CAJA DE TEXTO", "FERRETERIA MICKY", JOptionPane.WARNING_MESSAGE);
             } else {
-                objUnidadMedidaTO.setIdunidadmedida(Integer.parseInt(jtxtcodigoUnidadMedida.getText()));
-                objUnidadMedidaDAO.update(objUnidadMedidaTO);
-                mensaje = "UNIDAD DE MEDIDA ACTUALIZADO";
+                objCategoriaTO.setDescrcateg(jtxtDescripcionCategoria.getText().toUpperCase());
+                if (sw) {
+                    objCategoriaDAO.insert(objCategoriaTO);
+                    mensaje = "CATEGORIA REGISTRADO";
+                } else {
+                    objCategoriaTO.setIdcategoria(Integer.parseInt(jtxtcodigoCategoria.getText()));
+                    objCategoriaDAO.update(objCategoriaTO);
+                    mensaje = "CATEGORIA ACTUALIZADO";
+                }
+                habilitarControles(false);
+                JOptionPane.showMessageDialog(null, mensaje, "FERRETERIA MICKY", JOptionPane.INFORMATION_MESSAGE);
+                limpiarControles();
             }
-            habilitarControles(false);
-            JOptionPane.showMessageDialog(null, mensaje);
-            limpiarControles();
-
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
+            JOptionPane.showMessageDialog(null, e, "FERRETERIA MICKY", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -465,26 +481,30 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
         sw = false;
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void jtblUnidadMedidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblUnidadMedidaMouseClicked
+    private void jtblCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblCategoriaMouseClicked
         try {
-            xidunidadmedida = Integer.parseInt(jtblUnidadMedida.getValueAt(jtblUnidadMedida.getSelectedRow(), 0).toString());
-            rsUnidadMedida.first();
+            xidcategoria = Integer.parseInt(jtblCategoria.getValueAt(jtblCategoria.getSelectedRow(), 0).toString());
+            rsCategoria.first();
             do {
-                if (xidunidadmedida == rsUnidadMedida.getInt(1)) {
-                    jtxtcodigoUnidadMedida.setText(String.valueOf(rsUnidadMedida.getInt(1)));
-                    jtxtdescripUnidadMedida.setText(rsUnidadMedida.getString(2));
-                    rsUnidadMedida.last();
+                if (xidcategoria == rsCategoria.getInt(1)) {
+                    jtxtcodigoCategoria.setText(String.valueOf(rsCategoria.getInt(1)));
+                    jtxtDescripcionCategoria.setText(rsCategoria.getString(2));
+                    rsCategoria.last();
                 }
-            } while (rsUnidadMedida.next());
+            } while (rsCategoria.next());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e);
         }
-    }//GEN-LAST:event_jtblUnidadMedidaMouseClicked
+    }//GEN-LAST:event_jtblCategoriaMouseClicked
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         habilitarControles(false);
         limpiarControles();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void jtblCategoriaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtblCategoriaKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtblCategoriaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -495,29 +515,29 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelBuscar;
+    private javax.swing.JLabel jLabelCodigo;
+    private javax.swing.JLabel jLabelDescripcion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanelBuscar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtblUnidadMedida;
-    private javax.swing.JTextField jtxtBuscarUnidadMedida;
-    private javax.swing.JTextField jtxtcodigoUnidadMedida;
-    private javax.swing.JTextField jtxtdescripUnidadMedida;
+    private javax.swing.JTable jtblCategoria;
+    private javax.swing.JTextField jtxtBuscarCategoria;
+    private javax.swing.JTextField jtxtDescripcionCategoria;
+    private javax.swing.JTextField jtxtcodigoCategoria;
     // End of variables declaration//GEN-END:variables
 
     private void habilitarControles(boolean b) {
-        JTextField[] arrJTexFields = {jtxtdescripUnidadMedida};
+        JTextField[] arrJTexFields = {jtxtDescripcionCategoria};
         for (JTextField obJTextField : arrJTexFields) {
             obJTextField.setEditable(b);
         }
-        jtxtBuscarUnidadMedida.setEditable(!b);
-        jtxtdescripUnidadMedida.grabFocus();
+        jtxtBuscarCategoria.setEditable(!b);
+        jtxtDescripcionCategoria.grabFocus();
         btnGuardar.setEnabled(b);
         btnCancelar.setEnabled(b);
         btnNuevo.setEnabled(!b);
@@ -528,7 +548,7 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
 
     private void limpiarControles() {
         limpiarJTable();
-        JTextField[] objTextFields = {jtxtcodigoUnidadMedida, jtxtBuscarUnidadMedida, jtxtdescripUnidadMedida};
+        JTextField[] objTextFields = {jtxtcodigoCategoria, jtxtBuscarCategoria, jtxtDescripcionCategoria};
         for (JTextField objTextField : objTextFields) {
             objTextField.setText(null);
         }
@@ -538,6 +558,5 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
         while (objDtm.getRowCount() > 0) {
             objDtm.removeRow(0);
         }
-
     }
 }

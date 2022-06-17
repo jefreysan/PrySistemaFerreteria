@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import GUI.Entrada.EntradaGUI;
 import DAO.ProveedorDAO;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
