@@ -16,7 +16,7 @@ public class EntradaTO {
   private int idencargado;
   private int idproveedor;
   private String fechaent;
-  private int idtipago;
+  private String tipopago;
   private String nroent;
   private double totalent;
 
@@ -52,12 +52,12 @@ public class EntradaTO {
         this.fechaent = fechaent;
     }
 
-    public int getIdtipago() {
-        return idtipago;
+    public String getTipopago() {
+        return tipopago;
     }
 
-    public void setIdtipago(int idtipago) {
-        this.idtipago = idtipago;
+    public void setTipopago(String tipopago) {
+        this.tipopago = tipopago;
     }
 
     public String getNroent() {
@@ -75,7 +75,4 @@ public class EntradaTO {
     public void setTotalent(double totalent) {
         this.totalent = totalent;
     }
-
-  
-  
 }

@@ -4,10 +4,13 @@
  */
 package GUI.Producto;
 
+import DAO.PrePrecioDAO;
 import DAO.PresentacionDAO;
 import DAO.UnidadMedidaDAO;
+import DTO.PrePrecioTO;
 import DTO.PresentacionTO;
 import DTO.UnidadMedidaTO;
+import GUI.MenuGUI;
 import java.awt.Color;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -27,21 +30,23 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
     PresentacionDAO objPresentacionDAO = new PresentacionDAO();
     PresentacionTO objPresentacionTO = new PresentacionTO();
 
+    PrePrecioDAO objPrePrecioDAO = new PrePrecioDAO();
+    PrePrecioTO objPreprecioTO = new PrePrecioTO();
     UnidadMedidaDAO objUnidadMedidaDAO = new UnidadMedidaDAO();
     UnidadMedidaTO objUnidadMedidaTO = new UnidadMedidaTO();
     JRootPane rootPane;
     boolean sw;
     DefaultTableModel objDtm;
-    ResultSet rsUnidadMedida, rsPresentacion;
-    int xidunidadmedida, xidpresentacion;
+    ResultSet rsUnidadMedida, rsPreprecio, rsPresentacion;
+    int xidunidadmedida, xidpresentacion, xidpreprecio;
     String mensaje;
 
     public PrePrecioGUI() {
         initComponents();
         setVisible(true);
-        setSize(902, 391);
+        setSize(1091, 437);
         this.getContentPane().setBackground(Color.white);
-        objDtm = (DefaultTableModel) jtblRegistroPresentacion.getModel();
+        objDtm = (DefaultTableModel) jtblRegistroPreprecio.getModel();
     }
 
     /**
@@ -58,7 +63,7 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
         jPanelDatosPresentacion = new javax.swing.JPanel();
         jLabelCodigo = new javax.swing.JLabel();
         jLabelUnidadMedida = new javax.swing.JLabel();
-        jtxtCodigoPresentacion = new javax.swing.JTextField();
+        jtxtCodPreprecio = new javax.swing.JTextField();
         jPanelBotones = new javax.swing.JPanel();
         btnCancelar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
@@ -69,15 +74,20 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
         jPanelDatos = new javax.swing.JPanel();
         jLabelPresentacion = new javax.swing.JLabel();
         jLabelValor = new javax.swing.JLabel();
-        jtxtDescripcionPresentacion = new javax.swing.JTextField();
-        jLabelDescripcionPresentacion = new javax.swing.JLabel();
-        jtxtValor = new javax.swing.JTextField();
+        jtxtPrecio = new javax.swing.JTextField();
         jcomboxUnidadMedida = new javax.swing.JComboBox<>();
+        jtxtDescripcionProducto = new javax.swing.JTextField();
+        jLabelDescripcionProducto = new javax.swing.JLabel();
+        jbtnBuscarProducto = new javax.swing.JButton();
+        jLabelUnidadMedida1 = new javax.swing.JLabel();
+        jcomboxPresentacion = new javax.swing.JComboBox<>();
+        jLabelCodigo1 = new javax.swing.JLabel();
+        jtxtCodProducto = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtblRegistroPresentacion = new javax.swing.JTable();
+        jtblRegistroPreprecio = new javax.swing.JTable();
         jPanelBuscar = new javax.swing.JPanel();
         jLabelBuscarPresentacion = new javax.swing.JLabel();
-        jtxtBuscarPresentacion = new javax.swing.JTextField();
+        jtxtBuscarPreprecio = new javax.swing.JTextField();
 
         jPanelRegistro.setBackground(new java.awt.Color(153, 153, 255));
         jPanelRegistro.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -85,7 +95,7 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
         jLabelRegistroPresentacion.setFont(new java.awt.Font("Bahnschrift", 1, 15)); // NOI18N
         jLabelRegistroPresentacion.setForeground(new java.awt.Color(255, 255, 255));
         jLabelRegistroPresentacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelRegistroPresentacion.setText("REGISTRO PRESENTACION DE PRODUCTO");
+        jLabelRegistroPresentacion.setText("REGISTRO PRESENTACION DE PRECIO");
         jLabelRegistroPresentacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanelRegistroLayout = new javax.swing.GroupLayout(jPanelRegistro);
@@ -109,19 +119,19 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
         jPanelDatosPresentacion.setOpaque(false);
 
         jLabelCodigo.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jLabelCodigo.setText("CODIGO:");
+        jLabelCodigo.setText("COD:");
 
         jLabelUnidadMedida.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jLabelUnidadMedida.setText("U.MEDIDA:");
+        jLabelUnidadMedida.setText("UNIDAD MEDIDA:");
 
-        jtxtCodigoPresentacion.setEditable(false);
-        jtxtCodigoPresentacion.setBackground(new java.awt.Color(204, 204, 204));
-        jtxtCodigoPresentacion.addKeyListener(new java.awt.event.KeyAdapter() {
+        jtxtCodPreprecio.setEditable(false);
+        jtxtCodPreprecio.setBackground(new java.awt.Color(204, 204, 204));
+        jtxtCodPreprecio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtxtCodigoPresentacionKeyReleased(evt);
+                jtxtCodPreprecioKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtCodigoPresentacionKeyTyped(evt);
+                jtxtCodPreprecioKeyTyped(evt);
             }
         });
 
@@ -185,13 +195,13 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
             .addGroup(jPanelBotonesLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -219,7 +229,7 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
         jLabelPresentacion.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
         jLabelPresentacion.setForeground(new java.awt.Color(255, 255, 255));
         jLabelPresentacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelPresentacion.setText("DATOS DE PRESENTACION DE PRODUCTO");
+        jLabelPresentacion.setText("DATOS PRESENTACION DE PRECIO");
         jLabelPresentacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanelDatosLayout = new javax.swing.GroupLayout(jPanelDatos);
@@ -240,38 +250,20 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
         );
 
         jLabelValor.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jLabelValor.setText("VALOR:");
+        jLabelValor.setText("PRECIO:");
 
-        jtxtDescripcionPresentacion.setEditable(false);
-        jtxtDescripcionPresentacion.addActionListener(new java.awt.event.ActionListener() {
+        jtxtPrecio.setEditable(false);
+        jtxtPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtDescripcionPresentacionActionPerformed(evt);
+                jtxtPrecioActionPerformed(evt);
             }
         });
-        jtxtDescripcionPresentacion.addKeyListener(new java.awt.event.KeyAdapter() {
+        jtxtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtxtDescripcionPresentacionKeyReleased(evt);
+                jtxtPrecioKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtDescripcionPresentacionKeyTyped(evt);
-            }
-        });
-
-        jLabelDescripcionPresentacion.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jLabelDescripcionPresentacion.setText("DESCRIPCION DE PRESENTACION:");
-
-        jtxtValor.setEditable(false);
-        jtxtValor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtValorActionPerformed(evt);
-            }
-        });
-        jtxtValor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtxtValorKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtValorKeyTyped(evt);
+                jtxtPrecioKeyTyped(evt);
             }
         });
 
@@ -287,40 +279,105 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
             }
         });
 
+        jtxtDescripcionProducto.setEditable(false);
+        jtxtDescripcionProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtDescripcionProductoActionPerformed(evt);
+            }
+        });
+        jtxtDescripcionProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtxtDescripcionProductoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtDescripcionProductoKeyTyped(evt);
+            }
+        });
+
+        jLabelDescripcionProducto.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jLabelDescripcionProducto.setText("DESCRIPCION DEL PRODUCTO:");
+
+        jbtnBuscarProducto.setText("BUSCAR");
+        jbtnBuscarProducto.setEnabled(false);
+        jbtnBuscarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnBuscarProductoActionPerformed(evt);
+            }
+        });
+
+        jLabelUnidadMedida1.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jLabelUnidadMedida1.setText("PRESENTACION:");
+
+        jcomboxPresentacion.setEnabled(false);
+        jcomboxPresentacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcomboxPresentacionActionPerformed(evt);
+            }
+        });
+        jcomboxPresentacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jcomboxPresentacionKeyReleased(evt);
+            }
+        });
+
+        jLabelCodigo1.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jLabelCodigo1.setText("COD-P:");
+
+        jtxtCodProducto.setEditable(false);
+        jtxtCodProducto.setBackground(new java.awt.Color(204, 204, 204));
+        jtxtCodProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtxtCodProductoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtCodProductoKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelDatosPresentacionLayout = new javax.swing.GroupLayout(jPanelDatosPresentacion);
         jPanelDatosPresentacion.setLayout(jPanelDatosPresentacionLayout);
         jPanelDatosPresentacionLayout.setHorizontalGroup(
             jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
                 .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanelBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
-                                .addComponent(jLabelCodigo)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtxtCodigoPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabelUnidadMedida)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jcomboxUnidadMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabelCodigo1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcomboxUnidadMedida, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(10, 10, 10))
-            .addComponent(jPanelDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jtxtCodPreprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelCodigo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtxtCodProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19)
+                        .addComponent(jbtnBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelDescripcionProducto)
+                            .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
+                                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jcomboxPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelUnidadMedida1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelValor)
+                                    .addComponent(jtxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jtxtDescripcionProducto)))
+                .addContainerGap())
             .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtxtDescripcionPresentacion)
-                    .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
-                        .addComponent(jLabelDescripcionPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelValor))
-                .addContainerGap())
+                .addComponent(jPanelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelDatosPresentacionLayout.setVerticalGroup(
             jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,25 +386,32 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
                 .addGap(10, 10, 10)
                 .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCodigo)
-                    .addComponent(jtxtCodigoPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtxtCodPreprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelCodigo1)
+                    .addComponent(jtxtCodProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addComponent(jLabelDescripcionProducto)
+                .addGap(5, 5, 5)
+                .addComponent(jtxtDescripcionProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcomboxUnidadMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelUnidadMedida))
                 .addGap(10, 10, 10)
                 .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelUnidadMedida)
-                    .addComponent(jcomboxUnidadMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelDescripcionPresentacion)
+                    .addComponent(jLabelUnidadMedida1)
                     .addComponent(jLabelValor))
-                .addGap(10, 10, 10)
+                .addGap(5, 5, 5)
                 .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtxtDescripcionPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcomboxPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jPanelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10))
+                .addContainerGap())
         );
 
-        jtblRegistroPresentacion.setModel(new javax.swing.table.DefaultTableModel(
+        jtblRegistroPreprecio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -363,21 +427,21 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jtblRegistroPresentacion.setSelectionBackground(new java.awt.Color(51, 51, 255));
-        jtblRegistroPresentacion.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtblRegistroPreprecio.setSelectionBackground(new java.awt.Color(51, 51, 255));
+        jtblRegistroPreprecio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtblRegistroPresentacionMouseClicked(evt);
+                jtblRegistroPreprecioMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jtblRegistroPresentacion);
-        if (jtblRegistroPresentacion.getColumnModel().getColumnCount() > 0) {
-            jtblRegistroPresentacion.getColumnModel().getColumn(0).setMinWidth(70);
-            jtblRegistroPresentacion.getColumnModel().getColumn(0).setMaxWidth(70);
-            jtblRegistroPresentacion.getColumnModel().getColumn(1).setMinWidth(150);
-            jtblRegistroPresentacion.getColumnModel().getColumn(1).setMaxWidth(150);
-            jtblRegistroPresentacion.getColumnModel().getColumn(2).setMinWidth(150);
-            jtblRegistroPresentacion.getColumnModel().getColumn(2).setMaxWidth(150);
-            jtblRegistroPresentacion.getColumnModel().getColumn(3).setMinWidth(100);
+        jScrollPane1.setViewportView(jtblRegistroPreprecio);
+        if (jtblRegistroPreprecio.getColumnModel().getColumnCount() > 0) {
+            jtblRegistroPreprecio.getColumnModel().getColumn(0).setMinWidth(70);
+            jtblRegistroPreprecio.getColumnModel().getColumn(0).setMaxWidth(70);
+            jtblRegistroPreprecio.getColumnModel().getColumn(1).setMinWidth(100);
+            jtblRegistroPreprecio.getColumnModel().getColumn(1).setMaxWidth(100);
+            jtblRegistroPreprecio.getColumnModel().getColumn(2).setMinWidth(350);
+            jtblRegistroPreprecio.getColumnModel().getColumn(2).setMaxWidth(350);
+            jtblRegistroPreprecio.getColumnModel().getColumn(3).setMinWidth(100);
         }
 
         jPanelBuscar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -386,14 +450,14 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
         jLabelBuscarPresentacion.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
         jLabelBuscarPresentacion.setText("BUSCAR:");
 
-        jtxtBuscarPresentacion.addActionListener(new java.awt.event.ActionListener() {
+        jtxtBuscarPreprecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtBuscarPresentacionActionPerformed(evt);
+                jtxtBuscarPreprecioActionPerformed(evt);
             }
         });
-        jtxtBuscarPresentacion.addKeyListener(new java.awt.event.KeyAdapter() {
+        jtxtBuscarPreprecio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtxtBuscarPresentacionKeyReleased(evt);
+                jtxtBuscarPreprecioKeyReleased(evt);
             }
         });
 
@@ -404,16 +468,16 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
             .addGroup(jPanelBuscarLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabelBuscarPresentacion)
-                .addGap(10, 10, 10)
-                .addComponent(jtxtBuscarPresentacion)
-                .addGap(10, 10, 10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtxtBuscarPreprecio)
+                .addContainerGap())
         );
         jPanelBuscarLayout.setVerticalGroup(
             jPanelBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBuscarLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(jPanelBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtxtBuscarPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxtBuscarPreprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelBuscarPresentacion))
                 .addGap(10, 10, 10))
         );
@@ -423,12 +487,12 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addContainerGap()
                 .addComponent(jPanelDatosPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE))
                 .addContainerGap())
             .addComponent(jPanelRegistro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -449,20 +513,20 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtxtCodigoPresentacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtCodigoPresentacionKeyTyped
+    private void jtxtCodPreprecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtCodPreprecioKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtCodigoPresentacionKeyTyped
+    }//GEN-LAST:event_jtxtCodPreprecioKeyTyped
 
-    private void jtxtCodigoPresentacionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtCodigoPresentacionKeyReleased
+    private void jtxtCodPreprecioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtCodPreprecioKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtCodigoPresentacionKeyReleased
+    }//GEN-LAST:event_jtxtCodPreprecioKeyReleased
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         try {
-            int op = JOptionPane.showConfirmDialog(null, "¿ESTA SEGURO QUE DESEA ELIMINAR?", "REGISTRO UNIDAD DE MEDIDA", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int op = JOptionPane.showConfirmDialog(null, "¿ESTA SEGURO QUE DESEA ELIMINAR?", "REGISTRO PRESENTACION DE PRECIOS", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (op == JOptionPane.YES_OPTION) {
-                objUnidadMedidaTO.setIdunidadmedida(xidunidadmedida);
-                objUnidadMedidaDAO.delete(objUnidadMedidaTO);
+                objPreprecioTO.setIdpreprecio(xidpreprecio);
+                objPrePrecioDAO.delete(objPreprecioTO);
                 limpiarControles();
                 JOptionPane.showMessageDialog(null, "REGISTRO ELIMINADO");
             }
@@ -471,24 +535,24 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void jtxtBuscarPresentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtBuscarPresentacionActionPerformed
+    private void jtxtBuscarPreprecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtBuscarPreprecioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtBuscarPresentacionActionPerformed
+    }//GEN-LAST:event_jtxtBuscarPreprecioActionPerformed
 
-    private void jtxtBuscarPresentacionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtBuscarPresentacionKeyReleased
+    private void jtxtBuscarPreprecioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtBuscarPreprecioKeyReleased
         try {
             limpiarJTable();
-            if (!jtxtBuscarPresentacion.getText().isEmpty()) {
-                rsPresentacion = objPresentacionDAO.buscar(jtxtBuscarPresentacion.getText().trim());
-                while (rsPresentacion.next()) {
-                    Object registro[] = {rsPresentacion.getInt(1), rsPresentacion.getString(2), rsPresentacion.getString(3), rsPresentacion.getString(4)};
+            if (!jtxtBuscarPreprecio.getText().isEmpty()) {
+                rsPreprecio = objPrePrecioDAO.buscar(jtxtBuscarPreprecio.getText().trim());
+                while (rsPreprecio.next()) {
+                    Object registro[] = {rsPreprecio.getInt(1), rsPreprecio.getString(3), rsPreprecio.getString(5), rsPreprecio.getString(6)};
                     objDtm.addRow(registro);
                 }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e);
         }
-    }//GEN-LAST:event_jtxtBuscarPresentacionKeyReleased
+    }//GEN-LAST:event_jtxtBuscarPreprecioKeyReleased
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
@@ -497,31 +561,31 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         habilitarControles(true);
         limpiarControles();
-        llenarComboUnidad();
         sw = true;
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-            if (jtxtDescripcionPresentacion.getText().trim().length() == 0 || jtxtValor.getText().trim().length() == 0) {
+            if (jtxtDescripcionProducto.getText().trim().length() == 0 || jtxtPrecio.getText().trim().length() == 0) {
                 JOptionPane.showMessageDialog(null, "COMPLETAR CAJA DE TEXTO", "FERRETERIA MICKY", JOptionPane.WARNING_MESSAGE);
             } else {
-                obtenerIdUnidadMedida();
-                objPresentacionTO.setIdudm(xidunidadmedida);
-                objPresentacionTO.setDescrpresent(jtxtDescripcionPresentacion.getText().toUpperCase().trim());
-                objPresentacionTO.setCantpresent(Double.parseDouble(jtxtValor.getText().trim()));
+                objPreprecioTO.setIdproducto(Integer.parseInt(jtxtCodProducto.getText()));
+                String descrunid = jcomboxUnidadMedida.getSelectedItem().toString();
+                String descrpresent = jcomboxPresentacion.getSelectedItem().toString();
+                xidpresentacion = objPrePrecioDAO.obtenerIDPresent(descrunid, descrpresent);
+                objPreprecioTO.setIdpresentacion(xidpresentacion);
+                objPreprecioTO.setPreprecio(Double.parseDouble(jtxtPrecio.getText().trim()));
                 if (sw) {
-                    objPresentacionDAO.insert(objPresentacionTO);
-                    mensaje = "PRESENTACION REGISTRADO";
+                    objPrePrecioDAO.insert(objPreprecioTO);
+                    mensaje = "PRESENTACION DE PRECIOS REGISTRADO";
                 } else {
-                    objPresentacionTO.setIdpresentacion(Integer.parseInt(jtxtCodigoPresentacion.getText()));
-                    objPresentacionDAO.update(objPresentacionTO);
-                    mensaje = "PRESENTACION ACTUALIZADO";
+                    objPreprecioTO.setIdpreprecio(Integer.parseInt(jtxtCodPreprecio.getText()));
+                    objPrePrecioDAO.update(objPreprecioTO);
+                    mensaje = "PRESENTACION DE PRECIOS ACTUALIZADO";
                 }
                 habilitarControles(false);
                 JOptionPane.showMessageDialog(null, mensaje, "FERRETERIA MICKY", JOptionPane.INFORMATION_MESSAGE);
                 limpiarControles();
-                jcomboxUnidadMedida.removeAllItems();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "FERRETERIA MICKY", JOptionPane.ERROR_MESSAGE);
@@ -530,66 +594,92 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         habilitarControles(true);
-        llenarComboUnidad();
+        jcomboxPresentacion.setEnabled(true);
         sw = false;
+        obtenerDescrUDM();
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void jtblRegistroPresentacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblRegistroPresentacionMouseClicked
+    private void jtblRegistroPreprecioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblRegistroPreprecioMouseClicked
         try {
-            xidpresentacion = Integer.parseInt(jtblRegistroPresentacion.getValueAt(jtblRegistroPresentacion.getSelectedRow(), 0).toString());
-            rsPresentacion.first();
+            xidpreprecio = Integer.parseInt(jtblRegistroPreprecio.getValueAt(jtblRegistroPreprecio.getSelectedRow(), 0).toString());
+            rsPreprecio.first();
             do {
-                if (xidpresentacion == rsPresentacion.getInt(1)) {
-                    jtxtCodigoPresentacion.setText(String.valueOf(rsPresentacion.getInt(1)));
-                    jcomboxUnidadMedida.removeAllItems();
-                    jcomboxUnidadMedida.addItem(rsPresentacion.getString(2));
-                    jtxtDescripcionPresentacion.setText(rsPresentacion.getString(3));
-                    jtxtValor.setText(rsPresentacion.getString(4));
-                    rsPresentacion.last();
+                if (xidpreprecio == rsPreprecio.getInt(1)) {
+                    jtxtCodPreprecio.setText(String.valueOf(rsPreprecio.getInt(1)));
+                    jcomboxPresentacion.removeAllItems();
+                    jcomboxPresentacion.addItem(rsPreprecio.getString(3));
+                    jtxtCodProducto.setText(String.valueOf(rsPreprecio.getInt(4)));
+                    jtxtDescripcionProducto.setText(rsPreprecio.getString(5));
+                    jtxtPrecio.setText(rsPreprecio.getString(6));
+                    rsPreprecio.last();
                 }
-            } while (rsPresentacion.next());
+            } while (rsPreprecio.next());
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e, "FERRETERIA MICKY", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e);
         }
-    }//GEN-LAST:event_jtblRegistroPresentacionMouseClicked
+    }//GEN-LAST:event_jtblRegistroPreprecioMouseClicked
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         habilitarControles(false);
         limpiarControles();
-        jcomboxUnidadMedida.removeAllItems();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void jtxtDescripcionPresentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtDescripcionPresentacionActionPerformed
+    private void jtxtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtPrecioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtDescripcionPresentacionActionPerformed
+    }//GEN-LAST:event_jtxtPrecioActionPerformed
 
-    private void jtxtDescripcionPresentacionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtDescripcionPresentacionKeyReleased
+    private void jtxtPrecioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtPrecioKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtDescripcionPresentacionKeyReleased
+    }//GEN-LAST:event_jtxtPrecioKeyReleased
 
-    private void jtxtDescripcionPresentacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtDescripcionPresentacionKeyTyped
+    private void jtxtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtPrecioKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtDescripcionPresentacionKeyTyped
-
-    private void jtxtValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtValorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtValorActionPerformed
-
-    private void jtxtValorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtValorKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtValorKeyReleased
-
-    private void jtxtValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtValorKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtValorKeyTyped
+    }//GEN-LAST:event_jtxtPrecioKeyTyped
 
     private void jcomboxUnidadMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcomboxUnidadMedidaActionPerformed
-        // TODO add your handling code here:
+        llenarComboUDM();
     }//GEN-LAST:event_jcomboxUnidadMedidaActionPerformed
 
     private void jcomboxUnidadMedidaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcomboxUnidadMedidaKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_jcomboxUnidadMedidaKeyReleased
+
+    private void jtxtDescripcionProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtDescripcionProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtDescripcionProductoActionPerformed
+
+    private void jtxtDescripcionProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtDescripcionProductoKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtDescripcionProductoKeyReleased
+
+    private void jtxtDescripcionProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtDescripcionProductoKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtDescripcionProductoKeyTyped
+
+    private void jbtnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBuscarProductoActionPerformed
+        BP_PreprecioGUI objBP_PreprecioGUI = new BP_PreprecioGUI();
+        MenuGUI.desktopPane.add(objBP_PreprecioGUI);
+        objBP_PreprecioGUI.setVisible(true);
+        objBP_PreprecioGUI.setLocation(500, 150);
+        objBP_PreprecioGUI.setSize(600, 320);
+        objBP_PreprecioGUI.toFront();
+    }//GEN-LAST:event_jbtnBuscarProductoActionPerformed
+
+    private void jcomboxPresentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcomboxPresentacionActionPerformed
+
+    }//GEN-LAST:event_jcomboxPresentacionActionPerformed
+
+    private void jcomboxPresentacionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcomboxPresentacionKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcomboxPresentacionKeyReleased
+
+    private void jtxtCodProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtCodProductoKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtCodProductoKeyReleased
+
+    private void jtxtCodProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtCodProductoKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtCodProductoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -601,10 +691,12 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabelBuscarPresentacion;
     private javax.swing.JLabel jLabelCodigo;
-    private javax.swing.JLabel jLabelDescripcionPresentacion;
+    private javax.swing.JLabel jLabelCodigo1;
+    private javax.swing.JLabel jLabelDescripcionProducto;
     private javax.swing.JLabel jLabelPresentacion;
     private javax.swing.JLabel jLabelRegistroPresentacion;
     private javax.swing.JLabel jLabelUnidadMedida;
+    private javax.swing.JLabel jLabelUnidadMedida1;
     private javax.swing.JLabel jLabelValor;
     private javax.swing.JPanel jPanelBotones;
     private javax.swing.JPanel jPanelBuscar;
@@ -612,36 +704,40 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanelDatosPresentacion;
     private javax.swing.JPanel jPanelRegistro;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> jcomboxUnidadMedida;
-    private javax.swing.JTable jtblRegistroPresentacion;
-    private javax.swing.JTextField jtxtBuscarPresentacion;
-    private javax.swing.JTextField jtxtCodigoPresentacion;
-    private javax.swing.JTextField jtxtDescripcionPresentacion;
-    private javax.swing.JTextField jtxtValor;
+    private javax.swing.JButton jbtnBuscarProducto;
+    public static javax.swing.JComboBox<String> jcomboxPresentacion;
+    public static javax.swing.JComboBox<String> jcomboxUnidadMedida;
+    private javax.swing.JTable jtblRegistroPreprecio;
+    private javax.swing.JTextField jtxtBuscarPreprecio;
+    public static javax.swing.JTextField jtxtCodPreprecio;
+    public static javax.swing.JTextField jtxtCodProducto;
+    public static javax.swing.JTextField jtxtDescripcionProducto;
+    private javax.swing.JTextField jtxtPrecio;
     // End of variables declaration//GEN-END:variables
 
     private void habilitarControles(boolean b) {
-        JTextField[] arrJTexFields = {jtxtDescripcionPresentacion, jtxtValor};
+        JTextField[] arrJTexFields = {jtxtPrecio};
         for (JTextField obJTextField : arrJTexFields) {
             obJTextField.setEditable(b);
         }
-        jtxtBuscarPresentacion.setEditable(!b);
-        jtxtDescripcionPresentacion.grabFocus();
+        jtxtBuscarPreprecio.setEditable(!b);
         btnGuardar.setEnabled(b);
         btnCancelar.setEnabled(b);
         btnNuevo.setEnabled(!b);
         btnEditar.setEnabled(!b);
+        jbtnBuscarProducto.setEnabled(b);
         btnEliminar.setEnabled(!b);
         btnSalir.setEnabled(!b);
-        jcomboxUnidadMedida.setEnabled(b);
     }
 
     private void limpiarControles() {
         limpiarJTable();
-        JTextField[] objTextFields = {jtxtCodigoPresentacion, jtxtBuscarPresentacion, jtxtDescripcionPresentacion, jtxtValor};
+        JTextField[] objTextFields = {jtxtCodPreprecio, jtxtCodProducto, jtxtBuscarPreprecio, jtxtDescripcionProducto, jtxtPrecio};
         for (JTextField objTextField : objTextFields) {
             objTextField.setText(null);
         }
+        jcomboxPresentacion.removeAllItems();
+        jcomboxUnidadMedida.removeAllItems();
     }
 
     private void limpiarJTable() {
@@ -649,31 +745,27 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
             objDtm.removeRow(0);
         }
     }
-
-    private void obtenerIdUnidadMedida() {
-        try {
-            String nombre = jcomboxUnidadMedida.getSelectedItem().toString();
-            rsUnidadMedida.first();
-            do {
-                if (nombre.equals(rsUnidadMedida.getString(2))) {
-                    xidunidadmedida = rsUnidadMedida.getInt(1);
-                    rsUnidadMedida.last();
-                }
-            } while (rsUnidadMedida.next());
+ 
+    private void obtenerDescrUDM(){
+          try {
+            String data = String.valueOf(jcomboxPresentacion.getSelectedItem());
+            objPrePrecioDAO.buscarUDM(data);
+            String resultado = objPrePrecioDAO.buscarUDM(data);
+            jcomboxUnidadMedida.removeAllItems();
+            jcomboxUnidadMedida.addItem(resultado);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
+            JOptionPane.showMessageDialog(null, e);
         }
     }
-
-    private void llenarComboUnidad() {
+    private void llenarComboUDM() {
         try {
-            rsUnidadMedida = objUnidadMedidaDAO.buscar("%");
-            while (rsUnidadMedida.next()) {
-                jcomboxUnidadMedida.addItem(rsUnidadMedida.getString(2));
+            jcomboxPresentacion.removeAllItems();
+            String xnombre = jcomboxUnidadMedida.getSelectedItem().toString();
+            rsPreprecio = objPresentacionDAO.buscarPresentacion(xnombre);
+            while (rsPreprecio.next()) {
+                jcomboxPresentacion.addItem(rsPreprecio.getString(3));
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
         }
     }
-
 }

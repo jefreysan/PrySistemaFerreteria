@@ -8,6 +8,7 @@ package GUI;
 import GUI.Proveedor.ProveedorGUI;
 import GUI.Cliente.ClienteGUI;
 import GUI.Encargado.EncargadoGUI;
+import GUI.Entrada.EntradaGUI;
 import GUI.Producto.CategoriaGUI;
 import GUI.Producto.PrePrecioGUI;
 import GUI.Producto.PresentacionGUI;
@@ -45,7 +46,6 @@ public class MenuGUI extends javax.swing.JFrame {
         openMenuItem = new javax.swing.JMenuItem();
         saveMenuItem = new javax.swing.JMenuItem();
         saveAsMenuItemEncargado = new javax.swing.JMenuItem();
-        exitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
         copyMenuItem = new javax.swing.JMenuItem();
@@ -54,13 +54,20 @@ public class MenuGUI extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        fileMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/registro_menu.png"))); // NOI18N
         fileMenu.setMnemonic('f');
-        fileMenu.setText("Registro");
+        fileMenu.setText("REGISTRO");
 
+        openMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/cliente_reg.png"))); // NOI18N
         openMenuItem.setMnemonic('o');
         openMenuItem.setText("Cliente");
         openMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -70,6 +77,7 @@ public class MenuGUI extends javax.swing.JFrame {
         });
         fileMenu.add(openMenuItem);
 
+        saveMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/proveedor_reg.png"))); // NOI18N
         saveMenuItem.setMnemonic('s');
         saveMenuItem.setText("Proveedor");
         saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -79,6 +87,7 @@ public class MenuGUI extends javax.swing.JFrame {
         });
         fileMenu.add(saveMenuItem);
 
+        saveAsMenuItemEncargado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/encargado_reg.png"))); // NOI18N
         saveAsMenuItemEncargado.setMnemonic('a');
         saveAsMenuItemEncargado.setText("Encargado");
         saveAsMenuItemEncargado.addActionListener(new java.awt.event.ActionListener() {
@@ -88,20 +97,13 @@ public class MenuGUI extends javax.swing.JFrame {
         });
         fileMenu.add(saveAsMenuItemEncargado);
 
-        exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Exit");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(exitMenuItem);
-
         menuBar.add(fileMenu);
 
+        editMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/materiales_menu.png"))); // NOI18N
         editMenu.setMnemonic('e');
-        editMenu.setText("Materiales");
+        editMenu.setText("MATERIALES");
 
+        cutMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/producto_mat.png"))); // NOI18N
         cutMenuItem.setMnemonic('t');
         cutMenuItem.setText("Producto");
         cutMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -111,6 +113,7 @@ public class MenuGUI extends javax.swing.JFrame {
         });
         editMenu.add(cutMenuItem);
 
+        copyMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/categoria_mat.png"))); // NOI18N
         copyMenuItem.setMnemonic('y');
         copyMenuItem.setText("Categoria");
         copyMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -120,8 +123,9 @@ public class MenuGUI extends javax.swing.JFrame {
         });
         editMenu.add(copyMenuItem);
 
+        pasteMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/udm_mat.png"))); // NOI18N
         pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("UnidadMedida");
+        pasteMenuItem.setText("UDM");
         pasteMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pasteMenuItemActionPerformed(evt);
@@ -129,6 +133,7 @@ public class MenuGUI extends javax.swing.JFrame {
         });
         editMenu.add(pasteMenuItem);
 
+        deleteMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/presentacion_mat.png"))); // NOI18N
         deleteMenuItem.setMnemonic('d');
         deleteMenuItem.setText("Presentacion");
         deleteMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +143,8 @@ public class MenuGUI extends javax.swing.JFrame {
         });
         editMenu.add(deleteMenuItem);
 
-        jMenuItem1.setText("Presentacion  Precios");
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/preprecio_mat.png"))); // NOI18N
+        jMenuItem1.setText("Precios");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -148,18 +154,41 @@ public class MenuGUI extends javax.swing.JFrame {
 
         menuBar.add(editMenu);
 
+        helpMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/compras_menu.png"))); // NOI18N
         helpMenu.setMnemonic('h');
-        helpMenu.setText("Help");
+        helpMenu.setText("COMPRAS");
 
         contentMenuItem.setMnemonic('c');
-        contentMenuItem.setText("Contents");
+        contentMenuItem.setText("Entradas");
+        contentMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contentMenuItemActionPerformed(evt);
+            }
+        });
         helpMenu.add(contentMenuItem);
 
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
-        helpMenu.add(aboutMenuItem);
-
         menuBar.add(helpMenu);
+
+        jMenu1.setText("VENTAS");
+
+        jMenuItem2.setText("Comprobante");
+        jMenu1.add(jMenuItem2);
+
+        menuBar.add(jMenu1);
+
+        jMenu2.setText("COBRANZAS");
+        menuBar.add(jMenu2);
+
+        jMenu3.setText("REPORTES");
+
+        jMenuItem3.setText("Entradas");
+        jMenu3.add(jMenuItem3);
+
+        menuBar.add(jMenu3);
+
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/soporte_menu.png"))); // NOI18N
+        jMenu4.setText("SOPORTE");
+        menuBar.add(jMenu4);
 
         setJMenuBar(menuBar);
 
@@ -171,15 +200,11 @@ public class MenuGUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void saveAsMenuItemEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuItemEncargadoActionPerformed
         MenuGUI.desktopPane.add(new EncargadoGUI());
@@ -213,6 +238,10 @@ public class MenuGUI extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
           MenuGUI.desktopPane.add(new PrePrecioGUI());
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void contentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentMenuItemActionPerformed
+      MenuGUI.desktopPane.add(new EntradaGUI());
+    }//GEN-LAST:event_contentMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -250,17 +279,21 @@ public class MenuGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JMenuItem deleteMenuItem;
     public static javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu editMenu;
-    private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;

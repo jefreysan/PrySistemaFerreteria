@@ -16,7 +16,7 @@ public class ProductoTO {
     private String nombprod;
     private double pcompraprod;
     private double pventaprod;
-    private int cantiprod;
+    private double cantiprod;
 
     public int getIdproducto() {
         return idproducto;
@@ -66,15 +66,11 @@ public class ProductoTO {
         this.pventaprod = pventaprod;
     }
 
-    public int getCantiprod() {
+    public double getCantiprod() {
         return cantiprod;
     }
 
-    public void setCantiprod(int cantiprod) {
+    public void setCantiprod(double cantiprod) {
         this.cantiprod = cantiprod;
     }
-
-   
-    
-    
 }

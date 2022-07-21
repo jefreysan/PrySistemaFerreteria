@@ -29,7 +29,7 @@ public class PresentacionDAO implements VentasInterface<PresentacionTO> {
         try {
             Connection cn = ConMySql.getInstance().getConection();
             String nombre = "%" + objObject + "%";
-            String sql = "SELECT *FROM vpresentacion where descrpresent like ?";
+            String sql = "SELECT *FROM vpresentacion where descrudm like ?";
             PreparedStatement ps = cn.prepareStatement(sql);
             ps.setString(1, nombre);
             rs = ps.executeQuery();
@@ -82,5 +82,14 @@ public class PresentacionDAO implements VentasInterface<PresentacionTO> {
             JOptionPane.showConfirmDialog(rootPane, e);
         }
     }
-
+     public ResultSet buscarPresentacion(Object objObject) throws Exception {
+        Connection cn = ConMySql.getInstance().getConection();
+        String nombProv = objObject.toString();
+        String sql = "SELECT * FROM vpresentacion WHERE descrudm = ?";
+        PreparedStatement pst = cn.prepareStatement(sql);
+        pst.setString(1, nombProv);
+        ResultSet rs = pst.executeQuery();
+        return rs;
+    } 
+    
 }

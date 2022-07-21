@@ -37,7 +37,7 @@ public class EntradaDAO implements VentasInterface<EntradaTO> {
             CallableStatement cs = cn.prepareCall(sql);
             cs.setString(1, objObjeto.getFechaent());
             cs.setString(2, objObjeto.getNroent());
-            cs.setInt(3, objObjeto.getIdtipago());
+            cs.setString(3, objObjeto.getTipopago());
             cs.setInt(4, objObjeto.getIdencargado());
             cs.setInt(5, objObjeto.getIdproveedor());
             cs.setDouble(6, objObjeto.getTotalent());
@@ -86,5 +86,14 @@ public class EntradaDAO implements VentasInterface<EntradaTO> {
         ps.setString(3, estado);
         rs = ps.executeQuery();
         return rs;
+    }
+    
+    public String NroSerieEntrada() throws Exception {
+        Connection cn = ConMySql.getInstance().getConection();
+        String sql = "SELECT MAX(identrada) from entrada";
+        PreparedStatement ps = cn.prepareStatement(sql);
+        rs = ps.executeQuery();
+        rs.last();
+        return rs.getString(1);
     }
 }

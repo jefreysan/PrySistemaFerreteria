@@ -490,7 +490,7 @@ public class EncargadoGUI extends javax.swing.JInternalFrame {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
+            JOptionPane.showMessageDialog(null, e, "FERRETERIA MICKY", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jtxtBuscarEncargadoKeyReleased
 
@@ -545,7 +545,7 @@ public class EncargadoGUI extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "REGISTRO ELIMINADO");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
+            JOptionPane.showMessageDialog(null, e, "FERRETERIA MICKY", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -611,7 +611,7 @@ public class EncargadoGUI extends javax.swing.JInternalFrame {
                 }
             } while (rsEncargado.next());
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
+            JOptionPane.showMessageDialog(null, e, "FERRETERIA MICKY", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jtblRegistroEncargadoMouseClicked
 
@@ -696,5 +696,4 @@ public class EncargadoGUI extends javax.swing.JInternalFrame {
             objDtm.removeRow(0);
         }
     }
-
 }

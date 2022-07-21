@@ -61,6 +61,11 @@ public class BuscarEncargadoComprobante extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jtblBuscarEncargado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtblBuscarEncargadoMouseClicked(evt);
+            }
+        });
         jtblBuscarEncargado.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtblBuscarEncargadoKeyReleased(evt);
@@ -221,6 +226,10 @@ public class BuscarEncargadoComprobante extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jtblBuscarEncargadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblBuscarEncargadoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtblBuscarEncargadoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

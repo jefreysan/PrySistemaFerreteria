@@ -61,6 +61,11 @@ public class BuscarClienteCreditoGUI extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jtblBuscarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtblBuscarClienteMouseClicked(evt);
+            }
+        });
         jtblBuscarCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtblBuscarClienteKeyReleased(evt);
@@ -221,6 +226,10 @@ public class BuscarClienteCreditoGUI extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jtblBuscarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblBuscarClienteMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtblBuscarClienteMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

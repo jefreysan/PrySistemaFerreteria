@@ -50,7 +50,7 @@ public class ProductoDAO implements VentasInterface<ProductoTO> {
             cs.setString(3, objObjeto.getNombprod());
             cs.setDouble(4, objObjeto.getPcompraprod());
             cs.setDouble(5, objObjeto.getPventaprod());
-            cs.setInt(6, objObjeto.getCantiprod());
+            cs.setDouble(6, objObjeto.getCantiprod());
             cs.execute();
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(rootPane, e);
@@ -69,7 +69,7 @@ public class ProductoDAO implements VentasInterface<ProductoTO> {
             cs.setString(4, objObjeto.getNombprod());
             cs.setDouble(5, objObjeto.getPcompraprod());
             cs.setDouble(6, objObjeto.getPventaprod());
-            cs.setInt(7, objObjeto.getCantiprod());
+            cs.setDouble(7, objObjeto.getCantiprod());
             cs.execute();
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(rootPane, e);
@@ -88,16 +88,20 @@ public class ProductoDAO implements VentasInterface<ProductoTO> {
             JOptionPane.showConfirmDialog(rootPane, e);
         }
     }
- public ResultSet buscarProducto() {
+
+    public int obtenerCodProducto() {
+        int codproducto=0;
         try {
             Connection cn = ConMySql.getInstance().getConection();
-            String sql = "SELECT * FROM  vproducto";
+            String sql = "SELECT max(idproducto) from vproducto";
             PreparedStatement ps = cn.prepareStatement(sql);
             rs = ps.executeQuery();
+            while (rs.next()) {
+                codproducto = rs.getInt(1);
+            }
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(null, e);
         }
-        return rs;
-
+        return codproducto;
     }
 }

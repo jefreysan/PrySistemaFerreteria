@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import GUI.Producto.BP_PreprecioGUI;
 import DAO.DetalleEntradaDAO;
 import DAO.EntradaDAO;
 import DAO.ProveedorDAO;
@@ -752,7 +753,7 @@ public class SalidaGUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbtnbuscarProveedorActionPerformed
 
     private void jbtnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBuscarProductoActionPerformed
-        MenuGUI.desktopPane.add(new BuscarProductoGUI());
+        MenuGUI.desktopPane.add(new BP_PreprecioGUI());
     }//GEN-LAST:event_jbtnBuscarProductoActionPerformed
 
     private void jtxtcantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtcantidadKeyReleased
