@@ -11,6 +11,7 @@ import DTO.PrePrecioTO;
 import DTO.PresentacionTO;
 import DTO.UnidadMedidaTO;
 import GUI.MenuGUI;
+import com.sun.glass.events.KeyEvent;
 import java.awt.Color;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -44,7 +45,7 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
     public PrePrecioGUI() {
         initComponents();
         setVisible(true);
-        setSize(1091, 437);
+        setSize(1060, 481);
         this.getContentPane().setBackground(Color.white);
         objDtm = (DefaultTableModel) jtblRegistroPreprecio.getModel();
     }
@@ -83,6 +84,10 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
         jcomboxPresentacion = new javax.swing.JComboBox<>();
         jLabelCodigo1 = new javax.swing.JLabel();
         jtxtCodProducto = new javax.swing.JTextField();
+        jtxtValor = new javax.swing.JTextField();
+        jtxtPrecioEstimado = new javax.swing.JTextField();
+        jLabelValor1 = new javax.swing.JLabel();
+        jLabelValor2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblRegistroPreprecio = new javax.swing.JTable();
         jPanelBuscar = new javax.swing.JPanel();
@@ -119,10 +124,10 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
         jPanelDatosPresentacion.setOpaque(false);
 
         jLabelCodigo.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jLabelCodigo.setText("COD:");
+        jLabelCodigo.setText("CODIGO:");
 
         jLabelUnidadMedida.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jLabelUnidadMedida.setText("UNIDAD MEDIDA:");
+        jLabelUnidadMedida.setText("UDM:");
 
         jtxtCodPreprecio.setEditable(false);
         jtxtCodPreprecio.setBackground(new java.awt.Color(204, 204, 204));
@@ -250,7 +255,7 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
         );
 
         jLabelValor.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jLabelValor.setText("PRECIO:");
+        jLabelValor.setText("P_UNITARIO:");
 
         jtxtPrecio.setEditable(false);
         jtxtPrecio.addActionListener(new java.awt.event.ActionListener() {
@@ -321,7 +326,7 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
         });
 
         jLabelCodigo1.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jLabelCodigo1.setText("COD-P:");
+        jLabelCodigo1.setText("COD:");
 
         jtxtCodProducto.setEditable(false);
         jtxtCodProducto.setBackground(new java.awt.Color(204, 204, 204));
@@ -334,49 +339,87 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
             }
         });
 
+        jtxtValor.setEditable(false);
+        jtxtValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtValorActionPerformed(evt);
+            }
+        });
+        jtxtValor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtxtValorKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtValorKeyTyped(evt);
+            }
+        });
+
+        jtxtPrecioEstimado.setEditable(false);
+        jtxtPrecioEstimado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtPrecioEstimadoActionPerformed(evt);
+            }
+        });
+        jtxtPrecioEstimado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtxtPrecioEstimadoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtPrecioEstimadoKeyTyped(evt);
+            }
+        });
+
+        jLabelValor1.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jLabelValor1.setText("VALOR:");
+
+        jLabelValor2.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jLabelValor2.setText("ESTIMADO:");
+
         javax.swing.GroupLayout jPanelDatosPresentacionLayout = new javax.swing.GroupLayout(jPanelDatosPresentacion);
         jPanelDatosPresentacion.setLayout(jPanelDatosPresentacionLayout);
         jPanelDatosPresentacionLayout.setHorizontalGroup(
             jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanelDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
-                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabelUnidadMedida)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jcomboxUnidadMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabelCodigo1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxtCodPreprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabelCodigo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtxtCodProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)
-                        .addComponent(jbtnBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelDescripcionProducto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbtnBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtxtDescripcionProducto)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
+                            .addComponent(jLabelCodigo1)
+                            .addGap(10, 10, 10)
+                            .addComponent(jtxtCodPreprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabelUnidadMedida)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jcomboxUnidadMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabelDescripcionProducto)
+                        .addComponent(jPanelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelDatosPresentacionLayout.createSequentialGroup()
+                                .addComponent(jLabelValor)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelValor2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtxtPrecioEstimado, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
                                 .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jcomboxPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelUnidadMedida1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
+                                        .addComponent(jLabelUnidadMedida1)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jcomboxPresentacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelValor)
-                                    .addComponent(jtxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jtxtDescripcionProducto)))
-                .addContainerGap())
-            .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelValor1)
+                                    .addComponent(jtxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelDatosPresentacionLayout.setVerticalGroup(
@@ -386,27 +429,33 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
                 .addGap(10, 10, 10)
                 .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCodigo)
-                    .addComponent(jtxtCodPreprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtnBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelCodigo1)
                     .addComponent(jtxtCodProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
                 .addComponent(jLabelDescripcionProducto)
                 .addGap(5, 5, 5)
                 .addComponent(jtxtDescripcionProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcomboxUnidadMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelUnidadMedida))
-                .addGap(10, 10, 10)
+                    .addComponent(jLabelUnidadMedida)
+                    .addComponent(jtxtCodPreprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelCodigo1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelUnidadMedida1)
-                    .addComponent(jLabelValor))
+                    .addComponent(jLabelValor1))
                 .addGap(5, 5, 5)
                 .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcomboxPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcomboxPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
+                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxtPrecioEstimado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelValor2)
+                    .addComponent(jLabelValor))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jPanelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -416,7 +465,7 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "COD", "UDM", "DESCRIPCION", "VALOR"
+                "COD", "UDM", "DESCRIPCION", "PU"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -492,7 +541,7 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE))
                 .addContainerGap())
             .addComponent(jPanelRegistro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -501,12 +550,12 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
+                        .addGap(5, 5, 5)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addComponent(jPanelDatosPresentacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanelDatosPresentacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
         );
 
@@ -596,7 +645,7 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
         habilitarControles(true);
         jcomboxPresentacion.setEnabled(true);
         sw = false;
-        obtenerDescrUDM();
+//        obtenerDescrUDM();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void jtblRegistroPreprecioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblRegistroPreprecioMouseClicked
@@ -608,6 +657,10 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
                     jtxtCodPreprecio.setText(String.valueOf(rsPreprecio.getInt(1)));
                     jcomboxPresentacion.removeAllItems();
                     jcomboxPresentacion.addItem(rsPreprecio.getString(3));
+                    String datapre = String.valueOf(jcomboxPresentacion.getSelectedItem());
+                    String dataUDM = objPrePrecioDAO.obtenerUDM(datapre);
+                    jcomboxUnidadMedida.removeAllItems();
+                    jcomboxUnidadMedida.addItem(dataUDM);
                     jtxtCodProducto.setText(String.valueOf(rsPreprecio.getInt(4)));
                     jtxtDescripcionProducto.setText(rsPreprecio.getString(5));
                     jtxtPrecio.setText(rsPreprecio.getString(6));
@@ -625,11 +678,17 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void jtxtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtPrecioActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jtxtPrecioActionPerformed
 
     private void jtxtPrecioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtPrecioKeyReleased
-        // TODO add your handling code here:
+        if (evt.getExtendedKeyCode() == KeyEvent.VK_ENTER) {
+            double xvalor, xprecio, xresultado;
+            xvalor = Double.parseDouble(jtxtValor.getText());
+            xprecio = Double.parseDouble(jtxtPrecio.getText());
+            xresultado = xvalor * xprecio;
+            jtxtPrecioEstimado.setText(String.format("%.2f",xresultado));
+        }
     }//GEN-LAST:event_jtxtPrecioKeyReleased
 
     private void jtxtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtPrecioKeyTyped
@@ -666,7 +725,7 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbtnBuscarProductoActionPerformed
 
     private void jcomboxPresentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcomboxPresentacionActionPerformed
-
+        obtener_valorPresent();
     }//GEN-LAST:event_jcomboxPresentacionActionPerformed
 
     private void jcomboxPresentacionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcomboxPresentacionKeyReleased
@@ -680,6 +739,30 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
     private void jtxtCodProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtCodProductoKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtCodProductoKeyTyped
+
+    private void jtxtValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtValorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtValorActionPerformed
+
+    private void jtxtValorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtValorKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtValorKeyReleased
+
+    private void jtxtValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtValorKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtValorKeyTyped
+
+    private void jtxtPrecioEstimadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtPrecioEstimadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtPrecioEstimadoActionPerformed
+
+    private void jtxtPrecioEstimadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtPrecioEstimadoKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtPrecioEstimadoKeyReleased
+
+    private void jtxtPrecioEstimadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtPrecioEstimadoKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtPrecioEstimadoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -698,6 +781,8 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabelUnidadMedida;
     private javax.swing.JLabel jLabelUnidadMedida1;
     private javax.swing.JLabel jLabelValor;
+    private javax.swing.JLabel jLabelValor1;
+    private javax.swing.JLabel jLabelValor2;
     private javax.swing.JPanel jPanelBotones;
     private javax.swing.JPanel jPanelBuscar;
     private javax.swing.JPanel jPanelDatos;
@@ -713,6 +798,8 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
     public static javax.swing.JTextField jtxtCodProducto;
     public static javax.swing.JTextField jtxtDescripcionProducto;
     private javax.swing.JTextField jtxtPrecio;
+    private javax.swing.JTextField jtxtPrecioEstimado;
+    private javax.swing.JTextField jtxtValor;
     // End of variables declaration//GEN-END:variables
 
     private void habilitarControles(boolean b) {
@@ -745,27 +832,28 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
             objDtm.removeRow(0);
         }
     }
- 
-    private void obtenerDescrUDM(){
-          try {
-            String data = String.valueOf(jcomboxPresentacion.getSelectedItem());
-            objPrePrecioDAO.buscarUDM(data);
-            String resultado = objPrePrecioDAO.buscarUDM(data);
-            jcomboxUnidadMedida.removeAllItems();
-            jcomboxUnidadMedida.addItem(resultado);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
+
     private void llenarComboUDM() {
         try {
             jcomboxPresentacion.removeAllItems();
-            String xnombre = jcomboxUnidadMedida.getSelectedItem().toString();
-            rsPreprecio = objPresentacionDAO.buscarPresentacion(xnombre);
-            while (rsPreprecio.next()) {
-                jcomboxPresentacion.addItem(rsPreprecio.getString(3));
+            String xdescrUDM = jcomboxUnidadMedida.getSelectedItem().toString();
+            rsPresentacion = objPresentacionDAO.buscarPresentacion(xdescrUDM);
+            while (rsPresentacion.next()) {
+                jcomboxPresentacion.addItem(rsPresentacion.getString(3));
             }
         } catch (Exception e) {
         }
+    }
+
+    private void obtener_valorPresent() {
+        try {
+            String xdescrUDM, xdescrPresent, xvalor;
+            xdescrUDM = jcomboxUnidadMedida.getSelectedItem().toString();
+            xdescrPresent = jcomboxPresentacion.getSelectedItem().toString();
+            xvalor = objPresentacionDAO.obtener_Valor(xdescrUDM, xdescrPresent);
+            jtxtValor.setText(String.valueOf(xvalor));
+        } catch (Exception e) {
+        }
+
     }
 }

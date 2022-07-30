@@ -284,6 +284,8 @@ public class BP_EntradaGUI extends javax.swing.JInternalFrame {
         limpiarJTable();
         EntradaGUI.jtxtcodigoProductoEntrada.setText(null);
         EntradaGUI.jtxtDescrProducto.setText(null);
+        EntradaGUI.jtxtprecioVenta.setText(null);
         EntradaGUI.jcomboxUnidadMedida.removeAllItems();
+        EntradaGUI.jcomboxPresentacion.removeAllItems();
     }
 }

@@ -216,7 +216,7 @@ public class BuscarProductoEntrada extends javax.swing.JInternalFrame {
         try {
             EntradaGUI.jtxtcodigoProductoEntrada.setText(jtblBuscarProducto.getValueAt(jtblBuscarProducto.getSelectedRow(), 0).toString());
             EntradaGUI.jtxtDescrProducto.setText(jtblBuscarProducto.getValueAt(jtblBuscarProducto.getSelectedRow(), 1).toString());
-            EntradaGUI.jtxtprecioCompra.grabFocus();
+            EntradaGUI.jtxtprecioVenta.grabFocus();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e);
         }

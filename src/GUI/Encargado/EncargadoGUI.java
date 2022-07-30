@@ -496,6 +496,7 @@ public class EncargadoGUI extends javax.swing.JInternalFrame {
 
     private void jtxtCelularEncargadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtCelularEncargadoKeyTyped
         objValidarClass.numberKeyPress(evt);
+        objValidarClass.validarCelular(evt, jtxtCelularEncargado.getText());
     }//GEN-LAST:event_jtxtCelularEncargadoKeyTyped
 
     private void jtxtCelularEncargadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtCelularEncargadoKeyReleased
@@ -559,6 +560,7 @@ public class EncargadoGUI extends javax.swing.JInternalFrame {
 
     private void jtxtRucEncargadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtRucEncargadoKeyTyped
         objValidarClass.numberKeyPress(evt);
+        objValidarClass.validarRuc(evt, jtxtRucEncargado.getText());
     }//GEN-LAST:event_jtxtRucEncargadoKeyTyped
 
     private void jtxtRucEncargadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtRucEncargadoKeyReleased

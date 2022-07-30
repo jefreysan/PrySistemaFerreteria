@@ -42,4 +42,16 @@ public class ValidarClass {
         Matcher mat = pat.matcher(correo);
         return mat.find();
     }
+
+    public void validarRuc(KeyEvent evt, String ruc) {
+        if (ruc.length() >= 11) {
+            evt.consume();
+        }
+    }
+
+    public void validarCelular(KeyEvent evt, String celular) {
+        if (celular.length() >= 9) {
+            evt.consume();
+        }
+    }
 }

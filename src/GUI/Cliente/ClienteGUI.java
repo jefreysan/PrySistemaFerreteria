@@ -497,6 +497,7 @@ public class ClienteGUI extends javax.swing.JInternalFrame {
 
     private void jtxtCeluClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtCeluClienteKeyTyped
         objValidarClass.numberKeyPress(evt);
+        objValidarClass.validarCelular(evt, jtxtCeluCliente.getText());
     }//GEN-LAST:event_jtxtCeluClienteKeyTyped
 
     private void jtxtCeluClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtCeluClienteKeyReleased
@@ -560,6 +561,7 @@ public class ClienteGUI extends javax.swing.JInternalFrame {
 
     private void jtxtRucClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtRucClienteKeyTyped
         objValidarClass.numberKeyPress(evt);
+        objValidarClass.validarRuc(evt, jtxtRucCliente.getText());
     }//GEN-LAST:event_jtxtRucClienteKeyTyped
 
     private void jtxtRucClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtRucClienteKeyReleased

@@ -5,8 +5,6 @@
 package GUI.Entrada;
 
 import DAO.EncargadoDAO;
-import GUI.Producto.*;
-import DAO.ProductoDAO;
 import java.awt.Color;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;

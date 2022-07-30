@@ -7,6 +7,7 @@ package GUI;
 
 import GUI.Proveedor.ProveedorGUI;
 import GUI.Cliente.ClienteGUI;
+import GUI.ComprobantePago.ComprobantePagoGUI;
 import GUI.Encargado.EncargadoGUI;
 import GUI.Entrada.EntradaGUI;
 import GUI.Producto.CategoriaGUI;
@@ -14,6 +15,7 @@ import GUI.Producto.PrePrecioGUI;
 import GUI.Producto.PresentacionGUI;
 import GUI.Producto.ProductoGUI;
 import GUI.Producto.UnidadMedidaGUI;
+import GUI.Reportes.REPEntrada;
 
 /**
  *
@@ -54,14 +56,20 @@ public class MenuGUI extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        desktopPane.setForeground(new java.awt.Color(204, 204, 204));
+
+        menuBar.setBackground(new java.awt.Color(102, 255, 255));
 
         fileMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/registro_menu.png"))); // NOI18N
         fileMenu.setMnemonic('f');
@@ -158,6 +166,7 @@ public class MenuGUI extends javax.swing.JFrame {
         helpMenu.setMnemonic('h');
         helpMenu.setText("COMPRAS");
 
+        contentMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/entradas_inv.png"))); // NOI18N
         contentMenuItem.setMnemonic('c');
         contentMenuItem.setText("Entradas");
         contentMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -167,11 +176,20 @@ public class MenuGUI extends javax.swing.JFrame {
         });
         helpMenu.add(contentMenuItem);
 
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/salidas_inv.png"))); // NOI18N
+        jMenuItem4.setText("Salidas");
+        helpMenu.add(jMenuItem4);
+
         menuBar.add(helpMenu);
 
         jMenu1.setText("VENTAS");
 
         jMenuItem2.setText("Comprobante");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         menuBar.add(jMenu1);
@@ -179,10 +197,19 @@ public class MenuGUI extends javax.swing.JFrame {
         jMenu2.setText("COBRANZAS");
         menuBar.add(jMenu2);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/reportes_menu.png"))); // NOI18N
         jMenu3.setText("REPORTES");
 
         jMenuItem3.setText("Entradas");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem3);
+
+        jMenuItem5.setText("Salidas");
+        jMenu3.add(jMenuItem5);
 
         menuBar.add(jMenu3);
 
@@ -236,12 +263,20 @@ public class MenuGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_pasteMenuItemActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-          MenuGUI.desktopPane.add(new PrePrecioGUI());
+        MenuGUI.desktopPane.add(new PrePrecioGUI());
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void contentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentMenuItemActionPerformed
-      MenuGUI.desktopPane.add(new EntradaGUI());
+        MenuGUI.desktopPane.add(new EntradaGUI());
     }//GEN-LAST:event_contentMenuItemActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        MenuGUI.desktopPane.add(new REPEntrada());
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        MenuGUI.desktopPane.add(new ComprobantePagoGUI());
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -294,6 +329,8 @@ public class MenuGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;

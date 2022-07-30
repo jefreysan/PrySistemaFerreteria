@@ -82,14 +82,28 @@ public class PresentacionDAO implements VentasInterface<PresentacionTO> {
             JOptionPane.showConfirmDialog(rootPane, e);
         }
     }
-     public ResultSet buscarPresentacion(Object objObject) throws Exception {
+
+    public ResultSet buscarPresentacion(Object objObject) throws Exception {
         Connection cn = ConMySql.getInstance().getConection();
-        String nombProv = objObject.toString();
-        String sql = "SELECT * FROM vpresentacion WHERE descrudm = ?";
+        String xdescrUDM = objObject.toString();
+        String sql = "SELECT * FROM vpresentacion WHERE descrudm =?";
         PreparedStatement pst = cn.prepareStatement(sql);
-        pst.setString(1, nombProv);
-        ResultSet rs = pst.executeQuery();
+        pst.setString(1, xdescrUDM);
+        rs = pst.executeQuery();
         return rs;
-    } 
-    
+    }
+
+    public String obtener_Valor(Object objObject, Object objObject2) throws Exception {
+        Connection cn = ConMySql.getInstance().getConection();
+        String xdescrUDM = objObject.toString();
+        String xdescrPresent = objObject2.toString();
+        String sql = "SELECT * FROM vpresentacion WHERE descrudm =? and  descrpresent =?";
+        PreparedStatement pst = cn.prepareStatement(sql);
+        pst.setString(1, xdescrUDM);
+        pst.setString(2, xdescrPresent);
+        rs = pst.executeQuery();
+        rs.next();
+        rs.getString(4);
+        return rs.getString(4);
+    }
 }

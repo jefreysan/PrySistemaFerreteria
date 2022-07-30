@@ -532,6 +532,7 @@ public class ProveedorGUI extends javax.swing.JInternalFrame {
 
     private void jtxtRucProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtRucProveedorKeyTyped
         objValidarClass.numberKeyPress(evt);
+        objValidarClass.validarRuc(evt,jtxtRucProveedor.getText());   
     }//GEN-LAST:event_jtxtRucProveedorKeyTyped
 
     private void jtxtRucProveedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtRucProveedorKeyReleased
@@ -600,6 +601,7 @@ public class ProveedorGUI extends javax.swing.JInternalFrame {
 
     private void jtxtCelularProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtCelularProveedorKeyTyped
         objValidarClass.numberKeyPress(evt);
+        objValidarClass.validarCelular(evt, jtxtCelularProveedor.getText());
     }//GEN-LAST:event_jtxtCelularProveedorKeyTyped
 
     private void jtxtCorreoProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtCorreoProveedorActionPerformed

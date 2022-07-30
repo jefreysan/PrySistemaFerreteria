@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import GUI.ComprobantePago.ComprobanteGUI;
 import DAO.EncargadoDAO;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;

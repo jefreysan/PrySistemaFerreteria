@@ -54,7 +54,7 @@ public class EntradaDAO implements VentasInterface<EntradaTO> {
 
     @Override
     public void delete(EntradaTO objObjeto) {
-       try {
+        try {
             Connection cn = ConMySql.getInstance().getConection();
             String sql = "call sp_anular_entrada(?);";
             CallableStatement cs = cn.prepareCall(sql);
@@ -74,12 +74,12 @@ public class EntradaDAO implements VentasInterface<EntradaTO> {
         return rs.getInt(1);
     }
 
-    public ResultSet buscarPorFecha(Object Objecto1, Object Objecto2,Object Objecto3) throws Exception {
+    public ResultSet buscarPorFecha(Object Objecto1, Object Objecto2, Object Objecto3) throws Exception {
         Connection cn = ConMySql.getInstance().getConection();
         String fechaInicio = Objecto1.toString();
         String fechaFin = Objecto2.toString();
         String estado = Objecto3.toString();
-        String sql = "SELECT *FROM ventrada where date(fechaent) between ? and ? and descrpago=?";
+        String sql = "SELECT *FROM ventrada where date(fechaent) between ? and ? and tipopago=?";
         PreparedStatement ps = cn.prepareStatement(sql);
         ps.setString(1, fechaInicio);
         ps.setString(2, fechaFin);
@@ -87,13 +87,42 @@ public class EntradaDAO implements VentasInterface<EntradaTO> {
         rs = ps.executeQuery();
         return rs;
     }
-    
-    public String NroSerieEntrada() throws Exception {
+
+    public ResultSet buscarPorFecha_Prov(Object Objecto1, Object Objecto2, Object Objecto3, Object Objecto4) throws Exception {
+        Connection cn = ConMySql.getInstance().getConection();
+        String fechaInicio = Objecto1.toString();
+        String fechaFin = Objecto2.toString();
+        String estado = Objecto3.toString();
+        String idproveedor = Objecto4.toString();
+        String sql = "SELECT *FROM ventrada where date(fechaent) between ? and ? and tipopago=? and idproveedor=?";
+        PreparedStatement ps = cn.prepareStatement(sql);
+        ps.setString(1, fechaInicio);
+        ps.setString(2, fechaFin);
+        ps.setString(3, estado);
+        ps.setString(4, idproveedor);
+        rs = ps.executeQuery();
+        return rs;
+    }
+
+    public String nroSerieEntrada() throws Exception {
         Connection cn = ConMySql.getInstance().getConection();
         String sql = "SELECT MAX(identrada) from entrada";
         PreparedStatement ps = cn.prepareStatement(sql);
         rs = ps.executeQuery();
         rs.last();
         return rs.getString(1);
+    }
+
+    public double obtenerPrecioPresent(Object objObject, Object objObject2) throws Exception {
+        Connection cn = ConMySql.getInstance().getConection();
+        String descpresent = objObject.toString();
+        String idproducto = objObject2.toString();
+        String sql = "SELECT * FROM vpreprecio WHERE descrpresent=? and idproducto=?";
+        PreparedStatement pst = cn.prepareStatement(sql);
+        pst.setString(1, descpresent);
+        pst.setString(2, idproducto);
+        rs = pst.executeQuery();
+        rs.last();
+        return rs.getDouble(6);
     }
 }

@@ -83,7 +83,7 @@ public class PrePrecioDAO implements VentasInterface<PrePrecioTO> {
         }
     }
 
-    public String buscarUDM(Object objObject) throws Exception {
+    public String obtenerUDM(Object objObject) throws Exception {
         Connection cn = ConMySql.getInstance().getConection();
         String descpresent = objObject.toString();
         String sql = "SELECT * FROM vpresentacion WHERE descrpresent=?";
