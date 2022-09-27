@@ -6,11 +6,11 @@ package GUI.Producto;
 
 import DAO.UnidadMedidaDAO;
 import DTO.UnidadMedidaTO;
-import java.awt.Color;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
-import javax.swing.JRootPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,7 +25,6 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
     UnidadMedidaDAO objUnidadMedidaDAO = new UnidadMedidaDAO();
     UnidadMedidaTO objUnidadMedidaTO = new UnidadMedidaTO();
 
-    JRootPane rootPane;
     boolean sw;
     DefaultTableModel objDtm;
     ResultSet rsUnidadMedida;
@@ -34,10 +33,9 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
 
     public UnidadMedidaGUI() {
         initComponents();
-        setVisible(true);
-        setSize(828, 351);
-        this.getContentPane().setBackground(Color.white);
         objDtm = (DefaultTableModel) jtblRegistroUDM.getModel();
+        ((DefaultTableCellRenderer) jtblRegistroUDM.getTableHeader().getDefaultRenderer())
+                .setHorizontalAlignment(SwingConstants.CENTER);
     }
 
     /**
@@ -255,14 +253,12 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelDescripcionUDM)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jLabelCodigo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtxtCodigoUDM, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabelCodigo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtxtCodigoUDM, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jtxtDescripcionUDM))
+                    .addComponent(jtxtDescripcionUDM)
+                    .addComponent(jLabelDescripcionUDM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
             .addComponent(jPanelDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -288,11 +284,11 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "COD", "UDM"
+                "ID", "UDM", "REGISTRO"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -309,7 +305,8 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
         if (jtblRegistroUDM.getColumnModel().getColumnCount() > 0) {
             jtblRegistroUDM.getColumnModel().getColumn(0).setMinWidth(70);
             jtblRegistroUDM.getColumnModel().getColumn(0).setMaxWidth(70);
-            jtblRegistroUDM.getColumnModel().getColumn(1).setResizable(false);
+            jtblRegistroUDM.getColumnModel().getColumn(1).setMinWidth(200);
+            jtblRegistroUDM.getColumnModel().getColumn(1).setMaxWidth(200);
         }
 
         jPanelBuscar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -357,18 +354,18 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
                     .addComponent(jPanelBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(10, 10, 10))
             .addComponent(jPanelRegistro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -399,7 +396,7 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "REGISTRO ELIMINADO");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
+            JOptionPane.showMessageDialog(null, e, "FERRETERIA MICKY", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -425,12 +422,13 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
             if (!jtxtBuscarUDM.getText().isEmpty()) {
                 rsUnidadMedida = objUnidadMedidaDAO.buscar(jtxtBuscarUDM.getText().trim());
                 while (rsUnidadMedida.next()) {
-                    Object registro[] = {rsUnidadMedida.getInt(1), rsUnidadMedida.getString(2)};
+                    Object registro[] = {rsUnidadMedida.getInt(1), rsUnidadMedida.getString(2),
+                        rsUnidadMedida.getDate(3)};
                     objDtm.addRow(registro);
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
+            JOptionPane.showMessageDialog(null, e, "FERRETERIA MICKY", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jtxtBuscarUDMKeyReleased
 
@@ -484,7 +482,7 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
                 }
             } while (rsUnidadMedida.next());
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
+            JOptionPane.showMessageDialog(null, e, "FERRETERIA MICKY", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jtblRegistroUDMMouseClicked
 
@@ -545,6 +543,5 @@ public class UnidadMedidaGUI extends javax.swing.JInternalFrame {
         while (objDtm.getRowCount() > 0) {
             objDtm.removeRow(0);
         }
-
     }
 }

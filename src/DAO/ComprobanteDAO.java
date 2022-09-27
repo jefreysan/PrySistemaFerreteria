@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package DAO;
 
 import Conexion.ConMySql;
@@ -15,10 +11,6 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 
-/**
- *
- * @author HP
- */
 public class ComprobanteDAO implements VentasInterface<ComprobanteTO> {
 
     ResultSet rs;

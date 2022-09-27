@@ -6,11 +6,10 @@ package GUI.Producto;
 
 import DAO.CategoriaDAO;
 import DTO.CategoriaTO;
-import java.awt.Color;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
-import javax.swing.JRootPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,7 +25,6 @@ public class CategoriaGUI extends javax.swing.JInternalFrame {
     CategoriaDAO objCategoriaDAO = new CategoriaDAO();
     CategoriaTO objCategoriaTO = new CategoriaTO();
 
-    JRootPane rootPane;
     boolean sw;
     DefaultTableModel objDtm;
     ResultSet rsCategoria;
@@ -36,12 +34,9 @@ public class CategoriaGUI extends javax.swing.JInternalFrame {
 
     public CategoriaGUI() {
         initComponents();
-        setVisible(true);
-        setSize(828, 352);
-        this.getContentPane().setBackground(Color.white);
         objDtm = (DefaultTableModel) jtblCategoria.getModel();
-        jtblCategoria.getColumn("COD").setPreferredWidth(30);
-
+        ((DefaultTableCellRenderer) jtblCategoria.getTableHeader().getDefaultRenderer())
+        .setHorizontalAlignment(SwingConstants.CENTER); 
     }
 
     /**
@@ -259,14 +254,12 @@ public class CategoriaGUI extends javax.swing.JInternalFrame {
                 .addGroup(jPanelDatosCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanelDatosCategoriaLayout.createSequentialGroup()
-                        .addGroup(jPanelDatosCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelDescripcion)
-                            .addGroup(jPanelDatosCategoriaLayout.createSequentialGroup()
-                                .addComponent(jLabelCodigo)
-                                .addGap(15, 15, 15)
-                                .addComponent(jtxtcodigoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabelCodigo)
+                        .addGap(15, 15, 15)
+                        .addComponent(jtxtcodigoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jtxtDescripcionCategoria))
+                    .addComponent(jtxtDescripcionCategoria)
+                    .addComponent(jLabelDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
             .addComponent(jPanelDatos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -292,11 +285,11 @@ public class CategoriaGUI extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "COD", "CATEGORIA"
+                "ID", "CATEGORIA", "REGISTRO"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -318,7 +311,9 @@ public class CategoriaGUI extends javax.swing.JInternalFrame {
         if (jtblCategoria.getColumnModel().getColumnCount() > 0) {
             jtblCategoria.getColumnModel().getColumn(0).setMinWidth(70);
             jtblCategoria.getColumnModel().getColumn(0).setMaxWidth(70);
-            jtblCategoria.getColumnModel().getColumn(1).setResizable(false);
+            jtblCategoria.getColumnModel().getColumn(1).setMinWidth(290);
+            jtblCategoria.getColumnModel().getColumn(1).setMaxWidth(290);
+            jtblCategoria.getColumnModel().getColumn(2).setResizable(false);
         }
 
         jPanelBuscar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -366,10 +361,10 @@ public class CategoriaGUI extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jPanelDatosCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
-                    .addComponent(jPanelBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanelBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
             .addComponent(jPanelRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -377,14 +372,14 @@ public class CategoriaGUI extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addComponent(jPanelDatosCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(10, 10, 10))
         );
 
         pack();
@@ -408,7 +403,7 @@ public class CategoriaGUI extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "REGISTRO ELIMINADO");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
+                JOptionPane.showMessageDialog(null, e, "FERRETERIA MICKY", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -434,12 +429,13 @@ public class CategoriaGUI extends javax.swing.JInternalFrame {
             if (!jtxtBuscarCategoria.getText().isEmpty()) {
                 rsCategoria = objCategoriaDAO.buscar(jtxtBuscarCategoria.getText().trim());
                 while (rsCategoria.next()) {
-                    Object registro[] = {rsCategoria.getInt(1), rsCategoria.getString(2)};
+                    Object registro[] = {rsCategoria.getInt(1), rsCategoria.getString(2)
+                            , rsCategoria.getDate(3)};
                     objDtm.addRow(registro);
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
+                JOptionPane.showMessageDialog(null, e, "FERRETERIA MICKY", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jtxtBuscarCategoriaKeyReleased
 
@@ -493,7 +489,7 @@ public class CategoriaGUI extends javax.swing.JInternalFrame {
                 }
             } while (rsCategoria.next());
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
+                JOptionPane.showMessageDialog(null, e, "FERRETERIA MICKY", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jtblCategoriaMouseClicked
 

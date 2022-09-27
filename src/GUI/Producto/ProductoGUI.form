@@ -159,21 +159,27 @@
                   </Group>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabelPrecioVenta" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtxtPrecioVenta" min="-2" pref="120" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabelPrecioVenta" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtxtPrecioVenta" min="-2" pref="120" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="13" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jtxtCantidad" min="-2" pref="120" max="-2" attributes="0"/>
+                              <Component id="jLabelCantidad" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jradUND" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jradKG" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jradM" min="-2" max="-2" attributes="0"/>
+                          <Component id="jradRollo" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jradGL" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jtxtCantidad" min="-2" pref="120" max="-2" attributes="0"/>
-                      <Component id="jLabelCantidad" min="-2" max="-2" attributes="0"/>
-                      <Component id="jradGL" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -208,7 +214,7 @@
                       <Component id="jradKG" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jradGL" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelPrecioCompra1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jradM" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jradRollo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -261,7 +267,7 @@
                           <Component id="btnEliminar" max="32767" attributes="0"/>
                           <Component id="btnGuardar" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="10" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnEditar" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="btnSalir" alignment="0" min="-2" pref="105" max="-2" attributes="0"/>
@@ -285,7 +291,7 @@
                           <Component id="btnEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnSalir" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -576,13 +582,13 @@
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jLabelPrecioCompra1KeyReleased"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jradM">
+        <Component class="javax.swing.JRadioButton" name="jradRollo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="M"/>
+            <Property name="text" type="java.lang.String" value="ROLLO"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jradMActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jradRolloActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -707,6 +713,7 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtxtBuscarProductoActionPerformed"/>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtxtBuscarProductoKeyReleased"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtxtBuscarProductoKeyTyped"/>
           </Events>
         </Component>
       </SubComponents>

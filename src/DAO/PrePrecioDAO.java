@@ -107,4 +107,17 @@ public class PrePrecioDAO implements VentasInterface<PrePrecioTO> {
         rs.last();
         return rs.getInt(1);
     }
+
+    public String obtener_precio(Object objObject, Object objObject2) throws Exception {
+        Connection cn = ConMySql.getInstance().getConection();
+        String xdescrPresent = objObject.toString();
+        String idproducto = objObject2.toString();
+        String sql = "SELECT * FROM vpreprecio WHERE descrpresent =? and  idproducto=?";
+        PreparedStatement pst = cn.prepareStatement(sql);
+        pst.setString(1, xdescrPresent);
+        pst.setString(2, idproducto);
+        rs = pst.executeQuery();
+        rs.next();
+        return rs.getString(6);
+    }   
 }

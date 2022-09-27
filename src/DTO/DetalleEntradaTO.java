@@ -14,7 +14,7 @@ public class DetalleEntradaTO {
     private int identrada;
     private int idproducto;
     private double pcompraent;
-    private int cantidadent;
+    private double cantidadent;
     private double importeent;
 
     public int getIddetalleent() {
@@ -49,14 +49,14 @@ public class DetalleEntradaTO {
         this.pcompraent = pcompraent;
     }
 
-    public int getCantidadent() {
+    public double getCantidadent() {
         return cantidadent;
     }
 
-    public void setCantidadent(int cantidadent) {
+    public void setCantidadent(double cantidadent) {
         this.cantidadent = cantidadent;
     }
-
+    
     public double getImporteent() {
         return importeent;
     }

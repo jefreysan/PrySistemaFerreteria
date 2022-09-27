@@ -4,7 +4,6 @@ package Conexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-
 public class ConMySql {
 static ConMySql instance = null;
     Connection connection = null;

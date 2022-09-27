@@ -8,7 +8,6 @@ import Conexion.ConMySql;
 import DAO.ComprobanteDAO;
 import DAO.EntradaDAO;
 import DTO.ComprobanteTO;
-import DTO.EntradaTO;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -70,7 +69,6 @@ public class REPComprobante extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jComboEstado = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblReporteComprobante = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -143,13 +141,6 @@ public class REPComprobante extends javax.swing.JInternalFrame {
         jLabel12.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
         jLabel12.setText("ESTADO:");
 
-        jComboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PAGADO", "ANULADO" }));
-        jComboEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboEstadoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -163,12 +154,10 @@ public class REPComprobante extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jdateFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(34, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
                         .addComponent(jLabel12)
                         .addGap(125, 125, 125))))
         );
@@ -183,8 +172,7 @@ public class REPComprobante extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jdateFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jdateFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jdateFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -300,9 +288,7 @@ public class REPComprobante extends javax.swing.JInternalFrame {
             limpiarJTable();
             String fechaIncio = objSimpleDateFormat.format(jdateFechaInicio.getDate());
             String fechaFinal = objSimpleDateFormat.format(jdateFechaFin.getDate());
-            String jcomboxPago = jComboEstado.getSelectedItem().toString();
-            System.out.println(jcomboxPago);
-            if (jcomboxPago.equals("PAGADO")) {
+            if (equals("PAGADO")) {
                 rsComprobante = objComprobanteDAO.buscarPorFecha(fechaIncio, fechaFinal);
                 while (rsComprobante.next()) {
                     Object[] registro = {rsComprobante.getInt(1), rsComprobante.getString(2), rsComprobante.getString(3),rsComprobante.getString(4),
@@ -347,10 +333,6 @@ public class REPComprobante extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtblReporteComprobanteMouseClicked
 
-    private void jComboEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboEstadoActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -376,7 +358,6 @@ public class REPComprobante extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

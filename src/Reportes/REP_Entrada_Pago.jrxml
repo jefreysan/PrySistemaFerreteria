@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e1812e7a-5e05-48b8-86a0-f9856c691560">
 	<property name="ireport.zoom" value="1.4641000000000006"/>
-	<property name="ireport.x" value="419"/>
+	<property name="ireport.x" value="13"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="fechaInicio" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -13,7 +13,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select *from ventrada 
+		<![CDATA[select *from ventrada
 where date(fechaent) between $P{fechaInicio} and $P{fechaFin} and tipopago= $P{tipopago}]]>
 	</queryString>
 	<field name="identrada" class="java.lang.Integer">
@@ -29,9 +29,6 @@ where date(fechaent) between $P{fechaInicio} and $P{fechaFin} and tipopago= $P{t
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="nombencarg" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="idproveedor" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="nombprove" class="java.lang.String">
@@ -76,14 +73,14 @@ where date(fechaent) between $P{fechaInicio} and $P{fechaFin} and tipopago= $P{t
 				<text><![CDATA[PERNOS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="449" y="24" width="352" height="46" uuid="fee3f471-6af1-4868-b9cb-8eedf4ba7622"/>
+				<reportElement x="449" y="25" width="353" height="45" uuid="fee3f471-6af1-4868-b9cb-8eedf4ba7622"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="14" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Encuentra lo que necesitas para renovar tu espacio]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="707" y="94" width="94" height="16" uuid="2d01ccfd-7967-4ee8-bbb2-dfc18efb4638"/>
+				<reportElement x="707" y="92" width="95" height="18" uuid="2d01ccfd-7967-4ee8-bbb2-dfc18efb4638"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="9"/>
 				</textElement>
@@ -97,7 +94,7 @@ where date(fechaent) between $P{fechaInicio} and $P{fechaFin} and tipopago= $P{t
 				<text><![CDATA[ferreteriamicky@gmail.com]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="610" y="69" width="97" height="25" uuid="fda1834a-9a4d-4f37-912f-c1e95a80a71b"/>
+				<reportElement x="610" y="71" width="97" height="21" uuid="fda1834a-9a4d-4f37-912f-c1e95a80a71b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="9"/>
 				</textElement>
@@ -111,7 +108,7 @@ where date(fechaent) between $P{fechaInicio} and $P{fechaFin} and tipopago= $P{t
 				<text><![CDATA[DIRECCION:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="610" y="94" width="97" height="16" uuid="9adc24c8-025b-41e9-9a54-9e59ab7ef70a"/>
+				<reportElement x="610" y="92" width="97" height="18" uuid="9adc24c8-025b-41e9-9a54-9e59ab7ef70a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="10"/>
 				</textElement>
@@ -132,7 +129,7 @@ where date(fechaent) between $P{fechaInicio} and $P{fechaFin} and tipopago= $P{t
 				<text><![CDATA[FECHA IMPRESIÓN:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="707" y="69" width="94" height="25" uuid="bbc5f0e5-02e7-49bc-ae76-50aace47298e"/>
+				<reportElement x="707" y="71" width="95" height="21" uuid="bbc5f0e5-02e7-49bc-ae76-50aace47298e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="9"/>
 				</textElement>
@@ -169,7 +166,7 @@ where date(fechaent) between $P{fechaInicio} and $P{fechaFin} and tipopago= $P{t
 				<reportElement x="0" y="23" width="349" height="1" uuid="2afda025-6437-4db7-ab42-2bb769a341d2"/>
 			</line>
 			<staticText>
-				<reportElement x="503" y="70" width="107" height="22" uuid="8a9f96ff-6258-40f3-91b8-f69b1a547569"/>
+				<reportElement x="503" y="71" width="107" height="21" uuid="8a9f96ff-6258-40f3-91b8-f69b1a547569"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="9"/>
 				</textElement>
@@ -190,14 +187,14 @@ where date(fechaent) between $P{fechaInicio} and $P{fechaFin} and tipopago= $P{t
 				<text><![CDATA[HERRAMIENTAS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="400" y="70" width="103" height="22" uuid="d1584c86-d736-4d83-8418-8f2c9bdff7af"/>
+				<reportElement x="401" y="71" width="102" height="21" uuid="d1584c86-d736-4d83-8418-8f2c9bdff7af"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="9"/>
 				</textElement>
 				<text><![CDATA[TUBERIAS  ACCESORIOS]]></text>
 			</staticText>
 			<line>
-				<reportElement x="449" y="69" width="352" height="1" uuid="439e7604-bfb5-4e2b-bdac-70ebacb1a7b5"/>
+				<reportElement x="349" y="70" width="452" height="1" uuid="439e7604-bfb5-4e2b-bdac-70ebacb1a7b5"/>
 			</line>
 			<staticText>
 				<reportElement x="70" y="50" width="217" height="20" uuid="57c13d0c-ebf3-43d0-8e59-47a3805209eb"/>
@@ -271,19 +268,19 @@ where date(fechaent) between $P{fechaInicio} and $P{fechaFin} and tipopago= $P{t
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<rectangle>
-				<reportElement mode="Opaque" x="0" y="0" width="801" height="20" backcolor="#CCCCFF" uuid="a1a784ab-70c7-47fa-9d40-68f11f5b4721"/>
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="20" backcolor="#CCCCFF" uuid="a1a784ab-70c7-47fa-9d40-68f11f5b4721"/>
 			</rectangle>
 			<staticText>
 				<reportElement mode="Transparent" x="51" y="0" width="100" height="20" backcolor="#CCCCFF" uuid="2f8b4d19-f171-4200-bea8-0dccf642995e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Bahnschrift" isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[FECHA EMISION]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Transparent" x="234" y="0" width="60" height="20" backcolor="#CCCCCC" uuid="20684ba5-b161-4de9-9d2c-57145a0675ee"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Bahnschrift" isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PAGO]]></text>
 			</staticText>
@@ -293,7 +290,7 @@ where date(fechaent) between $P{fechaInicio} and $P{fechaFin} and tipopago= $P{t
 			<staticText>
 				<reportElement mode="Transparent" x="0" y="0" width="50" height="20" backcolor="#CCCCFF" uuid="a2402ca5-d323-4cf9-9299-fd076cb27812"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Bahnschrift" isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ID]]></text>
 			</staticText>
@@ -303,7 +300,7 @@ where date(fechaent) between $P{fechaInicio} and $P{fechaFin} and tipopago= $P{t
 			<staticText>
 				<reportElement mode="Transparent" x="152" y="0" width="80" height="20" backcolor="#CCCCFF" uuid="d6f5b27f-bb56-4157-a5f4-bd9779e91043"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Bahnschrift" isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SERIE]]></text>
 			</staticText>
@@ -313,30 +310,30 @@ where date(fechaent) between $P{fechaInicio} and $P{fechaFin} and tipopago= $P{t
 			<staticText>
 				<reportElement mode="Transparent" x="518" y="0" width="220" height="20" backcolor="#CCCCCC" uuid="0795c379-eb59-4198-877e-ac9ec9e6bf6a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Bahnschrift" isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ENCARGADO]]></text>
 			</staticText>
 			<line>
-				<reportElement x="295" y="1" width="1" height="19" uuid="dd5d52b1-9a45-4a46-8510-5fbfd47a359b"/>
+				<reportElement x="295" y="0" width="1" height="20" uuid="dd5d52b1-9a45-4a46-8510-5fbfd47a359b"/>
 			</line>
 			<line>
-				<reportElement x="517" y="1" width="1" height="18" uuid="fe61c828-1484-44aa-983e-009fae474068"/>
+				<reportElement x="517" y="0" width="1" height="20" uuid="fe61c828-1484-44aa-983e-009fae474068"/>
 			</line>
 			<line>
-				<reportElement x="738" y="1" width="1" height="18" uuid="8980721d-6c5e-494d-8e9a-4850940dae8c"/>
+				<reportElement x="738" y="0" width="1" height="20" uuid="8980721d-6c5e-494d-8e9a-4850940dae8c"/>
 			</line>
 			<staticText>
 				<reportElement mode="Transparent" x="296" y="0" width="221" height="20" backcolor="#CCCCCC" uuid="c8665295-82c3-4214-b746-ee48c3370015"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Bahnschrift" isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PROVEEDOR]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Transparent" x="740" y="0" width="61" height="20" backcolor="#CCCCCC" uuid="1801e5ae-1d24-466b-9f7a-fa21ee495ef1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Bahnschrift" isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[TOTAL]]></text>
 			</staticText>
@@ -398,26 +395,10 @@ where date(fechaent) between $P{fechaInicio} and $P{fechaFin} and tipopago= $P{t
 			</line>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="22" splitType="Stretch">
-			<staticText>
-				<reportElement x="652" y="0" width="49" height="20" uuid="ecc9ce01-1479-45a5-9cb0-b0c06fb8a0d0"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true" isItalic="false"/>
-				</textElement>
-				<text><![CDATA[TOTAL:]]></text>
-			</staticText>
-			<textField pattern="S/ #,##0.00;(#,##0.00)">
-				<reportElement x="701" y="0" width="100" height="20" uuid="b9a8a8ce-90a7-441d-aa37-e7e97b180a4f"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$V{TotalGeneral}]]></textFieldExpression>
-			</textField>
-		</band>
-	</columnFooter>
 	<pageFooter>
 		<band height="13" splitType="Stretch">
 			<textField evaluationTime="Report">
-				<reportElement mode="Opaque" x="761" y="0" width="40" height="13" backcolor="#CCCCFF" uuid="4d9e8d56-63a9-47a7-addb-9818732e7273"/>
+				<reportElement mode="Opaque" x="761" y="0" width="41" height="13" backcolor="#CCCCFF" uuid="4d9e8d56-63a9-47a7-addb-9818732e7273"/>
 				<textElement>
 					<font fontName="Arial" isBold="false"/>
 				</textElement>
@@ -432,4 +413,22 @@ where date(fechaent) between $P{fechaInicio} and $P{fechaFin} and tipopago= $P{t
 			</textField>
 		</band>
 	</pageFooter>
+	<summary>
+		<band height="20">
+			<staticText>
+				<reportElement x="652" y="0" width="49" height="20" uuid="ecc9ce01-1479-45a5-9cb0-b0c06fb8a0d0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<textField pattern="S/ #,##0.00;(#,##0.00)">
+				<reportElement x="701" y="0" width="101" height="20" uuid="b9a8a8ce-90a7-441d-aa37-e7e97b180a4f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalGeneral}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
 </jasperReport>

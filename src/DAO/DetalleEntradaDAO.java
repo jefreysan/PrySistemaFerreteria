@@ -37,7 +37,7 @@ public class DetalleEntradaDAO implements VentasInterface<DetalleEntradaTO> {
             cs.setInt(1, objObjeto.getIdentrada());
             cs.setInt(2, objObjeto.getIdproducto());
             cs.setDouble(3, objObjeto.getPcompraent());
-            cs.setInt(4, objObjeto.getCantidadent());
+            cs.setDouble(4, objObjeto.getCantidadent());
             cs.setDouble(5, objObjeto.getImporteent());
             cs.execute();
         } catch (Exception e) {

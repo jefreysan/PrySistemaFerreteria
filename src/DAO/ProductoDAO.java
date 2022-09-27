@@ -36,7 +36,6 @@ public class ProductoDAO implements VentasInterface<ProductoTO> {
             JOptionPane.showConfirmDialog(null, e);
         }
         return rs;
-
     }
 
     @Override

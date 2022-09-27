@@ -156,7 +156,7 @@ public class BE_EntradaGUI extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtxtBuscarEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jbtnEnviarData, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtnEnviarData, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelBuscarEncargadoLayout.setVerticalGroup(
@@ -179,19 +179,19 @@ public class BE_EntradaGUI extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jPanelBuscarEncargado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanelBuscarEncargado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
                 .addComponent(jPanelBuscarEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10))
+                .addGap(5, 5, 5)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5))
         );
 
         pack();
@@ -222,8 +222,8 @@ public class BE_EntradaGUI extends javax.swing.JInternalFrame {
 
     private void jbtnEnviarDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEnviarDataActionPerformed
         try {
-            EntradaGUI.jtxtcodigoEncargadoEntrada.setText(jtblBuscarEncargado.getValueAt(jtblBuscarEncargado.getSelectedRow(), 0).toString());
-            EntradaGUI.jtxtnombreEncargadoEntrada.setText(jtblBuscarEncargado.getValueAt(jtblBuscarEncargado.getSelectedRow(), 1).toString());
+            EntradaGUI.jtxtcodigoEncargado.setText(jtblBuscarEncargado.getValueAt(jtblBuscarEncargado.getSelectedRow(), 0).toString());
+            EntradaGUI.jtxtnombreEncargado.setText(jtblBuscarEncargado.getValueAt(jtblBuscarEncargado.getSelectedRow(), 1).toString());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "FERRETERIA MICKY", JOptionPane.WARNING_MESSAGE);
         }

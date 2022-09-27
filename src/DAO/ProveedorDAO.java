@@ -1,9 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package DAO;
 
+package DAO;
 import Conexion.ConMySql;
 import DTO.ProveedorTO;
 import Interfaz.VentasInterface;
@@ -14,10 +10,6 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 
-/**
- *
- * @author JEFREY
- */
 public class ProveedorDAO implements VentasInterface<ProveedorTO> {
 
     ResultSet rs;
@@ -28,7 +20,7 @@ public class ProveedorDAO implements VentasInterface<ProveedorTO> {
         try {
             Connection cn = ConMySql.getInstance().getConection();
             String nombre = "%" + objObject + "%";
-            String sql = "SELECT *FROM vproveedor where nombprove like ?";
+            String sql = "SELECT *FROM vproveedor where CONCAT(rucprove,nombprove) like ?";
             PreparedStatement ps = cn.prepareStatement(sql);
             ps.setString(1, nombre);
             rs = ps.executeQuery();
@@ -85,5 +77,20 @@ public class ProveedorDAO implements VentasInterface<ProveedorTO> {
             JOptionPane.showConfirmDialog(rootPane, e);
         }
     }
-
+    public boolean verificar(String dni) {
+        try {
+            Connection cn = ConMySql.getInstance().getConection();
+            String sql = "SELECT * FROM  vproveedor where rucprove=?";
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ps.setString(1, dni);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+            rs.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return false;
+    }
 }

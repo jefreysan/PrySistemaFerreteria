@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package DAO;
 
 import Conexion.ConMySql;
@@ -14,10 +11,6 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 
-/**
- *
- * @author JEFREY
- */
 public class CategoriaDAO implements VentasInterface<CategoriaTO> {
 
     ResultSet rs;

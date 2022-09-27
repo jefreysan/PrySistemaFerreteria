@@ -26,7 +26,17 @@ public class EntradaDAO implements VentasInterface<EntradaTO> {
 
     @Override
     public ResultSet buscar(Object objObject) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connection cn = ConMySql.getInstance().getConection();
+            String xidentrada = objObject.toString();
+            String sql = "SELECT * FROM  ventrada WHERE identrada = ?";
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ps.setString(1, xidentrada);
+            rs = ps.executeQuery();
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+        }
+        return rs;
     }
 
     @Override
@@ -49,7 +59,17 @@ public class EntradaDAO implements VentasInterface<EntradaTO> {
 
     @Override
     public void update(EntradaTO objObjeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connection cn = ConMySql.getInstance().getConection();
+            String sql = "CALL sp_update_entrada(?,?,?,?,?,?);";
+            CallableStatement cs = cn.prepareCall(sql);
+            cs.setString(1, objObjeto.getFechaent());
+            cs.setString(2, objObjeto.getNroent());
+            cs.setString(3, objObjeto.getTipopago());
+            cs.setInt(4, objObjeto.getIdencargado());
+            cs.execute();
+        } catch (Exception e) {
+        }
     }
 
     @Override

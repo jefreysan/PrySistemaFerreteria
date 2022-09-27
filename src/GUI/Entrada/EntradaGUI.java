@@ -4,25 +4,36 @@
  */
 package GUI.Entrada;
 
+import Conexion.ConMySql;
 import DAO.DetalleEntradaDAO;
 import DAO.EntradaDAO;
+import DAO.Pago_EntradaDAO;
 import DAO.PrePrecioDAO;
 import DAO.PresentacionDAO;
 import DTO.DetalleEntradaTO;
 import DTO.EntradaTO;
+import DTO.Pago_EntradaTO;
 import GUI.MenuGUI;
+import Library.Numero_Letras;
 import Library.ValidarClass;
 import com.sun.glass.events.KeyEvent;
 import java.awt.Color;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
-import javax.swing.JRootPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -34,22 +45,24 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
      * Creates new form BuscarProductoEntrada
      */
     EntradaDAO objEntradaDAO = new EntradaDAO();
-    EntradaTO objEntradaTO = new EntradaTO();
     PresentacionDAO objPresentacionDAO = new PresentacionDAO();
     PrePrecioDAO objPrePrecioDAO = new PrePrecioDAO();
     DetalleEntradaDAO objDetalleEntradaDAO = new DetalleEntradaDAO();
-    JRootPane rootPane;
+    Pago_EntradaDAO objPago_EntradaDAO = new Pago_EntradaDAO();
+    Numero_Letras objNumeroLetras = new Numero_Letras();
+
+    EntradaTO objEntradaTO = new EntradaTO();
+    Pago_EntradaTO objPago_EntradaTO = new Pago_EntradaTO();
     ButtonGroup objButtonGroup = new ButtonGroup();
-    ResultSet rspresentacion;
+    ResultSet rspresentacion, rsEntrada, rspagoEntrada;
     boolean sw;
     int xidentrada, xidtipopago;
     double precio;
-    int cantidad;
-    String op;
+    double cantidad, valor;
+    String op, data;
     double importe;
     static double subTotal;
     static double total;
-    Calendar objfecha_actual = new GregorianCalendar();
     ValidarClass objValidarClass = new ValidarClass();
     DefaultTableModel objDtm;
     SimpleDateFormat objSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -58,10 +71,9 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
     public EntradaGUI() {
         initComponents();
         setVisible(true);
-        setSize(1068, 578);
+        setSize(1068, 588);
         this.getContentPane().setBackground(Color.white);
         objDtm = (DefaultTableModel) jtblEntrada.getModel();
-        jDateFechaRegistro.setCalendar(objfecha_actual);
         objButtonGroup.add(jradContado);
         objButtonGroup.add(jradCredito);
 
@@ -80,7 +92,6 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e);
         }
-
     }
 
     /**
@@ -96,9 +107,9 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
         jLabelTitulo = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jlabelcodigoProducto = new javax.swing.JLabel();
-        jtxtnombreEncargadoEntrada = new javax.swing.JTextField();
+        jtxtnombreEncargado = new javax.swing.JTextField();
         jlabelDescProducto = new javax.swing.JLabel();
-        jtxtcodigoEncargadoEntrada = new javax.swing.JTextField();
+        jtxtcodigoEncargado = new javax.swing.JTextField();
         btnBuscarEncargado = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblEntrada = new javax.swing.JTable();
@@ -106,7 +117,7 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
         btnCancelar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
-        btnSalir = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jlabelTotal = new javax.swing.JLabel();
         jtxtTotal = new javax.swing.JTextField();
@@ -117,16 +128,11 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
         btnbuscarProveedor = new javax.swing.JButton();
         jlabelnombreProveedor1 = new javax.swing.JLabel();
         jtxtcodigoProveedor = new javax.swing.JTextField();
-        jPanel9 = new javax.swing.JPanel();
-        jlabeNroDocumento = new javax.swing.JLabel();
-        jtxtnroEntrada = new javax.swing.JTextField();
-        jDateFechaRegistro = new com.toedter.calendar.JDateChooser();
-        jlabelFechaRegistro = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jlabelcodigoProducto1 = new javax.swing.JLabel();
         jtxtDescrProducto = new javax.swing.JTextField();
         jlabelDescProducto1 = new javax.swing.JLabel();
-        jtxtcodigoProductoEntrada = new javax.swing.JTextField();
+        jtxtcodigoProducto = new javax.swing.JTextField();
         btnBuscarProducto = new javax.swing.JButton();
         jlabelprecioCompra = new javax.swing.JLabel();
         jtxtprecioVenta = new javax.swing.JTextField();
@@ -141,6 +147,12 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
         jradContado = new javax.swing.JRadioButton();
         jradCredito = new javax.swing.JRadioButton();
         btnEliminarProducto = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        jtxtnroEntrada = new javax.swing.JTextField();
+        jlabeNroDocumento = new javax.swing.JLabel();
+        jlabelFechaRegistro = new javax.swing.JLabel();
+        jDateFechaRegistro = new com.toedter.calendar.JDateChooser();
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -174,33 +186,33 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
         jlabelcodigoProducto.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
         jlabelcodigoProducto.setText("CODIGO:");
 
-        jtxtnombreEncargadoEntrada.setEditable(false);
-        jtxtnombreEncargadoEntrada.setBackground(new java.awt.Color(204, 204, 204));
-        jtxtnombreEncargadoEntrada.addKeyListener(new java.awt.event.KeyAdapter() {
+        jtxtnombreEncargado.setEditable(false);
+        jtxtnombreEncargado.setBackground(new java.awt.Color(204, 204, 204));
+        jtxtnombreEncargado.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtxtnombreEncargadoEntradaKeyReleased(evt);
+                jtxtnombreEncargadoKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtnombreEncargadoEntradaKeyTyped(evt);
+                jtxtnombreEncargadoKeyTyped(evt);
             }
         });
 
         jlabelDescProducto.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
         jlabelDescProducto.setText("DESCRIPCION ENCARGADO:");
 
-        jtxtcodigoEncargadoEntrada.setEditable(false);
-        jtxtcodigoEncargadoEntrada.setBackground(new java.awt.Color(204, 204, 204));
-        jtxtcodigoEncargadoEntrada.addActionListener(new java.awt.event.ActionListener() {
+        jtxtcodigoEncargado.setEditable(false);
+        jtxtcodigoEncargado.setBackground(new java.awt.Color(204, 204, 204));
+        jtxtcodigoEncargado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtcodigoEncargadoEntradaActionPerformed(evt);
+                jtxtcodigoEncargadoActionPerformed(evt);
             }
         });
-        jtxtcodigoEncargadoEntrada.addKeyListener(new java.awt.event.KeyAdapter() {
+        jtxtcodigoEncargado.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtxtcodigoEncargadoEntradaKeyReleased(evt);
+                jtxtcodigoEncargadoKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtcodigoEncargadoEntradaKeyTyped(evt);
+                jtxtcodigoEncargadoKeyTyped(evt);
             }
         });
 
@@ -219,15 +231,15 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtxtnombreEncargadoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxtnombreEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlabelDescProducto)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtxtcodigoEncargadoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtxtcodigoEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlabelcodigoProducto))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBuscarEncargado)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,12 +248,12 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
                 .addComponent(jlabelcodigoProducto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtxtcodigoEncargadoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxtcodigoEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jlabelDescProducto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtxtnombreEncargadoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtxtnombreEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5))
         );
 
@@ -250,7 +262,7 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "COD", "DESCRIPCION", "PCOMPRA", "CANTIDAD", "SUB TOTAL"
+                "COD", "DESCRIPCION", "P.U", "CANTIDAD", "SUB TOTAL"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -261,6 +273,7 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jtblEntrada.setSelectionBackground(new java.awt.Color(51, 51, 255));
         jScrollPane1.setViewportView(jtblEntrada);
         if (jtblEntrada.getColumnModel().getColumnCount() > 0) {
             jtblEntrada.getColumnModel().getColumn(0).setMinWidth(70);
@@ -303,11 +316,11 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
             }
         });
 
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/salida.png"))); // NOI18N
-        btnSalir.setText("SALIR");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/editar.png"))); // NOI18N
+        btnEditar.setText("EDITAR");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
 
@@ -317,9 +330,9 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnNuevo)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -329,15 +342,15 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnNuevo))
-                .addGap(18, 18, 18)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalir)
-                    .addComponent(btnCancelar))
-                .addContainerGap())
+                    .addComponent(btnCancelar)
+                    .addComponent(btnEditar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -372,12 +385,14 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlabelTotal)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jlabelTotal)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jlabelTotal1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jtxtTotal)))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -388,7 +403,7 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlabelTotal1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 16, Short.MAX_VALUE))
         );
 
         jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -468,65 +483,6 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
                 .addGap(5, 5, 5))
         );
 
-        jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel9.setOpaque(false);
-
-        jlabeNroDocumento.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jlabeNroDocumento.setText("NºDOCUMENTO:");
-
-        jtxtnroEntrada.setEditable(false);
-        jtxtnroEntrada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtnroEntradaActionPerformed(evt);
-            }
-        });
-        jtxtnroEntrada.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtxtnroEntradaKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtnroEntradaKeyTyped(evt);
-            }
-        });
-
-        jDateFechaRegistro.setDateFormatString("dd/MM/yyyy HH:mm:ss");
-        jDateFechaRegistro.setOpaque(false);
-
-        jlabelFechaRegistro.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jlabelFechaRegistro.setText("FECHA REGISTRO:");
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlabeNroDocumento)
-                    .addComponent(jtxtnroEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jlabelFechaRegistro)
-                        .addGap(87, 116, Short.MAX_VALUE))
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jDateFechaRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlabeNroDocumento)
-                    .addComponent(jlabelFechaRegistro))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDateFechaRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(jtxtnroEntrada, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
-                .addGap(5, 5, 5))
-        );
-
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel10.setOpaque(false);
 
@@ -547,19 +503,19 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
         jlabelDescProducto1.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
         jlabelDescProducto1.setText("DESCRIPCION PRODUCTO:");
 
-        jtxtcodigoProductoEntrada.setEditable(false);
-        jtxtcodigoProductoEntrada.setBackground(new java.awt.Color(204, 204, 204));
-        jtxtcodigoProductoEntrada.addActionListener(new java.awt.event.ActionListener() {
+        jtxtcodigoProducto.setEditable(false);
+        jtxtcodigoProducto.setBackground(new java.awt.Color(204, 204, 204));
+        jtxtcodigoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtcodigoProductoEntradaActionPerformed(evt);
+                jtxtcodigoProductoActionPerformed(evt);
             }
         });
-        jtxtcodigoProductoEntrada.addKeyListener(new java.awt.event.KeyAdapter() {
+        jtxtcodigoProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtxtcodigoProductoEntradaKeyReleased(evt);
+                jtxtcodigoProductoKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtcodigoProductoEntradaKeyTyped(evt);
+                jtxtcodigoProductoKeyTyped(evt);
             }
         });
 
@@ -649,7 +605,7 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
                             .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jlabelcodigoProducto1)
                                 .addGroup(jPanel10Layout.createSequentialGroup()
-                                    .addComponent(jtxtcodigoProductoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtxtcodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(btnBuscarProducto)))
                             .addGap(10, 10, 10)
@@ -682,7 +638,7 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
                     .addComponent(jlabelDescProducto3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtxtcodigoProductoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxtcodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcomboxPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcomboxUnidadMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -722,7 +678,7 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
                 .addComponent(jradContado, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jradCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -744,30 +700,98 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
             }
         });
 
+        btnSalir.setText("SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+
+        jPanel12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel12.setOpaque(false);
+
+        jtxtnroEntrada.setEditable(false);
+        jtxtnroEntrada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtnroEntradaActionPerformed(evt);
+            }
+        });
+        jtxtnroEntrada.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtxtnroEntradaKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtnroEntradaKeyTyped(evt);
+            }
+        });
+
+        jlabeNroDocumento.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jlabeNroDocumento.setText("NºDOCUMENTO:");
+
+        jlabelFechaRegistro.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jlabelFechaRegistro.setText("FECHA REGISTRO:");
+
+        jDateFechaRegistro.setDateFormatString("dd/MM/yyyy HH:mm:ss");
+        jDateFechaRegistro.setOpaque(false);
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlabeNroDocumento)
+                    .addComponent(jtxtnroEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlabelFechaRegistro)
+                    .addComponent(jDateFechaRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jlabelFechaRegistro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDateFechaRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jlabeNroDocumento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtxtnroEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEliminarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnEliminarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSalir))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(5, 5, 5)
+                        .addComponent(jScrollPane1)))
                 .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
@@ -775,22 +799,24 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
                         .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(5, 5, 5)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnEliminarProducto)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnEliminarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
@@ -799,13 +825,13 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtxtnombreEncargadoEntradaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtnombreEncargadoEntradaKeyTyped
+    private void jtxtnombreEncargadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtnombreEncargadoKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtnombreEncargadoEntradaKeyTyped
+    }//GEN-LAST:event_jtxtnombreEncargadoKeyTyped
 
-    private void jtxtnombreEncargadoEntradaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtnombreEncargadoEntradaKeyReleased
+    private void jtxtnombreEncargadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtnombreEncargadoKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtnombreEncargadoEntradaKeyReleased
+    }//GEN-LAST:event_jtxtnombreEncargadoKeyReleased
 
     private void jtxtcodigoProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtcodigoProveedorKeyTyped
         // TODO add your handling code here:
@@ -823,13 +849,13 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtnombreProveedorKeyReleased
 
-    private void jtxtcodigoEncargadoEntradaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtcodigoEncargadoEntradaKeyReleased
+    private void jtxtcodigoEncargadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtcodigoEncargadoKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtcodigoEncargadoEntradaKeyReleased
+    }//GEN-LAST:event_jtxtcodigoEncargadoKeyReleased
 
-    private void jtxtcodigoEncargadoEntradaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtcodigoEncargadoEntradaKeyTyped
+    private void jtxtcodigoEncargadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtcodigoEncargadoKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtcodigoEncargadoEntradaKeyTyped
+    }//GEN-LAST:event_jtxtcodigoEncargadoKeyTyped
 
     private void jtxtprecioVentaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtprecioVentaKeyReleased
         if (evt.getExtendedKeyCode() == KeyEvent.VK_ENTER) {
@@ -860,7 +886,7 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-            if (jtxtcodigoEncargadoEntrada.getText().trim().length() == 0
+            if (jtxtcodigoEncargado.getText().trim().length() == 0
                     || jtxtcodigoProveedor.getText().trim().length() == 0
                     || this.jtblEntrada.getRowCount() == 0) {
                 JOptionPane.showMessageDialog(null, "COMPLETAR CAJA DE TEXTO", "FERRETERIA MICKY", JOptionPane.WARNING_MESSAGE);
@@ -871,11 +897,12 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
                 objEntradaTO.setNroent(jtxtnroEntrada.getText().toUpperCase().trim());
                 jcheckSelecionar();
                 objEntradaTO.setTipopago(op);
-                objEntradaTO.setIdencargado(Integer.parseInt(jtxtcodigoEncargadoEntrada.getText()));
+                objEntradaTO.setIdencargado(Integer.parseInt(jtxtcodigoEncargado.getText()));
                 objEntradaTO.setIdproveedor(Integer.parseInt(jtxtcodigoProveedor.getText()));
                 objEntradaTO.setTotalent(total);
                 objEntradaDAO.insert(objEntradaTO);
                 xidentrada = objEntradaDAO.obternerIDIngreso();
+                data = jtxtTotal.getText();
                 /*DETALLE-ENTRADA*/
                 int filas = objDtm.getRowCount();
                 for (int i = 0; i < filas; i++) {
@@ -883,40 +910,43 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
                     objDetalleEntradaTO.setIdentrada(xidentrada);
                     objDetalleEntradaTO.setIdproducto(Integer.parseInt(jtblEntrada.getValueAt(i, 0).toString()));
                     objDetalleEntradaTO.setPcompraent(Double.parseDouble(jtblEntrada.getValueAt(i, 2).toString()));
-                    objDetalleEntradaTO.setCantidadent(Integer.parseInt(jtblEntrada.getValueAt(i, 3).toString()));
+                    objDetalleEntradaTO.setCantidadent(Double.parseDouble(jtblEntrada.getValueAt(i, 3).toString()));
                     objDetalleEntradaTO.setImporteent(Double.parseDouble(jtblEntrada.getValueAt(i, 4).toString()));
                     objDetalleEntradaDAO.insert(objDetalleEntradaTO);
                 }
-
-                habilitarControles(false);
-                mensaje = "ENTRADA GUARDADO";
-                JOptionPane.showMessageDialog(null, mensaje, "FERRETERIA MICKY", JOptionPane.INFORMATION_MESSAGE);
-                limpiarControles();
-                jDateFechaRegistro.setCalendar(objfecha_actual);
-
+                /*PAGOENTRADA*/
+                objPago_EntradaTO.setIdentrada(xidentrada);
+                objPago_EntradaTO.setMontoTotal(total);
+                objPago_EntradaDAO.insert(objPago_EntradaTO);
             }
+            mensaje = "ENTRADA GUARDADO";
+            habilitarControles(false);
+            JOptionPane.showMessageDialog(null, mensaje, "FERRETERIA MICKY", JOptionPane.INFORMATION_MESSAGE);
+            limpiarControles();
+            grabarEntrada();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "FERRETERIA MICKY", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnbuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarProveedorActionPerformed
-        BPV_EntradaGUI objBPV_EntradaGUI = new BPV_EntradaGUI();
-        MenuGUI.desktopPane.add(objBPV_EntradaGUI);
-        objBPV_EntradaGUI.setVisible(true);
-        objBPV_EntradaGUI.setLocation(500, 150);
-        objBPV_EntradaGUI.setSize(560, 326);
-        objBPV_EntradaGUI.toFront();
+        BPV_EntradaGUI pv = new BPV_EntradaGUI();
+        MenuGUI.desktopPane.add(pv);
+        pv.setVisible(true);
+        pv.setLocation(500, 150);
+        pv.setSize(530, 310);
+        pv.toFront();
     }//GEN-LAST:event_btnbuscarProveedorActionPerformed
 
     private void btnBuscarEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEncargadoActionPerformed
-        BE_EntradaGUI objBE_EntradaGUI = new BE_EntradaGUI();
-        MenuGUI.desktopPane.add(objBE_EntradaGUI);
-        objBE_EntradaGUI.setVisible(true);
-        objBE_EntradaGUI.setLocation(500, 150);
-        objBE_EntradaGUI.setSize(560, 326);
-        objBE_EntradaGUI.toFront();
+        BE_EntradaGUI e = new BE_EntradaGUI();
+        MenuGUI.desktopPane.add(e);
+        e.setVisible(true);
+        e.setLocation(500, 150);
+        e.setSize(530, 310);
+        e.toFront();
     }//GEN-LAST:event_btnBuscarEncargadoActionPerformed
+
 
     public void agregarProducto() {
         if (importe == 0) {
@@ -924,9 +954,10 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
         } else {
             sw = false;
             int cont = 0;
-            int idproducto = Integer.parseInt(jtxtcodigoProductoEntrada.getText());
-            Object registro[] = {jtxtcodigoProductoEntrada.getText(), jtxtDescrProducto.getText(), precio,
-                cantidad, importe};
+            int idproducto = Integer.parseInt(jtxtcodigoProducto.getText());
+            obtener_valorPresent();
+            Object registro[] = {jtxtcodigoProducto.getText(), jtxtDescrProducto.getText(), precio,
+                cantidad * valor, importe};
             if (objDtm.getRowCount() == 0) {
                 objDtm.addRow(registro);
                 limpiarProducto();
@@ -946,29 +977,17 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
         }
         calcularTotales();
     }
-    private void jtxtcodigoEncargadoEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtcodigoEncargadoEntradaActionPerformed
+    private void jtxtcodigoEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtcodigoEncargadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtcodigoEncargadoEntradaActionPerformed
+    }//GEN-LAST:event_jtxtcodigoEncargadoActionPerformed
 
     private void jtxtprecioVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtprecioVentaActionPerformed
 
     }//GEN-LAST:event_jtxtprecioVentaActionPerformed
 
-    private void jtxtnroEntradaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtnroEntradaKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtnroEntradaKeyReleased
-
-    private void jtxtnroEntradaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtnroEntradaKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtnroEntradaKeyTyped
-
     private void jtxtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtTotalActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jtxtTotalActionPerformed
-
-    private void jtxtnroEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtnroEntradaActionPerformed
-
-    }//GEN-LAST:event_jtxtnroEntradaActionPerformed
 
     private void jtxtcantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtcantidadActionPerformed
         precio = Double.parseDouble(jtxtprecioVenta.getText().trim());
@@ -989,15 +1008,15 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         habilitarControles(false);
         limpiarControles();
-        objButtonGroup.clearSelection();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         habilitarControles(true);
         limpiarControles();
-        sw = true;
         generarSerie();
+        jDateFechaRegistro.setCalendar(new GregorianCalendar());
         jradContado.setSelected(true);
+        sw = true;
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void jtxtDescrProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtDescrProductoKeyReleased
@@ -1008,31 +1027,31 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtDescrProductoKeyTyped
 
-    private void jtxtcodigoProductoEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtcodigoProductoEntradaActionPerformed
+    private void jtxtcodigoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtcodigoProductoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtcodigoProductoEntradaActionPerformed
+    }//GEN-LAST:event_jtxtcodigoProductoActionPerformed
 
-    private void jtxtcodigoProductoEntradaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtcodigoProductoEntradaKeyReleased
+    private void jtxtcodigoProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtcodigoProductoKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtcodigoProductoEntradaKeyReleased
+    }//GEN-LAST:event_jtxtcodigoProductoKeyReleased
 
-    private void jtxtcodigoProductoEntradaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtcodigoProductoEntradaKeyTyped
+    private void jtxtcodigoProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtcodigoProductoKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtcodigoProductoEntradaKeyTyped
+    }//GEN-LAST:event_jtxtcodigoProductoKeyTyped
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
-        BP_EntradaGUI objBP_EntradaGUI = new BP_EntradaGUI();
-        MenuGUI.desktopPane.add(objBP_EntradaGUI);
-        objBP_EntradaGUI.setVisible(true);
-        objBP_EntradaGUI.setLocation(500, 150);
-        objBP_EntradaGUI.setSize(600, 325);
-        objBP_EntradaGUI.toFront();
+        BP_EntradaGUI p = new BP_EntradaGUI();
+        MenuGUI.desktopPane.add(p);
+        p.setVisible(true);
+        p.setLocation(500, 150);
+        p.setSize(580, 315);
+        p.toFront();
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
     private void jcomboxPresentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcomboxPresentacionActionPerformed
         try {
             String dataPresent = String.valueOf(jcomboxPresentacion.getSelectedItem());
-            String idproducto = jtxtcodigoProductoEntrada.getText();
+            String idproducto = jtxtcodigoProducto.getText();
             double xprecio = objEntradaDAO.obtenerPrecioPresent(dataPresent, idproducto);
             jtxtprecioVenta.setText(String.format("%.2f", xprecio));
         } catch (Exception e) {
@@ -1052,15 +1071,32 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcomboxUnidadMedidaKeyReleased
 
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        habilitarControles(true);
+        sw = false;
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void jtxtnroEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtnroEntradaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtnroEntradaActionPerformed
+
+    private void jtxtnroEntradaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtnroEntradaKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtnroEntradaKeyReleased
+
+    private void jtxtnroEntradaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtnroEntradaKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtnroEntradaKeyTyped
+
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarEncargado;
     private javax.swing.JButton btnBuscarProducto;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminarProducto;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
@@ -1071,11 +1107,11 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JComboBox<String> jcomboxPresentacion;
     public static javax.swing.JComboBox<String> jcomboxUnidadMedida;
@@ -1100,10 +1136,10 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
     public static javax.swing.JTextField jtxtDescrProducto;
     private javax.swing.JTextField jtxtTotal;
     private javax.swing.JTextField jtxtcantidad;
-    public static javax.swing.JTextField jtxtcodigoEncargadoEntrada;
-    public static javax.swing.JTextField jtxtcodigoProductoEntrada;
+    public static javax.swing.JTextField jtxtcodigoEncargado;
+    public static javax.swing.JTextField jtxtcodigoProducto;
     public static javax.swing.JTextField jtxtcodigoProveedor;
-    public static javax.swing.JTextField jtxtnombreEncargadoEntrada;
+    public static javax.swing.JTextField jtxtnombreEncargado;
     public static javax.swing.JTextField jtxtnombreProveedor;
     private javax.swing.JTextField jtxtnroEntrada;
     public static javax.swing.JTextField jtxtprecioVenta;
@@ -1114,7 +1150,6 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
         for (JTextField obJTextField : arrJTexFields) {
             obJTextField.setEditable(b);
         }
-        jtxtnroEntrada.grabFocus();
         btnGuardar.setEnabled(b);
         btnCancelar.setEnabled(b);
         btnNuevo.setEnabled(!b);
@@ -1129,11 +1164,15 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
 
     private void limpiarControles() {
         limpiarJTable();
-        JTextField[] objTextFields = {jtxtnroEntrada, jtxtcodigoProveedor, jtxtnombreProveedor, jtxtcodigoEncargadoEntrada,
-            jtxtnombreEncargadoEntrada, jtxtcodigoProductoEntrada, jtxtDescrProducto, jtxtprecioVenta, jtxtcantidad, jtxtTotal};
+        JTextField[] objTextFields = { jtxtnroEntrada,
+            jtxtcodigoProveedor, jtxtnombreProveedor, jtxtcodigoEncargado,
+            jtxtnombreEncargado, jtxtcodigoProducto, jtxtDescrProducto,
+            jtxtprecioVenta, jtxtcantidad, jtxtTotal};
         for (JTextField objTextField : objTextFields) {
             objTextField.setText(null);
         }
+        objButtonGroup.clearSelection();
+        jDateFechaRegistro.setCalendar(null);
     }
 
     private void limpiarJTable() {
@@ -1155,7 +1194,7 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
     }
 
     private void limpiarProducto() {
-        JTextField[] objTextFields = {jtxtcodigoProductoEntrada, jtxtDescrProducto, jtxtprecioVenta, jtxtcantidad};
+        JTextField[] objTextFields = {jtxtcodigoProducto, jtxtDescrProducto, jtxtprecioVenta, jtxtcantidad};
         for (JTextField objTextField : objTextFields) {
             objTextField.setText(null);
         }
@@ -1185,5 +1224,34 @@ public class EntradaGUI extends javax.swing.JInternalFrame {
             op = "CREDITO";
         }
         return op;
+    }
+
+    private void obtener_valorPresent() {
+        try {
+            String xdescrUDM, xdescrPresent, xvalor;
+            xdescrUDM = jcomboxUnidadMedida.getSelectedItem().toString();
+            xdescrPresent = jcomboxPresentacion.getSelectedItem().toString();
+            xvalor = objPresentacionDAO.obtener_Valor(xdescrUDM, xdescrPresent);
+            valor = Double.parseDouble(xvalor);
+        } catch (Exception e) {
+        }
+    }
+
+    public void grabarEntrada() {
+        try {
+            Connection cn = ConMySql.getInstance().getConection();
+            String direccion = System.getProperty("user.dir") + "\\src\\Reportes\\REP_Entrada_Inv.jrxml";
+            JasperReport reporte = JasperCompileManager.compileReport(direccion);
+            Map parametros = new HashMap();
+            parametros.put("parameter_entrada", objEntradaDAO.obternerIDIngreso());
+            parametros.put("parameter_total", objNumeroLetras.Convertir(data, true));
+            JasperPrint mostrarReporte = JasperFillManager.fillReport(reporte, parametros, cn);
+            JasperViewer view = new JasperViewer(mostrarReporte, false);
+            view.setTitle("REPORTE DE ENTRADAS");
+            view.setExtendedState(MAXIMIZED_BOTH);
+            view.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e, "FERRETERIA MICKY", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

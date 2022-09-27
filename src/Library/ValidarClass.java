@@ -14,10 +14,6 @@ import java.util.regex.Pattern;
  * @author JEFREY
  */
 public class ValidarClass {
-
-    StringBuffer parteEntera = new StringBuffer();
-    StringBuffer parteDecimal = new StringBuffer();
-
     //VALIDAR CAMPO DE TEXTO
     public void textKeyPress(KeyEvent evt) {
         char crter = evt.getKeyChar();
@@ -27,7 +23,6 @@ public class ValidarClass {
             evt.consume();
         }
     }
-
     //VALIDAR CAMPO DE NUMERO
     public void numberKeyPress(KeyEvent evt) {
         char crter = evt.getKeyChar();
@@ -36,13 +31,12 @@ public class ValidarClass {
         }
     }
     //VALIDAR CAMPO DE GMAIL
-
     public boolean isEmail(String correo) {
         Pattern pat = Pattern.compile("^[\\w\\-\\_\\+]+(\\.[\\w\\-\\_]+)*@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$");
         Matcher mat = pat.matcher(correo);
         return mat.find();
     }
-
+    
     public void validarRuc(KeyEvent evt, String ruc) {
         if (ruc.length() >= 11) {
             evt.consume();

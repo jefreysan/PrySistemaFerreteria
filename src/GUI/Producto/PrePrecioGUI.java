@@ -11,7 +11,6 @@ import DTO.PrePrecioTO;
 import DTO.PresentacionTO;
 import DTO.UnidadMedidaTO;
 import GUI.MenuGUI;
-import com.sun.glass.events.KeyEvent;
 import java.awt.Color;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -45,7 +44,7 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
     public PrePrecioGUI() {
         initComponents();
         setVisible(true);
-        setSize(1060, 481);
+        setSize(1058, 452);
         this.getContentPane().setBackground(Color.white);
         objDtm = (DefaultTableModel) jtblRegistroPreprecio.getModel();
     }
@@ -85,9 +84,7 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
         jLabelCodigo1 = new javax.swing.JLabel();
         jtxtCodProducto = new javax.swing.JTextField();
         jtxtValor = new javax.swing.JTextField();
-        jtxtPrecioEstimado = new javax.swing.JTextField();
         jLabelValor1 = new javax.swing.JLabel();
-        jLabelValor2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblRegistroPreprecio = new javax.swing.JTable();
         jPanelBuscar = new javax.swing.JPanel();
@@ -255,7 +252,7 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
         );
 
         jLabelValor.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jLabelValor.setText("P_UNITARIO:");
+        jLabelValor.setText("P.U:");
 
         jtxtPrecio.setEditable(false);
         jtxtPrecio.addActionListener(new java.awt.event.ActionListener() {
@@ -354,26 +351,8 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
             }
         });
 
-        jtxtPrecioEstimado.setEditable(false);
-        jtxtPrecioEstimado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtPrecioEstimadoActionPerformed(evt);
-            }
-        });
-        jtxtPrecioEstimado.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtxtPrecioEstimadoKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtPrecioEstimadoKeyTyped(evt);
-            }
-        });
-
         jLabelValor1.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
         jLabelValor1.setText("VALOR:");
-
-        jLabelValor2.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jLabelValor2.setText("ESTIMADO:");
 
         javax.swing.GroupLayout jPanelDatosPresentacionLayout = new javax.swing.GroupLayout(jPanelDatosPresentacion);
         jPanelDatosPresentacion.setLayout(jPanelDatosPresentacionLayout);
@@ -381,46 +360,44 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
             jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanelDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
-                        .addComponent(jLabelCodigo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxtCodProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtnBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jtxtDescripcionProducto)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
-                            .addComponent(jLabelCodigo1)
-                            .addGap(10, 10, 10)
-                            .addComponent(jtxtCodPreprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabelUnidadMedida)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jcomboxUnidadMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabelDescripcionProducto)
-                        .addComponent(jPanelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelDatosPresentacionLayout.createSequentialGroup()
-                                .addComponent(jLabelValor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelValor2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtxtPrecioEstimado, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
+                                    .addComponent(jLabelCodigo)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jtxtCodProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jbtnBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jtxtDescripcionProducto)
+                                .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
+                                    .addComponent(jLabelCodigo1)
+                                    .addGap(10, 10, 10)
+                                    .addComponent(jtxtCodPreprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabelUnidadMedida)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jcomboxUnidadMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabelDescripcionProducto))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDatosPresentacionLayout.createSequentialGroup()
                                 .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
-                                        .addComponent(jLabelUnidadMedida1)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jcomboxPresentacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(jcomboxPresentacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
+                                        .addComponent(jLabelUnidadMedida1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(49, 49, 49)))
+                                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelValor1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelValor1)
-                                    .addComponent(jtxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jtxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelValor))))))
+                .addContainerGap())
         );
         jPanelDatosPresentacionLayout.setVerticalGroup(
             jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -431,31 +408,29 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
                     .addComponent(jLabelCodigo)
                     .addComponent(jbtnBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtxtCodProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
+                .addGap(10, 10, 10)
                 .addComponent(jLabelDescripcionProducto)
-                .addGap(5, 5, 5)
+                .addGap(10, 10, 10)
                 .addComponent(jtxtDescripcionProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
                 .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcomboxUnidadMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelUnidadMedida)
                     .addComponent(jtxtCodPreprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelCodigo1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelUnidadMedida1)
-                    .addComponent(jLabelValor1))
-                .addGap(5, 5, 5)
-                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcomboxPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtxtPrecioEstimado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelValor2)
-                    .addComponent(jLabelValor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelValor1, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
+                        .addComponent(jLabelUnidadMedida1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabelValor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcomboxPresentacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10)
                 .addComponent(jPanelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -538,10 +513,10 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelDatosPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE))
                 .addContainerGap())
             .addComponent(jPanelRegistro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -549,7 +524,7 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -682,13 +657,7 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtxtPrecioActionPerformed
 
     private void jtxtPrecioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtPrecioKeyReleased
-        if (evt.getExtendedKeyCode() == KeyEvent.VK_ENTER) {
-            double xvalor, xprecio, xresultado;
-            xvalor = Double.parseDouble(jtxtValor.getText());
-            xprecio = Double.parseDouble(jtxtPrecio.getText());
-            xresultado = xvalor * xprecio;
-            jtxtPrecioEstimado.setText(String.format("%.2f",xresultado));
-        }
+
     }//GEN-LAST:event_jtxtPrecioKeyReleased
 
     private void jtxtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtPrecioKeyTyped
@@ -716,12 +685,12 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtxtDescripcionProductoKeyTyped
 
     private void jbtnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBuscarProductoActionPerformed
-        BP_PreprecioGUI objBP_PreprecioGUI = new BP_PreprecioGUI();
-        MenuGUI.desktopPane.add(objBP_PreprecioGUI);
-        objBP_PreprecioGUI.setVisible(true);
-        objBP_PreprecioGUI.setLocation(500, 150);
-        objBP_PreprecioGUI.setSize(600, 320);
-        objBP_PreprecioGUI.toFront();
+        BP_PreprecioGUI pr = new BP_PreprecioGUI();
+        MenuGUI.desktopPane.add(pr);
+        pr.setVisible(true);
+        pr.setLocation(500, 150);
+        pr.setSize(600, 320);
+        pr.toFront();
     }//GEN-LAST:event_jbtnBuscarProductoActionPerformed
 
     private void jcomboxPresentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcomboxPresentacionActionPerformed
@@ -752,18 +721,6 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtValorKeyTyped
 
-    private void jtxtPrecioEstimadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtPrecioEstimadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtPrecioEstimadoActionPerformed
-
-    private void jtxtPrecioEstimadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtPrecioEstimadoKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtPrecioEstimadoKeyReleased
-
-    private void jtxtPrecioEstimadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtPrecioEstimadoKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtPrecioEstimadoKeyTyped
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -782,7 +739,6 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabelUnidadMedida1;
     private javax.swing.JLabel jLabelValor;
     private javax.swing.JLabel jLabelValor1;
-    private javax.swing.JLabel jLabelValor2;
     private javax.swing.JPanel jPanelBotones;
     private javax.swing.JPanel jPanelBuscar;
     private javax.swing.JPanel jPanelDatos;
@@ -798,7 +754,6 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
     public static javax.swing.JTextField jtxtCodProducto;
     public static javax.swing.JTextField jtxtDescripcionProducto;
     private javax.swing.JTextField jtxtPrecio;
-    private javax.swing.JTextField jtxtPrecioEstimado;
     private javax.swing.JTextField jtxtValor;
     // End of variables declaration//GEN-END:variables
 
@@ -819,7 +774,7 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
 
     private void limpiarControles() {
         limpiarJTable();
-        JTextField[] objTextFields = {jtxtCodPreprecio, jtxtCodProducto, jtxtBuscarPreprecio, jtxtDescripcionProducto, jtxtPrecio};
+        JTextField[] objTextFields = {jtxtCodPreprecio, jtxtCodProducto, jtxtBuscarPreprecio, jtxtDescripcionProducto, jtxtPrecio,jtxtValor};
         for (JTextField objTextField : objTextFields) {
             objTextField.setText(null);
         }
@@ -854,6 +809,5 @@ public class PrePrecioGUI extends javax.swing.JInternalFrame {
             jtxtValor.setText(String.valueOf(xvalor));
         } catch (Exception e) {
         }
-
     }
 }

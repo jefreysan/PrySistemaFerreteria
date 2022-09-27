@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dc166534-2891-4cd1-95ed-a31f1afe3b14">
+	<property name="ireport.zoom" value="1.6105100000000012"/>
+	<property name="ireport.x" value="44"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[SELECT
+     vcategoria.`idcategoria` AS vcategoria_idcategoria,
+     vcategoria.`descrcateg` AS vcategoria_descrcateg,
+     vcategoria.`fechacateg` AS vcategoria_fechacateg
+FROM
+     `vcategoria` vcategoria]]>
+	</queryString>
+	<field name="vcategoria_idcategoria" class="java.lang.Integer"/>
+	<field name="vcategoria_descrcateg" class="java.lang.String"/>
+	<field name="vcategoria_fechacateg" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="110" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="555" height="110" uuid="242a5ab0-9596-41e6-91a4-4753b5eba1aa"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="249" y="0" width="100" height="70" uuid="cb188fff-5192-489b-b222-b322c653d5cc"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="359" y="70" width="56" height="20" uuid="5b1ce478-935f-4090-b273-ab73a0b81f9d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[ACCESORIOS ELECTRICOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="484" y="70" width="71" height="20" uuid="1b696873-ed91-47ec-8c6a-0111b831840d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[MATERIAL CONSTRUCCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="42" width="59" height="20" uuid="a361119e-e6a7-4faf-9061-9f875160d2c6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[DIRECCION:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="20" width="249" height="1" uuid="23bf2570-69a0-4c2e-ac28-e3588c59420f"/>
+			</line>
+			<staticText>
+				<reportElement x="439" y="89" width="56" height="21" uuid="57c5c3b8-ad5b-4ccf-a287-c7f7937f2220"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[FONTANERIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="82" width="125" height="20" uuid="c9694acc-b10e-4df8-9bf1-74cc62b654ba"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[ferreteriamicky@gmail.com]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="453" y="0" width="102" height="20" uuid="807c90a7-2c66-4314-bf07-72f2ad8ddcea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="249" y="70" width="306" height="1" uuid="392888f2-8605-4a78-bcb1-4644f0c6ab9e"/>
+			</line>
+			<line>
+				<reportElement x="349" y="20" width="206" height="1" uuid="e3d0dd58-f88f-4891-993c-38c0e9837927"/>
+			</line>
+			<staticText>
+				<reportElement x="70" y="22" width="80" height="20" uuid="bceb975d-91a4-44df-908d-162765a44ba5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[10404865647]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="22" width="59" height="20" uuid="99fbadd6-8688-4e7a-9ece-02cf78f015ba"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[RUC:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="90" width="73" height="20" uuid="cb672060-0032-4542-8f9f-18a5c8d08bb1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[HERRAMIENTAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="62" width="59" height="20" uuid="d5ded33a-402d-4861-b371-59afd553ea7a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[CELULAR:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="42" width="179" height="20" uuid="13fcdf00-a655-4440-8984-2d421dd94e98"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[Av.Panamerica MZ B LT.2A Las Americas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="249" height="20" forecolor="#000000" uuid="1ef502b0-ff45-404f-ae2a-c55af6289fa5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<text><![CDATA[FERRETERIA MICKY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="82" width="59" height="20" uuid="0eff8a05-cb08-4bf3-a493-7f6a02d83196"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[CORREO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="62" width="125" height="20" uuid="02771f05-0e61-4eb2-9d1c-2dddbafddbed"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[991007603- 960206253]]></text>
+			</staticText>
+			<line>
+				<reportElement x="301" y="70" width="1" height="40" uuid="9789d2e6-6fb1-4135-929e-cb9ddcf36142"/>
+			</line>
+			<staticText>
+				<reportElement x="495" y="90" width="60" height="20" uuid="da5f8da7-0361-40c6-ac30-6c2f87e2c806"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[CERRAJERIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="90" width="64" height="20" uuid="6e476065-c711-4fb7-97ac-1cc23ec0f56e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[PERNOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="349" y="21" width="205" height="49" uuid="2f7d02e1-d0b2-4d25-8410-eb407b975284"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Encuentra lo que necesitas para renovar tu espacio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="70" width="57" height="20" uuid="271c4c48-3ae1-4e16-8f45-a432bafcccd6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[TUBERIAS  ACCESORIOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="70" width="70" height="20" uuid="a9c7a38e-5142-4735-b895-01b9d49c8839"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[PINTURA COMPLEMENTOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="349" y="0" width="104" height="20" uuid="1fbf9328-f086-409a-bb98-921815fe4d2e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[FECHA IMPRESIÓN:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="20" uuid="17ef9bb5-a0b4-449d-a84d-25de80413fcc"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="20" uuid="2f177255-7f72-410d-85b1-033a268c5ae1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE CATEGORIAS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="20" backcolor="#CCCCFF" uuid="351b6614-53b7-4bc5-8730-ac4a37cc1440"/>
+			</rectangle>
+			<line>
+				<reportElement x="65" y="0" width="1" height="20" uuid="04fbfad9-64a9-40c0-9d96-484b738237e4"/>
+			</line>
+			<line>
+				<reportElement x="453" y="0" width="1" height="20" uuid="084075cf-589b-4c36-8f9d-8a7e92cc19e2"/>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="66" y="0" width="387" height="20" backcolor="#CCCCFF" uuid="0d30611e-b9a4-4462-b51f-3db04391c9bd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="65" height="20" backcolor="#CCCCFF" uuid="bf92db29-b2f8-4b9e-a4df-568a30fe73ec"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="454" y="0" width="101" height="20" backcolor="#CCCCFF" uuid="2aca2ffd-87dd-4c6d-9be9-5db6b777394b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REGISTRO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<frame>
+				<reportElement style="Row" x="0" y="0" width="555" height="20" uuid="846a8d11-c6f6-48be-b82c-7fbbfb89480c"/>
+				<textField>
+					<reportElement x="0" y="0" width="65" height="20" uuid="28d6688b-11a2-49cd-9fc6-7e6cec4c54bf"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{vcategoria_idcategoria}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="66" y="0" width="387" height="20" uuid="8e357ff0-59f7-4129-b542-cdcf032512b7"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{vcategoria_descrcateg}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="454" y="0" width="100" height="20" uuid="4b036d0f-c8ca-48de-83b5-583558079ab6"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{vcategoria_fechacateg}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="13">
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="514" y="0" width="41" height="13" backcolor="#CCCCFF" uuid="f6ba49d7-244b-4171-b299-3c2c70fa92a2"/>
+				<textElement>
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="514" height="13" backcolor="#CCCCFF" uuid="ce679d73-ac26-45cb-a636-b383f4e749cd"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PAGINA "+$V{PAGE_NUMBER}+" DE"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="10" y="0" width="70" height="13" backcolor="#CCCCFF" uuid="5d36048a-8cd3-472d-9969-01b00fd3f63d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<text><![CDATA[CATEGORIAS:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="0" width="38" height="13" uuid="95262ac5-7e0f-41ce-8066-64cae41f6001"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

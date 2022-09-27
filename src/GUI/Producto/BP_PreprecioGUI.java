@@ -9,7 +9,8 @@ import DAO.ProductoDAO;
 import java.awt.Color;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
-import javax.swing.JRootPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,7 +21,6 @@ public class BP_PreprecioGUI extends javax.swing.JInternalFrame {
 
     DefaultTableModel objDtm;
     ResultSet rsProducto, rsPreprecio;
-    JRootPane rootPane;
     ProductoDAO objProductoDAO = new ProductoDAO();
     PresentacionDAO objPresentacionDAO = new PresentacionDAO();
 
@@ -28,6 +28,8 @@ public class BP_PreprecioGUI extends javax.swing.JInternalFrame {
         initComponents();
         this.getContentPane().setBackground(Color.white);
         objDtm = (DefaultTableModel) jtblBuscarProducto.getModel();
+                ((DefaultTableCellRenderer) jtblBuscarProducto.getTableHeader().getDefaultRenderer())
+                .setHorizontalAlignment(SwingConstants.CENTER); 
     }
 
     /**

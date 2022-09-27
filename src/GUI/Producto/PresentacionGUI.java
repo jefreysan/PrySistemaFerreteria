@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -29,7 +31,6 @@ public class PresentacionGUI extends javax.swing.JInternalFrame {
 
     UnidadMedidaDAO objUnidadMedidaDAO = new UnidadMedidaDAO();
     UnidadMedidaTO objUnidadMedidaTO = new UnidadMedidaTO();
-    JRootPane rootPane;
     boolean sw;
     DefaultTableModel objDtm;
     ResultSet rsUnidadMedida, rsPresentacion;
@@ -38,10 +39,9 @@ public class PresentacionGUI extends javax.swing.JInternalFrame {
 
     public PresentacionGUI() {
         initComponents();
-        setVisible(true);
-        setSize(902, 391);
-        this.getContentPane().setBackground(Color.white);
         objDtm = (DefaultTableModel) jtblRegistroPresentacion.getModel();
+        ((DefaultTableCellRenderer) jtblRegistroPresentacion.getTableHeader().getDefaultRenderer())
+                .setHorizontalAlignment(SwingConstants.CENTER);
     }
 
     /**
@@ -112,7 +112,7 @@ public class PresentacionGUI extends javax.swing.JInternalFrame {
         jLabelCodigo.setText("CODIGO:");
 
         jLabelUnidadMedida.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jLabelUnidadMedida.setText("U.MEDIDA:");
+        jLabelUnidadMedida.setText("UDM:");
 
         jtxtCodigoPresentacion.setEditable(false);
         jtxtCodigoPresentacion.setBackground(new java.awt.Color(204, 204, 204));
@@ -291,23 +291,6 @@ public class PresentacionGUI extends javax.swing.JInternalFrame {
         jPanelDatosPresentacion.setLayout(jPanelDatosPresentacionLayout);
         jPanelDatosPresentacionLayout.setHorizontalGroup(
             jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
-                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanelBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
-                                .addComponent(jLabelCodigo)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtxtCodigoPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabelUnidadMedida)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcomboxUnidadMedida, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(10, 10, 10))
             .addComponent(jPanelDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
                 .addContainerGap()
@@ -316,11 +299,24 @@ public class PresentacionGUI extends javax.swing.JInternalFrame {
                     .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
                         .addComponent(jLabelDescripcionPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelValor))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jtxtValor)
+                    .addComponent(jLabelValor, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDatosPresentacionLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanelDatosPresentacionLayout.createSequentialGroup()
+                        .addComponent(jLabelCodigo)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtxtCodigoPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelUnidadMedida)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcomboxUnidadMedida, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(10, 10, 10))
         );
         jPanelDatosPresentacionLayout.setVerticalGroup(
             jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,9 +325,7 @@ public class PresentacionGUI extends javax.swing.JInternalFrame {
                 .addGap(10, 10, 10)
                 .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCodigo)
-                    .addComponent(jtxtCodigoPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(jPanelDatosPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtxtCodigoPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelUnidadMedida)
                     .addComponent(jcomboxUnidadMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
@@ -352,7 +346,7 @@ public class PresentacionGUI extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "COD", "UDM", "DESCRIPCION", "VALOR"
+                "ID", "UDM", "PRESENTACION", "VALOR"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -377,7 +371,6 @@ public class PresentacionGUI extends javax.swing.JInternalFrame {
             jtblRegistroPresentacion.getColumnModel().getColumn(1).setMaxWidth(150);
             jtblRegistroPresentacion.getColumnModel().getColumn(2).setMinWidth(150);
             jtblRegistroPresentacion.getColumnModel().getColumn(2).setMaxWidth(150);
-            jtblRegistroPresentacion.getColumnModel().getColumn(3).setMinWidth(100);
         }
 
         jPanelBuscar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -425,7 +418,7 @@ public class PresentacionGUI extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jPanelDatosPresentacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
@@ -436,11 +429,11 @@ public class PresentacionGUI extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
+                        .addGap(5, 5, 5)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addComponent(jPanelDatosPresentacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10))
@@ -642,6 +635,7 @@ public class PresentacionGUI extends javax.swing.JInternalFrame {
         for (JTextField objTextField : objTextFields) {
             objTextField.setText(null);
         }
+        jcomboxUnidadMedida.removeAllItems();
     }
 
     private void limpiarJTable() {

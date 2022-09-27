@@ -10,12 +10,12 @@ import DAO.ProductoDAO;
 import DAO.UnidadMedidaDAO;
 import DTO.PrePrecioTO;
 import DTO.ProductoTO;
-import java.awt.Color;
 import java.sql.ResultSet;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
-import javax.swing.JRootPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,7 +37,6 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
     PrePrecioDAO objPrePrecioDAO = new PrePrecioDAO();
     PrePrecioTO objPrecioTO = new PrePrecioTO();
 
-    JRootPane rootPane;
     boolean sw;
     DefaultTableModel objDtm;
     ResultSet rsCategoria, rsProducto, rsUnidadMedida;
@@ -46,15 +45,13 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
 
     public ProductoGUI() {
         initComponents();
-        setVisible(true);
-        setSize(1339, 503);
         objButtonGroup.add(jradUND);
         objButtonGroup.add(jradKG);
         objButtonGroup.add(jradGL);
-        objButtonGroup.add(jradM);
-
-        this.getContentPane().setBackground(Color.white);
+        objButtonGroup.add(jradRollo);
         objDtm = (DefaultTableModel) jtblRegistroProducto.getModel();
+        ((DefaultTableCellRenderer) jtblRegistroProducto.getTableHeader().getDefaultRenderer())
+                .setHorizontalAlignment(SwingConstants.CENTER);
     }
 
     /**
@@ -96,7 +93,7 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
         jradUND = new javax.swing.JRadioButton();
         jradKG = new javax.swing.JRadioButton();
         jLabelPrecioCompra1 = new javax.swing.JLabel();
-        jradM = new javax.swing.JRadioButton();
+        jradRollo = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblRegistroProducto = new javax.swing.JTable();
         jPanelBuscar = new javax.swing.JPanel();
@@ -201,7 +198,7 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
                 .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -220,7 +217,7 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
                     .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEliminar)
                     .addComponent(btnSalir))
-                .addGap(5, 5, 5))
+                .addContainerGap())
         );
 
         jPanelDatos.setBackground(new java.awt.Color(153, 153, 255));
@@ -391,11 +388,11 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
             }
         });
 
-        jradM.setText("M");
-        jradM.setEnabled(false);
-        jradM.addActionListener(new java.awt.event.ActionListener() {
+        jradRollo.setText("ROLLO");
+        jradRollo.setEnabled(false);
+        jradRollo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jradMActionPerformed(evt);
+                jradRolloActionPerformed(evt);
             }
         });
 
@@ -438,19 +435,23 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
                     .addComponent(jLabelPrecioCompra1))
                 .addGap(10, 10, 10)
                 .addGroup(jPanelDatosProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelPrecioVenta)
-                    .addComponent(jtxtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelDatosProductoLayout.createSequentialGroup()
+                        .addGroup(jPanelDatosProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelPrecioVenta)
+                            .addComponent(jtxtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addGroup(jPanelDatosProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtxtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelCantidad)))
                     .addGroup(jPanelDatosProductoLayout.createSequentialGroup()
                         .addComponent(jradUND)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jradKG)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jradM)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelDatosProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtxtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelCantidad)
-                    .addComponent(jradGL))
+                        .addComponent(jradRollo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jradGL)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelDatosProductoLayout.setVerticalGroup(
@@ -479,7 +480,7 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
                     .addComponent(jradKG)
                     .addComponent(jradGL)
                     .addComponent(jLabelPrecioCompra1)
-                    .addComponent(jradM))
+                    .addComponent(jradRollo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelDatosProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPrecioVenta)
@@ -548,6 +549,9 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtxtBuscarProductoKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtBuscarProductoKeyTyped(evt);
+            }
         });
 
         javax.swing.GroupLayout jPanelBuscarLayout = new javax.swing.GroupLayout(jPanelBuscar);
@@ -606,7 +610,6 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
         try {
             int op = JOptionPane.showConfirmDialog(null, "¿ESTA SEGURO QUE DESEA ELIMINAR?", "REGISTRO PRODUCTO", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (op == JOptionPane.YES_OPTION) {
-                ProductoTO objProductoTO = new ProductoTO();
                 objProductoTO.setIdproducto(xidproducto);
                 objProductoDAO.delete(objProductoTO);
                 limpiarControles();
@@ -769,7 +772,7 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcomboxUnidadMedidaKeyReleased
 
     private void jcomboxUnidadMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcomboxUnidadMedidaActionPerformed
-      jcheckSelecionar();
+        jcheckSelecionar();
     }//GEN-LAST:event_jcomboxUnidadMedidaActionPerformed
 
     private void jLabelPrecioCompraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabelPrecioCompraKeyReleased
@@ -804,13 +807,17 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabelPrecioCompra1KeyReleased
 
-    private void jradMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jradMActionPerformed
+    private void jradRolloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jradRolloActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jradMActionPerformed
+    }//GEN-LAST:event_jradRolloActionPerformed
 
     private void jcomboxUnidadMedidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcomboxUnidadMedidaMouseClicked
 
     }//GEN-LAST:event_jcomboxUnidadMedidaMouseClicked
+
+    private void jtxtBuscarProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtBuscarProductoKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtBuscarProductoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -841,7 +848,7 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jcomboxUnidadMedida;
     private javax.swing.JRadioButton jradGL;
     private javax.swing.JRadioButton jradKG;
-    private javax.swing.JRadioButton jradM;
+    private javax.swing.JRadioButton jradRollo;
     private javax.swing.JRadioButton jradUND;
     private javax.swing.JTable jtblRegistroProducto;
     private javax.swing.JTextField jtxtBuscarProducto;
@@ -952,8 +959,8 @@ public class ProductoGUI extends javax.swing.JInternalFrame {
                     jradKG.setSelected(true);
                     op = 2;
                     break;
-                case "METROS":
-                    jradM.setSelected(true);
+                case "ROLLO":
+                    jradRollo.setSelected(true);
                     op = 3;
                     break;
                 case "GALON":

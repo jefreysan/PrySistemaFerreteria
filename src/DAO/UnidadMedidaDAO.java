@@ -28,11 +28,10 @@ public class UnidadMedidaDAO implements VentasInterface<UnidadMedidaTO> {
         try {
             Connection cn = ConMySql.getInstance().getConection();
             String nombre = "%" + objObject + "%";
-            String sql = "SELECT *FROM vudm where descrudm like ?";
+            String sql = "SELECT DISTINCT *FROM vudm where descrudm like ?";
             PreparedStatement ps = cn.prepareStatement(sql);
             ps.setString(1, nombre);
             rs = ps.executeQuery();
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e);
         }

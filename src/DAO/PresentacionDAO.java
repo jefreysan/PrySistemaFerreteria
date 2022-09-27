@@ -103,7 +103,6 @@ public class PresentacionDAO implements VentasInterface<PresentacionTO> {
         pst.setString(2, xdescrPresent);
         rs = pst.executeQuery();
         rs.next();
-        rs.getString(4);
         return rs.getString(4);
     }
 }
